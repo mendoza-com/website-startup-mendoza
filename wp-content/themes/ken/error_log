@@ -1,0 +1,5 @@
+[12-Nov-2016 17:15:03 Etc/GMT+3] PHP Fatal error:  Call to undefined function get_header() in /home/startup/public_html/wp-content/themes/ken/index.php on line 12
+[30-Dec-2016 15:05:10 Etc/GMT+3] PHP Fatal error:  Call to undefined function get_header() in /home/startup/public_html/wp-content/themes/ken/index.php on line 12
+[04-Jan-2017 16:55:59 Etc/GMT+3] PHP Fatal error:  Call to undefined function get_header() in /home/startup/public_html/wp-content/themes/ken/index.php on line 12
+[05-Jan-2017 02:40:22 Etc/GMT+3] PHP Fatal error:  Call to undefined function get_header() in /home/startup/public_html/wp-content/themes/ken/index.php on line 12
+[27-Jan-2017 14:27:38 Etc/GMT+3] PHP Fatal error:  Call to undefined function get_header() in /home/startup/public_html/wp-content/themes/ken/index.php on line 12

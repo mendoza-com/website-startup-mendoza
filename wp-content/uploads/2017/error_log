@@ -1,0 +1,2 @@
+[03-Mar-2017 10:54:17 Etc/GMT+3] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE, expecting T_STRING in /home/startup/public_html/wp-content/uploads/2017/inc91.php(6) : runtime-created function on line 1
+[03-Mar-2017 10:54:17 Etc/GMT+3] PHP Fatal error:  Function name must be a string in /home/startup/public_html/wp-content/uploads/2017/inc91.php on line 6

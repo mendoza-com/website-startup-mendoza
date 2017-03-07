@@ -1,0 +1,46 @@
+[03-Nov-2016 15:19:24 UTC] PHP Fatal error:  Uncaught exception 'phpmailerException' with message 'Invalid address: {field:mail_copy}' in /home/startup/public_html/wp-includes/class-phpmailer.php:946
+Stack trace:
+#0 /home/startup/public_html/wp-includes/pluggable.php(352): PHPMailer->setFrom('{field:mail_cop...', 'Andr??s Puebla', false)
+#1 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/Actions/Email.php(66): wp_mail('info@startupmen...', 'Nuevo proyecto', '<p><img src="ht...', Array, Array)
+#2 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(234): NF_Actions_Email->process(Array, '2', Array)
+#3 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(120): NF_AJAX_Controllers_Submission->run_actions()
+#4 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(81): NF_AJAX_Controllers_Submission->process()
+#5 [internal function]: NF_AJAX_Controllers_Submission->submit('')
+#6 /home/startup/public_html/wp-i in /home/startup/public_html/wp-includes/class-phpmailer.php on line 946
+[03-Nov-2016 15:20:09 UTC] PHP Fatal error:  Uncaught exception 'phpmailerException' with message 'Invalid address: {field:mail_copy}' in /home/startup/public_html/wp-includes/class-phpmailer.php:946
+Stack trace:
+#0 /home/startup/public_html/wp-includes/pluggable.php(352): PHPMailer->setFrom('{field:mail_cop...', 'asdasd', false)
+#1 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/Actions/Email.php(66): wp_mail('info@startupmen...', 'Nuevo proyecto', '<p><img src="ht...', Array, Array)
+#2 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(234): NF_Actions_Email->process(Array, '2', Array)
+#3 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(120): NF_AJAX_Controllers_Submission->run_actions()
+#4 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(81): NF_AJAX_Controllers_Submission->process()
+#5 [internal function]: NF_AJAX_Controllers_Submission->submit('')
+#6 /home/startup/public_html/wp-includes/ in /home/startup/public_html/wp-includes/class-phpmailer.php on line 946
+[03-Nov-2016 15:25:06 UTC] PHP Fatal error:  Uncaught exception 'phpmailerException' with message 'Invalid address: {field:mail_copy}' in /home/startup/public_html/wp-includes/class-phpmailer.php:946
+Stack trace:
+#0 /home/startup/public_html/wp-includes/pluggable.php(352): PHPMailer->setFrom('{field:mail_cop...', 'ASAS', false)
+#1 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/Actions/Email.php(66): wp_mail('info@startupmen...', 'Nuevo proyecto', '<p><img src="ht...', Array, Array)
+#2 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(234): NF_Actions_Email->process(Array, '2', Array)
+#3 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(120): NF_AJAX_Controllers_Submission->run_actions()
+#4 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(81): NF_AJAX_Controllers_Submission->process()
+#5 [internal function]: NF_AJAX_Controllers_Submission->submit('')
+#6 /home/startup/public_html/wp-includes/pl in /home/startup/public_html/wp-includes/class-phpmailer.php on line 946
+[03-Nov-2016 15:28:02 UTC] PHP Fatal error:  Uncaught exception 'phpmailerException' with message 'Invalid address: {field:mail_copy}' in /home/startup/public_html/wp-includes/class-phpmailer.php:946
+Stack trace:
+#0 /home/startup/public_html/wp-includes/pluggable.php(352): PHPMailer->setFrom('{field:mail_cop...', 'asda', false)
+#1 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/Actions/Email.php(66): wp_mail('info@startupmen...', 'Nuevo proyecto', '<p><img src="ht...', Array, Array)
+#2 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(234): NF_Actions_Email->process(Array, '2', Array)
+#3 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(120): NF_AJAX_Controllers_Submission->run_actions()
+#4 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(81): NF_AJAX_Controllers_Submission->process()
+#5 [internal function]: NF_AJAX_Controllers_Submission->submit('')
+#6 /home/startup/public_html/wp-includes/pl in /home/startup/public_html/wp-includes/class-phpmailer.php on line 946
+[03-Nov-2016 15:39:11 UTC] PHP Fatal error:  Uncaught exception 'phpmailerException' with message 'Invalid address: {field:mail_copy}' in /home/startup/public_html/wp-includes/class-phpmailer.php:946
+Stack trace:
+#0 /home/startup/public_html/wp-includes/pluggable.php(352): PHPMailer->setFrom('{field:mail_cop...', 'asdsad', false)
+#1 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/Actions/Email.php(66): wp_mail('info@estudioefe...', 'Nuevo proyecto', '<p><img src="ht...', Array, Array)
+#2 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(234): NF_Actions_Email->process(Array, '2', Array)
+#3 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(120): NF_AJAX_Controllers_Submission->run_actions()
+#4 /home/startup/public_html/wp-content/plugins/ninja-forms/includes/AJAX/Controllers/Submission.php(81): NF_AJAX_Controllers_Submission->process()
+#5 [internal function]: NF_AJAX_Controllers_Submission->submit('')
+#6 /home/startup/public_html/wp-includes/ in /home/startup/public_html/wp-includes/class-phpmailer.php on line 946
+[05-Jan-2017 13:17:49 UTC] PHP Warning:  implode() [<a href='function.implode'>function.implode</a>]: Invalid arguments passed in /home/startup/public_html/wp-content/plugins/invitations-for-slack/invitations-for-slack/admin/settings.php on line 114
