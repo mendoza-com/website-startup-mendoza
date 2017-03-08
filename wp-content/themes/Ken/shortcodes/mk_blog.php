@@ -5,14 +5,14 @@ extract(shortcode_atts(array(
     'column' => 3,
     'disable_meta' => 'true',
     'image_height' => 350,
-    'image_width' => 220, // Scroller Style Only
-    'count' => 10,
+    'image_width' => 350, // Scroller Style Only
+    'count' => 8,
     'offset' => 0,
     'cat' => '',
     'posts' => '',
     'author' => '',
     'pagination' => 'true',
-    'pagination_style' => 1,
+    'pagination_style' => '2',
     'orderby' => 'date',
     'order' => 'DESC',
     'grid_avatar' => 'true',
@@ -28,16 +28,15 @@ extract(shortcode_atts(array(
     'el_class' => ''
 
 ), $atts));
-
-require_once THEME_INCLUDES . "/image-cropping.php";    
-
 global $mk_settings;
 $query = array(
     'posts_per_page' => (int) $count,
     'post_type' => 'post',
     'suppress_filters' => 0
 );
-
+if ($offset) {
+    $query['offset'] = $offset;
+}
 if ($cat) {
     $query['cat'] = $cat;
 }
@@ -54,15 +53,11 @@ if ($order) {
     $query['order'] = $order;
 }
 
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 
 $item_id = (!empty($item_id)) ? $item_id : 1409305847;
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : ((get_query_var('page')) ? get_query_var('page') : 1);
-
-if ($offset && $pagination_style != 2) {
-    $query['offset'] = $offset;
-}
 
 $query['paged'] = $paged;
 
@@ -150,7 +145,7 @@ if ($style == 'scroller' || $style == 'slideshow') {
 
 	$slidesPerView = ($style == 'scroller') ? 'auto' : 1;
     $scroller_atts = array(
-        'mk-swiper-container mk-swiper-slider ',
+        'swiper-container mk-swiper-slider ',
         'data-loop="false" data-freeModeFluid="true" data-slidesPerView="'.$slidesPerView.'" data-pagination="false" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="6000" data-animationSpeed="500" data-directionNav="true"'
     );
 } else {
@@ -178,10 +173,10 @@ switch ($magazine_strcutre) {
 
 
 
-$output .= '<div class="loop-main-wrapper"><section id="mk-blog-loop-' . $id . '" data-style="' . $style . '" data-uniqid="'.$item_id.'" class="mk-blog-container mk-' . $style . '-wrapper '.$magazine_style_class.' ' . $scroller_atts[0] . $isotope_el_class . $paginaton_style_class . ' '.$el_class.'" ' . $scroller_atts[1] . ' '.get_schema_markup('blog').'>' . "\n";
+$output .= '<div class="loop-main-wrapper"><section id="mk-blog-loop-' . $id . '" data-style="' . $style . '" data-uniqid="'.$item_id.'" class="mk-blog-container mk-' . $style . '-wrapper '.$magazine_style_class.' ' . $scroller_atts[0] . $isotope_el_class . $paginaton_style_class . ' '.$el_class.'" ' . $scroller_atts[1] . '>' . "\n";
 
 if ($style == 'scroller' || $style == 'slideshow') {
-    $output .= '<div class="mk-swiper-wrapper">';
+    $output .= '<div class="swiper-wrapper">';
 }
 
 $i = 0;

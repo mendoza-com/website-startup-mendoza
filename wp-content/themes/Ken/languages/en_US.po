@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: THE KEN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-16 16:46+0200\n"
-"PO-Revision-Date: 2015-07-13 12:50+0200\n"
+"PO-Revision-Date: 2014-11-16 16:47+0200\n"
 "Last-Translator: Bob Alpakar <bob@alpakar.com>\n"
 "Language-Team: Artbees <info@artbees.net>\n"
 "Language: en_US\n"
@@ -145,7 +145,7 @@ msgstr ""
 #: /Applications/MAMP/htdocs/ken/wp-content/themes/ken/shortcodes/mk_contact_form.php:25
 #: /Applications/MAMP/htdocs/ken/wp-content/themes/ken/widgets/widgets-contact-form.php:33
 msgid "FULL NAME"
-msgstr ""
+msgstr "\t\t"
 
 #: /Applications/MAMP/htdocs/ken/wp-content/themes/ken/comments.php:112
 msgid "EMAIL ADDRESS"

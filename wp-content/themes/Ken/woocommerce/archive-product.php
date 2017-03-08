@@ -7,6 +7,8 @@
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
  * @version     2.0.0
+  *
+ * @package This template is overrided by theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -23,7 +25,13 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_before_main_content' );
 	?>
 
-		<?php do_action( 'woocommerce_archive_description' ); ?>
+		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+
+			<!--<h1 class="page-title"><?php /* woocommerce_page_title(); */ ?></h1>-->
+
+		<?php endif; ?>
+
+		<?php //do_action( 'woocommerce_archive_description' ); ?>
 
 		<?php if ( have_posts() ) : ?>
 
@@ -40,12 +48,6 @@ get_header( 'shop' ); ?>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php woocommerce_product_subcategories(); ?>
-
-			<?php woocommerce_product_loop_end(); ?>	
-
-			
-
-			<?php woocommerce_product_loop_start(); ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
 

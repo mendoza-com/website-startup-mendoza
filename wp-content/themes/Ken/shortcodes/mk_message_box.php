@@ -2,7 +2,7 @@
 
 extract(shortcode_atts(array(
 	'el_class' => '',
-	'type' => 'love',
+	'type' => 'confirm',
 	'style' => 'pointed',
 	'icon' => '',
 	'box_color' => '',

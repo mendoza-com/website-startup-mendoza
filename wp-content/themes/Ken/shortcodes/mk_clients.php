@@ -3,17 +3,18 @@
 extract( shortcode_atts( array(
 			'count'=> 10,
 			'bg_color' => '',
-			'style' => 'column',
-			'column' => 3,
-            'dimension' => 180, // specific for grid style
-            'item_height' => 180, // specific for column style
+			'style' => 'grid',
+			'column' => '4',
+            'dimension' => '180', // specific for grid style
+            'item_height' => '', // specific for column style
 			'border_color' => '',
-			'border_width' => 2,			
+			'border_width' => '2',
+			'orderby'=> 'date',
 			'scroll' => 'true',
 			'hover_state' => 'true',
 			'target' => '_self',
 			'clients' => '',
-			'orderby'=> 'date',
+			'height' => '',
 			'order'=> 'DESC',
 			'el_class' => '',
 			'cover' => 'false'
@@ -43,14 +44,11 @@ $loop = new WP_Query( $query );
 $bg_color = !empty( $bg_color ) ? ( 'background-color:'.$bg_color.';' ) : '';
 $border_color_item = !empty( $border_color ) ? ( 'border-color:'.$border_color.';' ) : 'border-color:transparent;';
 
-$id = Mk_Static_Files::shortcode_id();
-$output = $column_css = $dimension_style = $container_border = '';
-
-
-$app_styles = '';
-
+$id = uniqid();
+$output = $column_css = $dimension_style = $container_border = $style_css = '';
+$style_css .= '<style type="text/css">';
 if ( $style == 'grid' ) {
-    $app_styles .= '
+    $style_css .= '
 	    #clients-shortcode-'.$id.' ul li:last-child .flip-wrapper {
             border-right-width: '.$border_width.'px !important;
         }
@@ -63,17 +61,18 @@ if ( $style == 'grid' ) {
         }
         ';
 }else{
-	$app_styles .= '
+	$style_css .= '
         #clients-shortcode-'.$id.'.column-style .client-item .client-item-wrapper {
             border-width:'.$border_width.'px;
         }
         ';
 }
+$style_css .= '</style>';
 
 if($style == 'grid') {
 	$dimension_style = !empty( $dimension ) ? ( 'height:'.$dimension.'px;width:'.$dimension.'px;' ) : ( 'height:180px;width:180px;' );
 if($scroll == 'true') {
-		$scroll_stuff = array('mk-swiper-container mk-swiper-slider ', ' data-loop="false" data-freeModeFluid="true" data-slidesPerView="auto" data-pagination="false" data-freeMode="true" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="4000" data-animationSpeed="600" data-directionNav="false" ', 'mk-swiper-wrapper', 'swiper-slide', '');
+		$scroll_stuff = array('swiper-container mk-swiper-slider ', ' data-loop="false" data-freeModeFluid="true" data-slidesPerView="auto" data-pagination="false" data-freeMode="true" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="4000" data-animationSpeed="600" data-directionNav="false" ', 'swiper-wrapper', 'swiper-slide', '');
 	} else {
 		$scroll_stuff[4] = 'grid-style ';
 	}
@@ -137,8 +136,7 @@ endwhile;
 wp_reset_postdata();
 
 $output .= '</ul><div class="clearboth"></div></div>';
+$output .= $style_css;
 
 
 echo $output;
-
-Mk_Static_Files::addCSS($app_styles, $id);

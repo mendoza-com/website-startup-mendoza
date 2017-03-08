@@ -1,11 +1,11 @@
 <?php
 
 extract(shortcode_atts(array(
-    'slides' => '',
     'orderby' => 'date',
+    'slides' => '',
     'order' => 'DESC',
     "full_height" => "true",
-    "height" => 700,
+    "height" => 350,
     "animation_speed" => 700,
     "el_class" => ''
 ), $atts));
@@ -33,11 +33,11 @@ if($full_height == 'false') {
     $min = 'style="min-height:' . $height . 'px;"';
 }
 
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 $loop = new WP_Query($query);
 
-$output .= '<div id="mk-tab-slider-'.$id.'" class="mk-tab-slider mk-swiper-container" '.$min.' data-height="' . $height . '" data-fullHeight="' . $full_height . '" data-pause="" data-speed="' . $animation_speed . '" data-pagination="true">';
-    $output .= '<div '.$min.' class="edge-slider-holder mk-swiper-wrapper">';
+$output .= '<div id="mk-tab-slider-'.$id.'" class="mk-tab-slider swiper-container" '.$min.' data-height="' . $height . '" data-fullHeight="' . $full_height . '" data-pause="" data-speed="' . $animation_speed . '" data-pagination="true">';
+    $output .= '<div '.$min.' class="edge-slider-holder swiper-wrapper">';
 
     while ($loop->have_posts()):
         $loop->the_post();
@@ -66,7 +66,7 @@ $output .= '<div id="mk-tab-slider-'.$id.'" class="mk-tab-slider mk-swiper-conta
     $output .= '<div class="swiper-slide" data-skin="'.$tab_skin.'">';
 
         $output .= '<div class="mk-half-layout">';
-            $output .= '<div class="mk-video-holder ' . $cover_bg . '"' . $bg_image_css . '>';
+            $output .= '<div class="mk-video-holder ' . $cover_bg . '"' . $bg_image_css . '">';
 
             // if (!empty($overlay)) {
             //     $color_mask_css = ' style="background-color:' . $overlay . ';opacity:' . $overlay_opacity . ';"';

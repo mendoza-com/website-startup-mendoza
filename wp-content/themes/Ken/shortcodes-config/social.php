@@ -4,7 +4,7 @@ vc_map(array(
     "name" => __("Social Networks", "mk_framework"),
     "base" => "mk_social_networks",
     'icon' => 'icon-mk-social-networks vc_mk_element-icon',
-    'description' => __( 'Adds social network icons.', 'mk_framework' ),
+    'description' => __( 'Adds social network icons.', 'js_composer' ),
     "category" => __('Social', 'mk_framework'),
     "params" => array(
         array(
@@ -113,7 +113,6 @@ vc_map(array(
             "param_name" => "align",
             "width" => 150,
             "value" => array(
-                __('None', "mk_framework") => "none",
                 __('Left', "mk_framework") => "left",
                 __('Right', "mk_framework") => "right",
                 __('Center', "mk_framework") => "center"
@@ -153,20 +152,6 @@ vc_map(array(
             "type" => "textfield",
             "heading" => __("Dribbble URL", "mk_framework"),
             "param_name" => "dribbble",
-            "value" => "",
-            "description" => __("Fill this textbox with the full URL of your corresponding social netowork. include (http://). if left blank this social network icon wont be shown.", "mk_framework")
-        ),
-         array(
-            "type" => "textfield",
-            "heading" => __("Vimeo URL", "mk_framework"),
-            "param_name" => "vimeo",
-            "value" => "",
-            "description" => __("Fill this textbox with the full URL of your corresponding social netowork. include (http://). if left blank this social network icon wont be shown.", "mk_framework")
-        ),
-         array(
-            "type" => "textfield",
-            "heading" => __("Spotify URL", "mk_framework"),
-            "param_name" => "spotify",
             "value" => "",
             "description" => __("Fill this textbox with the full URL of your corresponding social netowork. include (http://). if left blank this social network icon wont be shown.", "mk_framework")
         ),
@@ -290,7 +275,7 @@ vc_map(array(
     "name" => __("Twitter Feeds", "mk_framework"),
     "base" => "vc_twitter",
     'icon' => 'icon-mk-twitter-feeds vc_mk_element-icon',
-    'description' => __( 'Adds Twitter Feeds.', 'mk_framework' ),
+    'description' => __( 'Adds Twitter Feeds.', 'js_composer' ),
     "category" => __('Social', 'mk_framework'),
     "params" => array(
         array(
@@ -317,11 +302,6 @@ vc_map(array(
             "param_name" => "el_class",
             "value" => "",
             "description" => __("If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.", "mk_framework")
-        ),
-        array(
-            'type' => 'item_id',
-            'heading' => __( 'Item ID', 'mk_framework' ),
-            'param_name' => "item_id"
         )
     )
 ));
@@ -334,7 +314,7 @@ vc_map(array(
     "name" => __("Video player", "mk_framework"),
     "base" => "vc_video",
     'icon' => 'icon-mk-video-player vc_mk_element-icon',
-    'description' => __( 'Youtube, Vimeo,..', 'mk_framework' ),
+    'description' => __( 'Youtube, Vimeo,..', 'js_composer' ),
     "category" => __('Social', 'mk_framework'),
     "params" => array(
         array(
@@ -374,7 +354,7 @@ vc_map(array(
     "base" => "mk_gmaps",
     "category" => __('Social', 'mk_framework'),
     'icon' => 'icon-mk-advanced-google-maps vc_mk_element-icon',
-    'description' => __( 'Powerful Google Maps element.', 'mk_framework' ),
+    'description' => __( 'Powerful Google Maps element.', 'js_composer' ),
     "params" => array(
          array(
                "type" => "textfield",
@@ -457,7 +437,7 @@ vc_map(array(
                "type" => "range",
                "heading" => __("Map height", "mk_framework"),
                "param_name" => "height",
-               "value" => "400",
+               "value" => "300",
                "min" => "1",
                "max" => "1000",
                "step" => "1",
@@ -584,31 +564,6 @@ vc_map(array(
                     )
                )
           ),
-          
-        array(
-            "type" => "dropdown",
-            "heading" => __("Custom Map Styles", "mk_framework"),
-            "param_name" => "modify_json",
-            "value" => array(
-                __("No", "mk_framework") => "false",
-                __("Yes", "mk_framework") => "true"
-            ),
-            "description" => __("", "mk_framework")
-        ),
-        array(
-            "type" => "textarea_raw_html",
-            "heading" => __("JSON", "mk_framework"),
-            "param_name" => "map_json",
-            "holder" => 'div',
-            "value" => "",
-            "description" => __("Paste your code here", "mk_framework"),
-            "dependency" => array(
-                'element' => "modify_json",
-                'value' => array(
-                    'true'
-                )
-            )
-        ),
 
         array(
             "type" => "textfield",
@@ -626,14 +581,14 @@ vc_map(array(
     "base" => "vc_flickr",
     "name" => __("Flickr Feeds", "mk_framework"),
     'icon' => 'icon-mk-flickr-feeds vc_mk_element-icon',
-    'description' => __( 'Show your Flickr Feeds.', 'mk_framework' ),
+    'description' => __( 'Show your Flickr Feeds.', 'js_composer' ),
     "category" => __('Social', 'mk_framework'),
     "params" => array(
         array(
             "type" => "textfield",
             "heading" => __("Flickr ID", "mk_framework"),
             "param_name" => "flickr_id",
-            "value" => "95572727@N00",
+            "value" => "",
             "description" => __('To find your flickID visit <a href="http://idgettr.com/" target="_blank">idGettr</a>. In order to use Flickr Shortcode you should first obtain an API key from <a href="http://www.flickr.com/services/api/misc.api_keys.html">Flickr The App Garden</a> and update the field in Theme settings => Third Party API => Flickr API Key.', "mk_framework")
         ),
         array(
@@ -683,14 +638,14 @@ vc_map(array(
             "heading" => __("Instagram ID", "mk_framework"),
             "param_name" => "instagram_id",
             "value" => "",
-            "description" => __('Dont know your user id or token? <a target="_blank" href="https://instagram.com/oauth/authorize/?client_id=12087cfb5d6b4a639e77bb8438c8e47c&redirect_uri=https://www.artbees.net/instagram-api/&response_type=token">Click here</a> to get one.', "mk_framework")
+            "description" => __('Dont know your user id or token? <a href="https://instagram.com/oauth/authorize/?client_id=467ede5a6b9b48ae8e03f4e2582aeeb3&redirect_uri=http://instafeedjs.com&response_type=token">Click here</a> to get one.', "mk_framework")
         ),
         array(
             "type" => "textfield",
             "heading" => __("Access Token", "mk_framework"),
             "param_name" => "access_token",
             "value" => "",
-            "description" => __('Dont know your user id or token? <a target="_blank" href="https://instagram.com/oauth/authorize/?client_id=12087cfb5d6b4a639e77bb8438c8e47c&redirect_uri=https://www.artbees.net/instagram-api/&response_type=token">Click here</a> to get one.', "mk_framework")
+            "description" => __('', "mk_framework")
         ),
         array(
             "type" => "range",
@@ -756,7 +711,7 @@ vc_map(array(
     "base" => "mk_contact_form",
     "name" => __("Contact Form", "mk_framework"),
     'icon' => 'icon-mk-contact-form vc_mk_element-icon',
-    'description' => __( 'Adds Contact form element.', 'mk_framework' ),
+    'description' => __( 'Adds Contact form element.', 'js_composer' ),
     "category" => __('Social', 'mk_framework'),
     "params" => array(
 
@@ -765,7 +720,7 @@ vc_map(array(
             "type" => "textfield",
             "heading" => __("Email", "mk_framework"),
             "param_name" => "email",
-            "value" => get_bloginfo( 'admin_email' ),
+            "value" => "",
             "description" => sprintf(__('Which email would you like the contacts to be sent, if left empty emails will be sent to admin email : "%s"', "mk_framework"), get_bloginfo('admin_email'))
 
         ),
@@ -870,7 +825,7 @@ vc_map(array(
     "name" => __("Contact Info", "mk_framework"),
     'icon' => 'icon-mk-contact-info vc_mk_element-icon',
     "category" => __('Social', 'mk_framework'),
-    'description' => __( 'Adds Contact info details.', 'mk_framework' ),
+    'description' => __( 'Adds Contact info details.', 'js_composer' ),
     "params" => array(
 
         array(

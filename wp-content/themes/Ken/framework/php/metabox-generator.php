@@ -20,7 +20,7 @@ class mk_metaboxesGenerator {
 	 * @param string  $name
 	 * @param array   $options
 	 */
-	function __construct($config, $options) {
+	function mk_metaboxesGenerator($config, $options) {
 		$this->config = $config;
 		$this->options = $options;
 
@@ -89,10 +89,6 @@ class mk_metaboxesGenerator {
 				}
 			}
 		}
-
-
-		// Deletes the cached css and JS files as well as theme options.
-        mk_purge_cache_actions();
 	}
 
 	function render() {
@@ -107,7 +103,7 @@ class mk_metaboxesGenerator {
 						$option['default'] = $default;
 					}
 				}
-				$this->{$option['type']}($option);
+				$this->$option['type']($option);
 			}
 		}
 		echo '</tbody></table></div>';
@@ -776,7 +772,7 @@ echo '</div>';
 			foreach ($attachments as $attachment_id) {
 				echo '<li class="image attachment details" data-attachment_id="' . $attachment_id . '"><div class="attachment-preview"><div class="thumbnail">
                             ' . wp_get_attachment_image($attachment_id, 'thumbnail') . '</div>
-                            <a href="#" class="delete check" title="' . __('Remove image', 'mk_framework') . '"><div class="media-modal-icon"></div></a>
+                            <a href="#" class="delete check" title="' . __('Remove image', 'easy-image-gallery') . '"><div class="media-modal-icon"></div></a>
 
                         </div></li>';
 			}
@@ -792,7 +788,7 @@ echo '</div>';
     </div>
     <br class="clear" />
     <div class="add_gallery_images hide-if-no-js">
-        <a class="button button-primary button-large add_gallery_images" href="#"><?php _e('Add gallery images', 'mk_framework');?></a>
+        <a class="button button-primary button-large add_gallery_images" href="#"><?php _e('Add gallery images', 'easy-image-gallery');?></a>
     </div>
 
 
@@ -930,8 +926,10 @@ echo '</div>';
  ** Type : Icon Selector
 -------------------------------------------------------------*/
 	function icon_selector($value) {
-		wp_enqueue_style('mk-theme-icons', THEME_STYLES . '/theme-font-icons.min.css', false, false, false);
-		echo '<style>'.mk_enqueue_font_icons().'</style>';
+		wp_enqueue_style('font-awesome', THEME_STYLES . '/font-awesome.css', false, WPB_VC_VERSION, false);
+		wp_enqueue_style('artbees-icons', THEME_STYLES . '/artbees-icons.css', false, WPB_VC_VERSION, false);
+		wp_enqueue_style('pe-line-icons', THEME_STYLES . '/pe-line-icons.css', false, WPB_VC_VERSION, 'all');
+		wp_enqueue_style('flaticon', THEME_STYLES . '/flaticon.css', false, WPB_VC_VERSION, 'all');
 		echo '<tr id="' . $value['id'] . '_wrapper">';
 		echo '<th>';
 		echo '<label for="' . $value['id'] . '">' . $value['name'] . '</label>';

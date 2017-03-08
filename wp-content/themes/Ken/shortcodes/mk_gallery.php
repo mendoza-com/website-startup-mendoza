@@ -4,10 +4,10 @@ extract( shortcode_atts( array(
 			"style" => 'grid',
 			'enable_title' => 'true',
 			'structure' => 'column',
-			'masonry_style' => 'style1',
+			'masonry_style' => '',
 			'item_spacing' => '8',
 			"images" => '',
-			"height" => 500,
+			"height" => '',
 			"column" => 4,
 			'image_quality' => 1,
 			"margin_bottom" => 20,
@@ -17,10 +17,8 @@ extract( shortcode_atts( array(
 			'scroller_dimension' => 400,
 			"el_class" => '',
 			'item_id' => '',
-			'image_size' => 'crop',
 		), $atts ) );
 
-require_once THEME_INCLUDES . "/image-cropping.php";	
 
 if ( $images == '' ) {
 
@@ -40,7 +38,7 @@ $args = array(
 			'numberposts' => -1
 			);
 
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 
 $item_id = (!empty($item_id)) ? $item_id : 1409305847;
 
@@ -59,7 +57,6 @@ if ( is_singular() ) {
 } else {
 	$layout == 'full';
 }
-
 
 
 
@@ -140,7 +137,7 @@ if($style == 'grid') {
 
 		$width = $scroller_dimension - 1;
 		$height = $scroller_dimension - 1;
-		$scroller_css = array('mk-swiper-container mk-swiper-slider ', 'mk-swiper-wrapper ', 'swiper-slide', ' data-freeModeFluid="true" data-slidesPerView="auto" data-pagination="false" data-freeMode="true" data-mousewheelControl="true" data-direction="horizontal" data-slideshowSpeed="4000" data-animationSpeed="400" data-directionNav="false" ');
+		$scroller_css = array('swiper-container mk-swiper-slider ', 'swiper-wrapper ', 'swiper-slide', ' data-freeModeFluid="true" data-slidesPerView="auto" data-pagination="false" data-freeMode="true" data-mousewheelControl="true" data-direction="horizontal" data-slideshowSpeed="4000" data-animationSpeed="400" data-directionNav="false" ');
 		$item_width = ' style="width:'.$scroller_dimension.'px"';
 	}
 
@@ -150,34 +147,8 @@ if($style == 'grid') {
 			foreach ( $attachments as $attachment ) {
 				$i++;
 				$title = $attachment->post_title;
-				switch ($image_size) {
-				    case 'full':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-				        $image_src = $image_src_array[0];
-				        break;
-				    case 'crop':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-				        $image_src = bfi_thumb($image_src_array[0], array(
-				            'width' => $width * $image_quality,
-				            'height' => $height * $image_quality
-				        ));
-				        break;            
-				    case 'large':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'large', true);
-				        $image_src = $image_src_array[0];
-				        break;
-				    case 'medium':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'medium', true);
-				        $image_src = $image_src_array[0];
-				        break;        
-				    default:
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-				        $image_src = bfi_thumb($image_src_array[0], array(
-				            'width' => $width * $image_quality,
-				            'height' => $height * $image_quality
-				        ));
-				        break;
-				}
+				$image_src_array = wp_get_attachment_image_src( $attachment->ID, 'full', true );
+				$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $width, 'height' => $height, 'crop'=>true));
 
 				$zoom_icon ='<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'" class="mk-lightbox theme-rounded-icon"><i class="mk-nuance-icon-search"></i></a>';
 
@@ -186,18 +157,11 @@ if($style == 'grid') {
 
 				$output .='<div class="featured-image '.$hover_scenarios.'-hover"><img alt="'.$title.'" title="'.$title.'" src="' . mk_thumbnail_image_gen($image_src, $width, $height) .'" />';
 				$output .='<div class="hover-overlay"></div>';
-					$output .='<div class="gallery-meta">';
-					$output .= '<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'-2" class="mk-lightbox">';
-					$output .= '<i class="mk-theme-icon-plus"></i></a><div class="clearboth"></div>';
-					
-					if($enable_title == 'true') { 
-						$output .= '<div class="the-title">';
-						$output .= '<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'-3" class="mk-lightbox">';
-						$output .= $title;
-						$output .= '</a>';
-						$output .= '</div>';
-					}
-					$output .= '</div>';
+					$output .='<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'" class="mk-lightbox">';
+					$output .= '<div class="gallery-meta">';
+					$output .= '<i class="mk-theme-icon-plus"></i><div class="clearboth"></div>';
+					$output .= ($enable_title == 'true') ? '<div class="the-title">'.$title.'</div>' : '';
+					$output .= '</div></a>';
 
 
 				$output .='</div>';
@@ -222,34 +186,9 @@ if($style == 'grid') {
 			foreach ( $attachments as $attachment ) {
 
 				$image_title = $attachment->post_title;
-				switch ($image_size) {
-				    case 'full':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-				        $image_src = $image_src_array[0];
-				        break;
-				    case 'crop':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-				        $image_src = bfi_thumb($image_src_array[0], array(
-				            'width' => $width * $image_quality,
-				            'height' => $height * $image_quality
-				        ));
-				        break;            
-				    case 'large':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'large', true);
-				        $image_src = $image_src_array[0];
-				        break;
-				    case 'medium':
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'medium', true);
-				        $image_src = $image_src_array[0];
-				        break;        
-				    default:
-				        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-				        $image_src = bfi_thumb($image_src_array[0], array(
-				            'width' => $width * $image_quality,
-				            'height' => $height * $image_quality
-				        ));
-				        break;
-				}
+
+				$image_src_array = wp_get_attachment_image_src( $attachment->ID, 'full', true );
+				$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $width, 'height' => $height, 'crop'=>true));
 				$image_src_thumb  = bfi_thumb( $image_src_array[ 0 ], array('width' => 100, 'height' => 100, 'crop'=>true));
 
 				$slide_item .= '<div class="swiper-slide"><div class="featured-image '.$hover_scenarios.'-hover">';
@@ -270,7 +209,7 @@ if($style == 'grid') {
 			}
 
 
-			$output .= '<div class="gallery-thumb-large"><div id="gallery-'.$id.'" class="mk-swiper-container mk-swiper-slider" data-freeModeFluid="true" data-loop="false" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-mousewheelControl="true" data-direction="horizontal" data-slideshowSpeed="6000" data-animationSpeed="600" data-directionNav="true"><div class="mk-swiper-wrapper">';
+			$output .= '<div class="gallery-thumb-large"><div id="gallery-'.$id.'" class="swiper-container mk-swiper-slider" data-freeModeFluid="true" data-loop="false" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-mousewheelControl="true" data-direction="horizontal" data-slideshowSpeed="6000" data-animationSpeed="600" data-directionNav="true"><div class="swiper-wrapper">';
 			$output .= $slide_item. '</div>';
 			$output .= '<a class="mk-swiper-prev slideshow-swiper-arrows"><i class="mk-theme-icon-prev-big"></i></a>';
 			$output .= '<a class="mk-swiper-next slideshow-swiper-arrows"><i class="mk-theme-icon-next-big"></i></a>';
@@ -303,52 +242,19 @@ if($style == 'grid') {
 		    }
 
 			$title = $attachment->post_title;
-			switch ($image_size) {
-			    case 'full':
-			        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-			        $image_src = $image_src_array[0];
-			        break;
-			    case 'crop':
-			        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-			        $image_src = bfi_thumb($image_src_array[0], array(
-			            'width' => $width * $image_quality,
-			            'height' => $height * $image_quality
-			        ));
-			        break;            
-			    case 'large':
-			        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'large', true);
-			        $image_src = $image_src_array[0];
-			        break;
-			    case 'medium':
-			        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'medium', true);
-			        $image_src = $image_src_array[0];
-			        break;        
-			    default:
-			        $image_src_array = wp_get_attachment_image_src($attachment->ID, 'full', true);
-			        $image_src = bfi_thumb($image_src_array[0], array(
-			            'width' => $width * $image_quality,
-			            'height' => $height * $image_quality
-			        ));
-			        break;
-			}
+			$image_src_array = wp_get_attachment_image_src( $attachment->ID, 'full', true );
+			$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $width, 'height' => $height, 'crop'=>true));
 
 			$zoom_icon ='<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'" class="mk-lightbox theme-rounded-icon"><i class="mk-nuance-icon-search"></i></a>';
 			$output .='<article class="mk-gallery-item mk-isotop-item masonry-'.$item_id.' '.$mansory_pointer_css.$scroller_css[2].'"'.$item_width.'><div class="item-holder" style="margin:0 '.$item_spacing.'px '.($item_spacing*2).'px">';
 
 			$output .='<div class="featured-image '.$hover_scenarios.'-hover"><img alt="'.$title.'" title="'.$title.'" width="'.$width.'" height="'.$height.'" src="' . mk_thumbnail_image_gen($image_src, $width, $height) .'" />';
 			$output .='<div class="hover-overlay"></div>';
-				$output .='<div class="gallery-meta">';
-				$output .= '<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'-2" class="mk-lightbox">';
-				$output .= '<i class="mk-theme-icon-plus"></i></a><div class="clearboth"></div>';
-				
-				if($enable_title == 'true') {
-					$output .= '<div class="the-title">';
-					$output .= '<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'-3" class="mk-lightbox">';
-					$output .= $title;
-					$output .= '</a>';
-					$output .= '</div>';
-				}
-				$output .= '</div>';
+				$output .='<a href="'.$image_src_array[0].'" title="'.$title.'" rel="gallery-'.$id.'" class="mk-lightbox">';
+				$output .= '<div class="gallery-meta">';
+				$output .= '<i class="mk-theme-icon-plus"></i><div class="clearboth"></div>';
+				$output .= ($enable_title == 'true') ? '<div class="the-title">'.$title.'</div>' : '';
+				$output .= '</div></a>';
 
 
 			$output .='</div>';

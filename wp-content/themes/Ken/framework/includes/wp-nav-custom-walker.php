@@ -312,7 +312,7 @@ class Walker_Nav_Menu_Edit_Custom extends Walker_Nav_Menu  {
                 <label for="edit-menu-item-target-<?php echo $item_id; ?>">
                         <strong><?php _e( 'Menu Item Icon', "mk_framework" ); ?></strong><br />
                         <input class="widefat" type="text" id="edit-menu-item-menu-icon-<?php echo $item_id; ?>" name="menu-item-menu_icon[<?php echo $item_id; ?>]" value="<?php echo esc_attr( $item->menu_icon ); ?>" />   
-                        <span class="description"><?php _e("<a target='_blank' href='".admin_url( 'admin.php?page=icon-library')."'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"); ?></span>
+                        <span class="description"><?php _e("<a target='_blank' href='".admin_url( 'tools.php?page=icon-library')."'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"); ?></span>
                 </label>
                 </p>
 

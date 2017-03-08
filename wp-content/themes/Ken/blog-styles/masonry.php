@@ -37,26 +37,21 @@ function blog_masonry_style( $atts) {
 		break;
 	}
 
-	$output = $blog_heading = $item_cat = '';
+	$output = $blog_heading = '';
 
 	$post_type = (get_post_format( get_the_id()) == '0' || get_post_format( get_the_id()) == '') ? 'image' : get_post_format( get_the_id());
 
-    $categories = get_the_category();
-
-    foreach ($categories as $category) {
-        $item_cat .= 'category-' . $category->slug . ' ';
-    }
-    
 
 
-	$output .='<article id="entry-'.get_the_ID().'" class="blog-masonry-entry masonry-'.$item_id.' mk-isotop-item '.$mk_column_css.' '.$post_type.'-post-type ' . $item_cat . '">';
+
+	$output .='<article id="entry-'.get_the_ID().'" class="blog-masonry-entry masonry-'.$item_id.' mk-isotop-item '.$mk_column_css.' '.$post_type.'-post-type">';
 	$output .= '<a class="post-type-icon" href="'.get_permalink().'"><i class="mk-post-type-icon-'.$post_type.'"></i></a>';
 	$output .= '<div class="item-holder">';
 
 
 	/* Blog Heading */
 	$blog_heading .= '<div class="blog-entry-heading">';
-	$blog_heading .= '<h3 class="blog-title"><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
+	$blog_heading .= '<h2 class="blog-title"><a href="'.get_permalink().'">'.get_the_title().'</a></h2>';
 			if($column != 4) {
 				ob_start();
 				comments_number(__( '0', 'mk_framework' ), __( '1', 'mk_framework' ), __( '%', 'mk_framework' ));
@@ -74,7 +69,6 @@ function blog_masonry_style( $atts) {
 	if($post_type == 'audio') {
 		$output .= $blog_heading;
 	}
-
 
 
 	switch ($post_type) {
@@ -111,8 +105,8 @@ function blog_masonry_style( $atts) {
 		case 'gallery':
 			$attachment_ids = get_post_meta( get_the_id(), '_gallery_images', true );
 			$output .='<div class="blog-gallery-type">';
-			$output .= do_shortcode( '[mk_image_slideshow images="'.$attachment_ids.'" margin_bottom="0" image_width="'.$image_width.'" image_height="'.$image_height.'" direction="horizontal" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="false" direction_nav="true"]' );
-			$output .='<div class="clearboth"></div></div>';
+			$output .= do_shortcode( '[mk_image_slideshow images="'.$attachment_ids.'" margin_bottom="0" image_width="'.$image_width.'" image_height="'.$image_height.'" resposnive="true" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="false" direction_nav="true"]' );
+			$output .='</div>';
 
 			break;
 		/***********/
@@ -207,7 +201,7 @@ function blog_masonry_style( $atts) {
 	/***********/
 	if($excerpt_length != 0) {
 		ob_start();
-	    mk_excerpt_max_charlength($excerpt_length);
+	    the_excerpt_max_charlength($excerpt_length);
 	    $output .= '<div class="blog-excerpt">' . ob_get_clean() . '</div>';
 	}
 

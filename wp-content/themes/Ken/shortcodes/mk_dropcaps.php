@@ -1,9 +1,8 @@
 <?php
-global $mk_settings;
 
 extract(shortcode_atts(array(
 	'style' => 'square-default',
-	'fill_color' => $mk_settings['accent-color'],
+	'fill_color' => '',
 	'char' => '',
 	'el_class' => '',
 ), $atts));

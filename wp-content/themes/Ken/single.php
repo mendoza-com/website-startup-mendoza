@@ -4,10 +4,6 @@ $mk_settings;
 
 
 $layout = get_post_meta( $post->ID, '_layout', true );
-$global_single_layout = $mk_settings['blog-single-layout'];
-$layout = ($global_single_layout == 'meta-feed') ? $layout : $global_single_layout;
-$layout = empty($layout) ? 'right' : $layout;
-
 
 $image_height = $mk_settings['blog-single-image-height'];
 $image_width = mk_content_width($layout);
@@ -21,24 +17,9 @@ $show_featured = (isset($show_featured) && !empty($show_featured)) ? $show_featu
 $show_meta = get_post_meta( $post->ID, '_meta', true );
 $show_meta = (isset($show_meta) && !empty($show_meta)) ? $show_meta  : 'true' ;
 
-function social_networks_meta() {
-	// Open Graph meta tags will be viewed if Yoast SEO plugin is not installed.
-	if(!defined('WPSEO_VERSION')) {
-		$image_src_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true );
-		$output  = '<meta property="og:site_name" content="'.get_bloginfo('name').'"/>'. "\n";
-		$output .= '<meta property="og:image" content="'.$image_src_array[ 0 ].'"/>'. "\n";
-		$output .= '<meta property="og:url" content="'.get_permalink().'"/>'. "\n";
-		$output .= '<meta property="og:title" content="'.get_the_title().'"/>'. "\n";
-		$output .= '<meta property="og:description" content="'.get_the_excerpt().'"/>'. "\n";
-		$output .= '<meta property="og:type" content="article"/>'. "\n";
-		echo $output;
-	}
-}
-add_action('wp_head', 'social_networks_meta');
-
 get_header(); ?>
 
-<div id="theme-page" class="mk-blog-single page-master-holder">
+<div id="theme-page" class="mk-blog-single">
 	<?php if ( have_posts() ) while ( have_posts() ) : the_post();
 		$post_type = (get_post_format( get_the_id()) == '0' || get_post_format( get_the_id()) == '') ? 'image' : get_post_format( get_the_id());
 		$image_src_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true );
@@ -49,7 +30,6 @@ get_header(); ?>
 		}
 	?>
 	<div class="mk-main-wrapper-holder">
-	<div class="background-img background-img--page"></div>
 	<div class="theme-page-wrapper <?php echo $layout; ?>-layout mk-grid vc_row-fluid <?php echo $padding; ?>">
 			<div class="theme-content <?php echo $padding; ?>" id="blog-entry-<?php the_ID(); ?>" <?php post_class(); ?> itemprop="mainContentOfPage">
 		<?php if($show_featured == 'true') :
@@ -103,8 +83,8 @@ get_header(); ?>
  		/* Meta section */ ?>
 			<div class="entry-meta">
 				<div class="item-holder">
-					<time class="mk-post-date" datetime="<?php the_date('Y-m-d') ?>" itemprop="datePublished" pubdate>
-						<a href="<?php echo get_month_link( get_the_time( "Y" ), get_the_time( "m" ) ); ?>"><?php echo get_the_date(); ?></a>
+					<time datetime="<?php the_time( 'F jS, Y' ) ?>" itemprop="datePublished" pubdate>
+							<a href="<?php get_month_link( the_time( "Y" ), the_time( "m" ) ) ?>"><?php the_date() ?></a>
 					</time>
 					<div class="blog-categories"><?php the_category( ', ' ); ?></div>
 					<a href="#comments" class="blog-comments"><i class="mk-icon-comment"></i><span> <?php echo comments_number( '0', '1', '%'); ?></span></a>
@@ -152,7 +132,7 @@ get_header(); ?>
 		<?php /* About Author section */
 			if($mk_settings['blog-single-about-author']) :
 		?>
-		<div class="about-author-wrapper" <?php echo get_schema_markup('author_box'); ?>>
+		<div class="about-author-wrapper">
 			<div class="item-holder">
 				<div class="avatar-box"><?php global $user; echo get_avatar( get_the_author_meta('email'), '150',false ,get_the_author_meta('display_name', $user['ID'])); ?></div>
 

@@ -1,68 +1,3 @@
-.mk-options-container,
-.mk-metabox-wrapper,
-.vc_edit_form_elements {
-  color: #525252;
-}
-.mk-metabox-wrapper input[type=text],
-.vc_edit_form_elements input[type=text],
-.mk-metabox-wrapper input[type=password],
-.vc_edit_form_elements input[type=password],
-.mk-metabox-wrapper input[type=checkbox],
-.vc_edit_form_elements input[type=checkbox],
-.mk-metabox-wrapper input[type=color],
-.vc_edit_form_elements input[type=color],
-.mk-metabox-wrapper input[type=date],
-.vc_edit_form_elements input[type=date],
-.mk-metabox-wrapper input[type=datetime],
-.vc_edit_form_elements input[type=datetime],
-.mk-metabox-wrapper input[type=datetime-local],
-.vc_edit_form_elements input[type=datetime-local],
-.mk-metabox-wrapper input[type=email],
-.vc_edit_form_elements input[type=email],
-.mk-metabox-wrapper input[type=month],
-.vc_edit_form_elements input[type=month],
-.mk-metabox-wrapper input[type=number],
-.vc_edit_form_elements input[type=number],
-.mk-metabox-wrapper input[type=radio],
-.vc_edit_form_elements input[type=radio],
-.mk-metabox-wrapper input[type=tel],
-.vc_edit_form_elements input[type=tel],
-.mk-metabox-wrapper input[type=time],
-.vc_edit_form_elements input[type=time],
-.mk-metabox-wrapper input[type=url],
-.vc_edit_form_elements input[type=url],
-.mk-metabox-wrapper input[type=week],
-.vc_edit_form_elements input[type=week],
-.mk-metabox-wrapper input[type=search],
-.vc_edit_form_elements input[type=search],
-.mk-metabox-holder select,
-.vc_edit_form_elements select,
-.mk-metabox-holder textarea,
-.vc_edit_form_elements textarea {
-  box-shadow: none !important;
-  border-radius: 6px;
-  background-clip: padding-box;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  border-color: #d9d9d9;
-}
-.mk-metabox-holder a,
-.vc_edit_form_elements a {
-  text-decoration: none;
-}
-.mk-metabox-holder a:focus,
-.vc_edit_form_elements a:focus,
-.mk-metabox-holder li:focus,
-.vc_edit_form_elements li:focus {
-  outline: none;
-  box-shadow: none !important;
-}
-
-.wpb_element_label,
-.mk-metabox-holder tr label {
-  text-transform: capitalize;
-}
-
 
 /* Upload Option */
 .upload-option .show-upload-image
@@ -84,138 +19,190 @@
     border: 0;
 }
 /* Toggle Button */
-.mk-toggle-button {
-  display: block;
-  background-color: #e9e9e9;
-  width: 62px;
-  height: 32px;
-  cursor: pointer;
-  position: relative;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.mk-toggle-button
+{
+    position: relative;
+
+    display: block;
+
+    width: 60px;
+    height: 28px;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    background-color: #bbb;
+
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
 }
-.mk-toggle-button .toggle-handle {
-  width: 26px;
-  height: 26px;
-  background-color: #fff;
-  position: relative;
-  display: block;
-  left: 4px;
-  top: 3px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+.mk-toggle-button .toggle-handle
+{
+    position: relative;
+    top: 3px;
+    left: 3px;
+
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    background-color: #fff;
 }
-.mk-toggle-button.on {
-  background-color: #89daff;
+.mk-toggle-button.on
+{
+    background-color: #14a5ed;
 }
-.mk-toggle-button.on .toggle-handle {
-  left: 32px;
+.mk-toggle-button.on .toggle-handle
+{
+    left: 34px;
 }
-.mk-toggle-button.off {
-  background-color: #e9e9e9;
-}
--html[dir="rtl"] .mk-toggle-button.on {
-  background-color: #89daff;
-}
--html[dir="rtl"] .mk-toggle-button.on .toggle-handle {
-  right: 32px;
+.mk-toggle-button.off
+{
+    background-color: #bbb;
 }
 .mk-toggle-button,
-.toggle-handle {
-  border-radius: 40px;
-  background-clip: padding-box;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
+.toggle-handle
+{
+    -webkit-transition: all .1s ease-in-out;
+       -moz-transition: all .1s ease-in-out;
+        -ms-transition: all .1s ease-in-out;
+         -o-transition: all .1s ease-in-out;
+
+    -webkit-border-radius: 40px;
+       -moz-border-radius: 40px;
+            border-radius: 40px;
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
 }
 
 
-.mk-ui-input-slider {
-  margin: 30px 0 20px 0;
+.mk-ui-input-slider
+{
+    margin: 10px 0 20px 0;
 }
-.mk-ui-input-slider .ui-slider-horizontal {
-  position: relative;
-  float: left;
-  clear: right;
-  width: 266px;
-  height: 6px;
-  top: 0;
-  background-color: #d9d9d9;
-  cursor: pointer;
+.mk-ui-input-slider .ui-slider-horizontal
+{
+    position: relative;
+    top: 0;
+
+    float: left;
+    clear: right;
+
+    width: 240px;
+    height: 12px;
+    margin-left: 5px;
+
+    cursor: pointer;
+
+    background-color: #bbb;
 }
-.mk-ui-input-slider .progress {
-  display: none;
-  height: 9px;
-  background-color: #C5FF00;
-  opacity: 0.6;
+.mk-ui-input-slider .progress
+{
+    display: none;
+
+    height: 9px;
+
+    opacity: .6;
+    background-color: #c5ff00;
 }
-.mk-ui-input-slider .ui-slider-handle {
-  position: absolute;
-  top: -9px;
-  z-index: 2;
-  width: 22px;
-  height: 22px;
-  background-color: #fff !important;
-  cursor: move;
-  margin-left: -10px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+.mk-ui-input-slider .ui-slider-handle
+{
+    position: absolute;
+    z-index: 2;
+    top: -7px;
+
+    width: 19px;
+    height: 19px;
+    margin-left: -10px;
+
+    cursor: move;
+
+    border: 3px solid #14a5ed !important;
+    background-color: #fff !important;
 }
-.mk-ui-input-slider .range-input-selector {
-  float: left;
-  margin: -14px 0 5px 25px !important;
-  padding: 8px 0 !important;
-  width: 90px;
-  background-color: #fff;
-  color: #555555;
-  text-align: center;
+.mk-ui-input-slider .range-input-selector
+{
+    float: left;
+
+    width: 90px;
+    margin: -10px 0 5px 25px !important;
+    padding: 6px !important;
+
+    text-align: center;
+
+    color: #555;
+    border: 1px solid #bbb !important;
+    background-color: #f7f7f7;
 }
-.mk-ui-input-slider .unit {
-  font-family: georgia;
-  display: inline-block;
-  margin-left: 8px;
-  color: #aaaaaa;
-  font-style: italic;
-  font-size: 14px;
-  line-height: 14px;
-  position: relative;
-  top: -8px;
+.mk-ui-input-slider .unit
+{
+    font-size: 11px;
+    font-style: italic;
+    line-height: 12px;
+
+    display: inline-block;
+
+    margin-left: 6px;
+
+    color: #a5a5a5;
 }
 .ui-slider-horizontal,
 .ui-slider-handle,
-.range-input-selector {
-  border-radius: 30px !important;
-  background-clip: padding-box !important;
-  -moz-background-clip: padding !important;
-  -webkit-background-clip: padding-box !important;
+.range-input-selector
+{
+    -webkit-border-radius: 30px !important;
+       -moz-border-radius: 30px !important;
+            border-radius: 30px !important;
+    -webkit-background-clip: padding-box !important;
+       -moz-background-clip: padding !important;
+            background-clip: padding-box !important;
 }
 
 
 
 
-.mk-select,
-.vc_edit_form_elements select {
-  display: block;
-  padding: 10px 70px 10px 13px !important;
-  max-width: 100%;
-  height: auto !important;
-  border: 1px solid #e3e3e3;
-  background: url('../img/selectbox-arrow.png') right center no-repeat;
-  background-color: #fff;
-  color: #444444;
-  font-size: 12px;
-  line-height: 16px !important;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+.mk-select
+{
+    font-size: 12px;
+    line-height: 14px !important;
+
+    display: block;
+
+    min-width: 300px;
+    max-width: 100%;
+    height: auto !important;
+    margin: 0 0 10px 0!important;
+    padding: 10px 45px 10px 10px !important;
+
+    cursor: pointer;
+
+    color: #444;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 0 !important;
+       -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+    background: url('../img/selectbox-arrow.png')  right center  no-repeat;
+    background-color: #fff;
+    -webkit-background-clip: padding-box !important;
+       -moz-background-clip: padding !important;
+            background-clip: padding-box !important;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
 }
-.mk-select option,
-.vc_edit_form_elements select option {
-  padding: 0 4px;
+
+.mk-select option
+{
+    padding: 0 4px;
 }
 
 .mk-visual-selector a
@@ -392,7 +379,6 @@
 .gallery_images .details.attachment
 {
     box-shadow: none;
-    width: auto !important;
 }
 
 .eig-metabox-sortable-placeholder
@@ -472,7 +458,6 @@
     vertical-align: middle;
 
     *display: inline;
-    width: 100% !important;
 }
 .chosen-container .chosen-drop
 {
@@ -1577,6 +1562,10 @@
   -webkit-background-clip: padding-box;
 }
 
+.vc_navbar .vc_page_section_icon {
+    background-position: -60px -210px !important;
+}
+
 .vc_row_section_mark {
     line-height: 16px;
     height: 16px;
@@ -1671,12 +1660,3 @@
  .icon-mk-flickr-feeds {background-position: -320px -96px!important;}
  .icon-mk-contact-form {background-position: -352px -96px!important;}
  .icon-mk-contact-info {background-position: -384px -96px!important;}
-
-
- .wpb-select.fade {
-    opacity: 1 !important;
-}
-
-.vc_navbar .vc_page_section_icon {
-  background-position: -60px -337px !important;
-}

@@ -47,14 +47,6 @@ $options = array(
     "default" => 'false',
     "type" => "toggle"
   ),
-  array(
-      "name" => __("Header Toolbar?", "mk_framework"),
-      "subtitle" => __("", "mk_framework"),
-      "desc" => __("", "mk_framework"),
-      "id" => "_header_toolbar",
-      "default" => 'true',
-      "type" => "toggle"
-  ),
 
   array(
     "name" => __("Featured Image?", "mk_framework" ),

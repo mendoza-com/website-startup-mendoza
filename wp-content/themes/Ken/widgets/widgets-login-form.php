@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Login_Form extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Login_Form() {
 		$widget_ops = array( 'classname' => 'widget_login_form', 'description' => 'Ajax Login Form.' );
-		WP_Widget::__construct( 'login_form', THEME_SLUG.' - '.'Login Form', $widget_ops );
+		$this->WP_Widget( 'login_form', THEME_SLUG.' - '.'Login Form', $widget_ops );
 	}
 
 
@@ -49,13 +49,7 @@ class Artbees_Widget_Login_Form extends WP_Widget {
 			}
 			echo '</li>';
 			echo '<li>';
-				$woo_my_account = get_option('woocommerce_myaccount_page_id');
-				if(class_exists('woocommerce') && !empty($woo_my_account)) {
-					$account_link = get_permalink( get_option('woocommerce_myaccount_page_id') );	
-				} else {
-					$account_link = get_edit_user_link();
-				}
-				echo '<a href="'.$account_link.'">';
+				echo '<a href="#">';
 					echo '<span>'.__('My Account', 'mk_framework').'</span>';
 				echo '</a>';
 			echo '</li>';

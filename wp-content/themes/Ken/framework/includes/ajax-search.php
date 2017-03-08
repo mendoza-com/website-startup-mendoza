@@ -13,8 +13,7 @@
     
     function mk_ajax_search(){  
 
-        check_ajax_referer('mk-ajax-search-form', 'security');
-        $search_term = esc_html($_REQUEST['term']);
+        $search_term = $_REQUEST['term'];
         $search_term = apply_filters('get_search_query', $search_term);
         
         $search_array = array(

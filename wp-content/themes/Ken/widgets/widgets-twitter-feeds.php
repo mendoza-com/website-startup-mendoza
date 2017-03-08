@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Twitter extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Twitter() {
 		$widget_ops = array( 'classname' => 'widget_twitter', 'description' => 'Displays a list of twitter feeds' );
-		WP_Widget::__construct( 'twitter', THEME_SLUG.' - '.'Twitter Feeds', $widget_ops );
+		$this->WP_Widget( 'twitter', THEME_SLUG.' - '.'Twitter Feeds', $widget_ops );
 
 
 	}

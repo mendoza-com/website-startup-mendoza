@@ -1,38 +1,3 @@
-.fixed-layer {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-}
-
-.scroll-layer {
-	position: absolute; 
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-}
-
-.scroll-layer[css-attach="fixed"] {
-	position: fixed;
-}
-
-.bg-layer {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	clip: rect(0,auto,auto,0);
-}
-
-.clip {
-  -webkit-clip-path: inset(0px 0px 0px 0px); 
-          clip-path: inset(0px 0px 0px 0px); 
-}
-
-
-
 .theme-main-wrapper {
 	position: relative;
 	.transition(all 0.3s ease-in-out);
@@ -49,7 +14,7 @@
 	padding: 30px 20px;
 	width: 280px;
 	height: 100%;
-	z-index: 100;
+	z-index: 1;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 	.transition(all 0.3s ease-in-out);
@@ -61,26 +26,8 @@
 
 .admin-bar .mk-side-dashboard {
 	top:32px !important;
-} 
-
-.header-margin-style.mk-side-dashboard {
-	width: 270px !important;
-	//right: 20px !important;
-}
-.header-margin-style.mk-side-dashboard.dashboard-opened {
-	right: 20px !important;
 }
 
-@media handheld, only screen and (max-width:767px) { 
-.header-margin-style.mk-side-dashboard
-	{
-		width: 280px !important;
-	}
- .header-margin-style.mk-side-dashboard.dashboard-opened,
- .header-margin-style.mk-side-dashboard {
- 	//right: 0 !important;
- }	
-} 
 
 .dashboard-trigger {
 	position: relative;
@@ -108,12 +55,6 @@
 	right: 20px !important;
 }
 
-.toolbar-is-active .dashboard-trigger.desktop-mode {
-	top:35px;
-}
-.mk-secondary-header .dashboard-trigger.desktop-mode {
-	top:0;
-} 
 
 
 .mk-top-corner,
@@ -187,7 +128,6 @@
 	padding: 0;
 	margin: 0;
 	min-height: 200px;
-	z-index: 10;
 	.theme-page-wrapper {
 		margin: 20px auto;
 		&.no-padding {
@@ -231,9 +171,10 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	&.shadow-enabled {
-		.box-shadow( 0px 0px 15px rgba(0, 0, 0, 0.13) );
-	}
+	.box-shadow(0px 0px 15px rgba(0,
+	0,
+	0,
+	0.13));
 	#mk-header.sticky-header {
 		left: auto;
 		right: auto;

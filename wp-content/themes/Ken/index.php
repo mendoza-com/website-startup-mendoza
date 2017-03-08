@@ -10,9 +10,7 @@
  *
  */
 get_header(); ?>
-<div id="theme-page" class="page-master-holder">
-  	<div class="background-img background-img--page"></div>
-  	
+<div id="theme-page">
 	<div class="mk-main-wrapper-holder">
 	<div class="theme-page-wrapper right-layout  mk-grid row-fluid">
 		<div class="theme-content" itemprop="mainContentOfPage">

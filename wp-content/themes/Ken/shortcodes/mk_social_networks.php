@@ -1,12 +1,13 @@
 <?php
 
-$el_class = $output = '';
+$el_class = $output = $custom_skin = '';
 
 extract( shortcode_atts( array(
 			'el_class' => '',
 			'style' => 'square',
 			'align' => 'none',
-			'margin' => '4',
+			'margin' => '',
+			'style' => '',
 			'skin' => 'dark',
 			'border_color' => '#ccc',
 			'bg_color' => '',
@@ -32,12 +33,9 @@ extract( shortcode_atts( array(
 			'renren' => "",
 			'wechat' => "",
 			'weibo' => "",
-			'vimeo' => "",
-			'spotify' => "",
 			'animation' => '',
 		), $atts ) );
-
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 
 
 $animation_css = ($animation != '') ? (' class="mk-animate-element ' . $animation . '" ') : '';
@@ -47,24 +45,23 @@ if($style == 'simple'){
 }
 
 if($skin == 'custom'){
-	Mk_Static_Files::addCSS('
-		#social-networks-'.$id.' a i{
-			color:'.$icon_color.';
-		}
-		#social-networks-'.$id.' a:hover i{
-			color:'.$icon_hover_color.';
-		}
-		
-		#social-networks-'.$id.' a {
-			border-color: '.$border_color.' !important;
-			background-color: '.$bg_color.';
-		}
-		#social-networks-'.$id.' a:hover {
-			border-color: '.$bg_hover_color.' !important;
-			background-color: '.$bg_hover_color.';
-		}
-	', $id);
-
+	$custom_skin ='<style>
+	#social-networks-'.$id.' a i{
+		color:'.$icon_color.';
+	}
+	#social-networks-'.$id.' a:hover i{
+		color:'.$icon_hover_color.';
+	}';
+	$custom_skin .= '
+	#social-networks-'.$id.' a {
+		border-color: '.$border_color.' !important;
+		background-color: '.$bg_color.';
+	}
+	#social-networks-'.$id.' a:hover {
+		border-color: '.$bg_hover_color.' !important;
+		background-color: '.$bg_hover_color.';
+	}';
+	$custom_skin .= '</style>';
 }
 
 $output .= '<div class=" '.$el_class.'">';
@@ -73,10 +70,8 @@ $output .= '<ul>';
 $output .= !empty( $facebook )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="facebook-hover '.$skin.'" href="'.$facebook.'"><i class="mk-icon-facebook"></i></a></li>' : '';
 $output .= !empty( $twitter )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="twitter-hover '.$skin.'" href="'.$twitter.'"><i class="mk-icon-twitter"></i></a></li>' : '';
 $output .= !empty( $rss )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="rss-hover '.$skin.'" href="'.$rss.'"><i class="mk-icon-rss"></i></a></li>' : '';
-$output .= !empty( $vimeo )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="vimeo-hover '.$skin.'" href="'.$vimeo.'"><i class="mk-theme-icon-social-vimeo"></i></a></li>' : '';
 $output .= !empty( $dribbble )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="dribbble-hover '.$skin.'" href="'.$dribbble.'"><i class="mk-icon-dribbble"></i></a></li>' : '';
 $output .= !empty( $instagram )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="instagram-hover '.$skin.'" href="'.$instagram.'"><i class="mk-icon-instagram"></i></a></li>' : '';
-$output .= !empty( $spotify )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="spotify-hover '.$skin.'" href="'.$spotify.'"><i class="mk-theme-icon-social-spotify"></i></a></li>' : '';
 $output .= !empty( $pinterest )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="pinterest-hover '.$skin.'" href="'.$pinterest.'"><i class="mk-icon-pinterest"></i></a></li>' : '';
 $output .= !empty( $google_plus )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="googleplus-hover '.$skin.'" href="'.$google_plus.'"><i class="mk-icon-google-plus"></i></a></li>' : '';
 $output .= !empty( $linkedin )  ? '<li'.$animation_css.'><a style="margin: '.$margin.'px;" target="_blank" class="linkedin-hover '.$skin.'" href="'.$linkedin.'"><i class="mk-icon-linkedin"></i></a></li>' : '';
@@ -94,5 +89,5 @@ $output .= !empty( $weibo )  ? '<li'.$animation_css.'><a style="margin: '.$margi
 $output .= '</ul>';
 $output .= '</div>';
 $output .= '</div>';
-
+$output .= $custom_skin;
 echo $output;

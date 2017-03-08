@@ -102,6 +102,7 @@ if ( !function_exists( 'mk_portfolio_related_posts' ) ) {
 				while ( $related->have_posts() ) {
 					global $post;
 					$related->the_post();
+					if ( has_post_thumbnail() ) {
 						$output .= '<li class="mk-portfolio-item">';
 
 						$link_to = get_post_meta( get_the_ID(), '_portfolio_permalink', true );
@@ -147,6 +148,7 @@ if ( !function_exists( 'mk_portfolio_related_posts' ) ) {
 						$output .='</div>';
 
 						$output .= '</div></li>';
+					}
 				}
 				$output .= '</ul>';
 				$output .= '<div class="clearboth"></div></section>';

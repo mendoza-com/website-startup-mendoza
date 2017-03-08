@@ -2,7 +2,7 @@
 
 extract(shortcode_atts(array(
     'style' => 'boxed',
-    'count' => 4,
+    'count' => 10,
     'orderby' => 'date',
     'testimonials' => '',
     'order' => 'DESC',
@@ -17,22 +17,21 @@ extract(shortcode_atts(array(
     'animation_effect' => 'slide'
 ), $atts));
 
-$id = Mk_Static_Files::shortcode_id();
-
-require_once THEME_INCLUDES . "/image-cropping.php";    
+$id = uniqid();
 
 $animation_css = ($animation != '') ? (' mk-animate-element ' . $animation . ' ') : '';
 
-$output = $final_output = $color = '';
+$output = $final_output = $color = $style_css = '';
 
 $query = array(
     'post_type' => 'testimonial',
     'showposts' => $count
 );
 
+$style_css .= '<style type="text/css">';
 
 if ( $style == 'modern' ) {
-    Mk_Static_Files::addCSS('
+    $style_css .= '
         #testimonial-'.$id.' .swiper-pagination .swiper-pagination-switch {
             border-color:'.$font_color.' !important;
         }
@@ -40,8 +39,9 @@ if ( $style == 'modern' ) {
             border-color:'.$font_color.' !important;
             background-color:'.$font_color.' !important;
         }
-    ',$id);
+        ';
 }
+$style_css .= '</style>';
 
 if ($testimonials) {
     $query['post__in'] = explode(',', $testimonials);
@@ -96,16 +96,19 @@ endwhile;
 
 wp_reset_query();
 
-$final_output .= '<div id="testimonial-'.$id.'" class="mk-testimonial ' . $skin . '-skin ' . $style . '-style ' . $animation_css . ' ' . $el_class . '"><div id="mk-swiper-' . $id . '" data-loop="true" data-freeModeFluid="true" data-slidesPerView="1" data-pagination="true" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="5000" data-animationSpeed="500" data-animation="'.$animation_effect.'" data-directionNav="true" class="mk-swiper-container mk-swiper-slider">';
+$final_output .= '<div id="testimonial-'.$id.'" class="mk-testimonial ' . $skin . '-skin ' . $style . '-style ' . $animation_css . ' ' . $el_class . '"><div id="mk-swiper-' . $id . '" data-loop="true" data-freeModeFluid="true" data-slidesPerView="1" data-pagination="true" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="7000" data-animationSpeed="600" data-animation="'.$animation_effect.'" data-directionNav="true" class="swiper-container mk-swiper-slider">';
 $final_output .= '<div class="swiper-pagination"></div>';
-$final_output .= '<div class="mk-swiper-wrapper">' . $output . '</div>';
+$final_output .= '<div class="swiper-wrapper">' . $output . '</div>';
 
 $final_output .= '</div></div>';
 
 
 $final_output .= mk_get_fontfamily("#testimonial-", $id . ' .testimonial-quote', $font_family, $font_type);
+$final_output .= $style_css;
 
 echo $final_output;
+
+
 
 
 

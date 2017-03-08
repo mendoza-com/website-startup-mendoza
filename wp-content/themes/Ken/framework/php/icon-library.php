@@ -1,5 +1,13 @@
 <?php
 
+add_action('admin_menu', 'register_mk_icon_library');
+
+function register_mk_icon_library() {
+	add_submenu_page('tools.php', 'Icon Library', 'Icon Library', 'manage_options', 'icon-library', 'icon_library_submenu_page_callback');
+}
+
+function icon_library_submenu_page_callback() {
+
 	$mk_icons_list = array(
 		"flaticon-amplified" => "e000",
 		"flaticon-arrow434" => "e001",
@@ -864,7 +872,7 @@
 		"icon-ils" => "f20b",
 		"icon-meanpath" => "f20c",
 	);
-	echo '<style>'.mk_enqueue_font_icons().'</style>';
+
 	echo '<div class="wrap icon-library-page">';
 	echo '<h2>' . __('Theme Icon Library', 'mk_framework') . '</h2>';
 	echo '<p>' . __('Search and find your desired icon and paste its <strong>class name</strong> to the <strong>text field</strong> provided in shortcode options. You will need character code for custom list shortcode!', 'mk_framework') . '</p>';
@@ -886,5 +894,19 @@
 	echo '</ul>';
 	echo '</div>';
 
+}
 
-
+function mk_enqueue_icon_lib() {
+	$theme_data = wp_get_theme();
+	wp_enqueue_style('mk-icon-libs', THEME_ADMIN_ASSETS_URI . '/css/icon-library.css', false, $theme_data['Version'], 'all');
+	wp_enqueue_script('icon-libs-filter', THEME_ADMIN_ASSETS_URI . '/js/icon-libs-filter.js', array(
+		'jquery',
+	), $theme_data['Version'], true);
+	wp_enqueue_style('pe-line-icons', THEME_STYLES . '/pe-line-icons.css', false, $theme_data['Version'], 'all');
+	wp_enqueue_style('mk-fontawesome', THEME_STYLES . '/font-awesome.css', false, $theme_data['Version'], 'all');
+	wp_enqueue_style('artbees-icons', THEME_STYLES . '/artbees-icons.css', false, $theme_data['Version'], 'all');
+	wp_enqueue_style('flaticon', THEME_STYLES . '/flaticon.css', false, $theme_data['Version'], 'all');
+}
+if (mk_theme_is_icon_library()) {
+	add_action('admin_init', 'mk_enqueue_icon_lib');
+}

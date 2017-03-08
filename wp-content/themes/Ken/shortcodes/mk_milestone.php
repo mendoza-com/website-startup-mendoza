@@ -3,7 +3,7 @@
 extract( shortcode_atts( array(
 			"style" => 'classic',
 			"icon" => '',
-			"color" => '#919191',
+			"color" => '',
 			"type" => 'icon',
 			'text_size' => 12,
 			'icon_size' => 16,
@@ -15,7 +15,7 @@ extract( shortcode_atts( array(
 			'text_icon_color' => '',
 			'text_suffix' => '',
 			'border_bottom' => '#eee',
-			'number_suffix_text_size' => 12,
+			'number_suffix_text_size' => '',
 			'el_class' => '',
 		), $atts ) );
 

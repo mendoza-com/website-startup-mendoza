@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Contact_Form extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Contact_Form() {
 		$widget_ops = array( 'classname' => 'widget_contact_form', 'description' => 'Displays a email contact form.' );
-		WP_Widget::__construct( 'contact_form', THEME_SLUG.' - '.'Contact Form', $widget_ops );
+		$this->WP_Widget( 'contact_form', THEME_SLUG.' - '.'Contact Form', $widget_ops );
 	}
 
 
@@ -19,7 +19,6 @@ class Artbees_Widget_Contact_Form extends WP_Widget {
 		$email= $instance['email'];
 		$skin= $instance['skin'];
 		$captcha = !empty( $instance['captcha'] )?$instance['captcha']:false;
-		Mk_Send_Mail::update_contact_form_email(2342, $args['id'], $instance['email']);
 
 		echo $before_widget;
 
@@ -65,8 +64,7 @@ $change_text= __( 'Change text.', 'mk_framework' );
         </div>
         <i class="mk-contact-loading mk-icon-refresh"></i>
         <i class="mk-contact-success mk-theme-icon-tick"></i>
-        <?php wp_nonce_field('mk-contact-form-security', 'security'); ?>
-        <?php echo Mk_Send_Mail::contact_form_hidden_values($args['id'], 2342); ?>
+        <input type="hidden" value="<?php echo $email; ?>" name="contact_to"/>
     </form>
     <div class="clearboth"></div>
 

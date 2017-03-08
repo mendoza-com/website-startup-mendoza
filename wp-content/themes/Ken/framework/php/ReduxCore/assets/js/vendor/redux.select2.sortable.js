@@ -21,7 +21,7 @@
                     return false;
                 }
 
-                var $select2 = $select.siblings('.select2-container');
+                var $select2 = $select.siblings('.select2-container')
                 var sorted;
 
                 // Opt group names
@@ -36,7 +36,7 @@
                     var optVal = this;
                     
                     if (groupName === undefined) {
-                        if (this.value !== '' && !this.selected) {
+                        if (this.value !== '') {
                             optArr.push (optVal);
                         }
                     }
@@ -47,22 +47,16 @@
                         return undefined;
                     }
                     
-                    if($(this).data('select2Data') != undefined){
-                        var id = $(this).data('select2Data').id;
-                        return $select.find('option[value="' + id + '"]')[0];
-                    }
-
+                    var id = $(this).data('select2Data').id;
                     
-                    //var id = $(this).data('select2Data').id;
-
-                    //return $select.find('option[value="' + id + '"]')[0];
+                    return $select.find('option[value="' + id + '"]')[0];
                 }));
  
-                 sorted.push.apply(sorted, optArr);
+                sorted.push.apply(sorted, optArr);
                 
                 $select.children().remove();
                 $select.append(sorted);
-              });
+            });
 
             return $this;
         },

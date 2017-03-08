@@ -1,14 +1,14 @@
 <?php
-global $mk_settings;
+
 extract( shortcode_atts( array(
 			'el_class' => '',
 			'style' => 'f00c',
-			'icon_color'=> $mk_settings['accent-color'],
+			'icon_color'=> '',
 			'animation' => '',
-			'margin_bottom' => 30,
+			'margin_bottom' => '',
 		), $atts ) );
 
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 $output = $animation_css = '';
 if ( $animation != '' ) {
 	$animation_css = ' mk-animate-element ' . $animation . ' ';
@@ -31,17 +31,12 @@ $icon_color = ($icon_color == $mk_settings['accent-color']) ? $mk_accent_color :
 $output .= '<div id="list-style-'.$id.'" class="mk-list-styles '.$animation_css.$el_class.'" style="margin-bottom:'.$margin_bottom.'px">';
 $output .= wpb_js_remove_wpautop( $content );
 $output .= '</div>';
-
-
-
-Mk_Static_Files::addCSS('
-	#list-style-'.$id.' ul li:before {
-	    font-family:"'.$font_family.'";
-	    content: "\\'.$style.'";
-	    color:'.$icon_color.'
-	}
-', $id);
+$output .= '<style type="text/css">
+                    #list-style-'.$id.' ul li:before {
+                        font-family:"'.$font_family.'";
+                        content: "\\'.$style.'";
+                        color:'.$icon_color.'
+                    }
+                </style>';
 
 echo $output;
-
-

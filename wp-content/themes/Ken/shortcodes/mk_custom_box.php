@@ -7,11 +7,11 @@ extract( shortcode_atts( array(
 			'border_color' => '',
 			'bg_color' => '',
 			'bg_image' => '',
-			'bg_position' => 'left top',
+			'bg_position' => 'center center',
 			'bg_repeat' => 'repeat',
-			'bg_stretch' => 'false',
+			'bg_stretch' => '',
 			'padding_horizental' => '20',
-			'padding_vertical' => '30',
+			'padding_vertical' => '20',
 			'margin_bottom' => '20',
 			'drop_shadow' => 'false',
 			'animation' => '',
@@ -19,7 +19,7 @@ extract( shortcode_atts( array(
 		), $atts ) );
 
 $output = $bg_stretch_class = $animation_css = $drop_shadow_css = '';
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 
 if ( $bg_stretch == 'true' ) {
 	$bg_stretch_class = 'mk-background-stretch';
@@ -37,27 +37,22 @@ $border = !empty( $border_color ) ? ( 'border:2px solid '.$border_color.';' ) : 
 $output .= '<div id="mk-custom-box-'.$id.'" class="mk-custom-boxed mk-shortcode '.$drop_shadow_css.' '.$bg_stretch_class.' '.$visibility.' '.$animation_css.$el_class.'">';
 $output .= wpb_js_remove_wpautop( $content );
 $output .= '<div class="clearboth"></div></div>';
+$output .= '<style type="text/css">
+                   #mk-custom-box-'.$id.' {
+                        padding:'.$padding_vertical.'px '.$padding_horizental.'px;
+                        margin-bottom:'.$margin_bottom.'px;
+                        '. $backgroud_image.'
+                        background-attachment:scroll;
+                        background-repeat:'.$bg_repeat.';
+                        background-color:'.$bg_color.';
+                        background-position:'.$bg_position.';
+                        '.$border.'
 
-
-
-Mk_Static_Files::addCSS('
-
-	#mk-custom-box-'.$id.' {
-	    padding:'.$padding_vertical.'px '.$padding_horizental.'px;
-	    margin-bottom:'.$margin_bottom.'px;
-	    '. $backgroud_image.'
-	    background-attachment:scroll;
-	    background-repeat:'.$bg_repeat.';
-	    background-color:'.$bg_color.';
-	    background-position:'.$bg_position.';
-	    '.$border.'
-
-	}
-	#mk-custom-box-'.$id.' .mk-divider .divider-inner i{
-	    background-color: '.$bg_color.' !important;
-	}
-	
-', $id);
+                  }
+                 #mk-custom-box-'.$id.' .mk-divider .divider-inner i{
+                        background-color: '.$bg_color.' !important;
+                    }
+                 </style>';
 
 
 echo $output;

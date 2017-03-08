@@ -4,29 +4,29 @@ vc_map(array(
     "name" => __("Pricing Table", "mk_framework"),
     "base" => "mk_pricing_table",
     'icon' => 'icon-mk-pricing-table vc_mk_element-icon',
-    'description' => __( 'Shows Pricing table Posts.', 'mk_framework' ),
+    'description' => __( 'Shows Pricing table Posts.', 'js_composer' ),
     "category" => __('Loops', 'mk_framework'),
     "params" => array(
 
         array(
             "type" => "dropdown",
-            "heading" => __("Style", "mk_framework"),
+            "heading" => __("Style", "js_composer"),
             "param_name" => "style",
             "value" => array(
                 "Classic" => "classic",
                 "Modern" => "modern"
             ),
-            "description" => __("", "mk_framework")
+            "description" => __("", "js_composer")
         ),
         array(
             "type" => "dropdown",
-            "heading" => __("Skin", "mk_framework"),
+            "heading" => __("Skin", "js_composer"),
             "param_name" => "skin",
             "value" => array(
                 "Light" => "light",
                 "Dark" => "dark"
             ),
-            "description" => __("", "mk_framework")
+            "description" => __("", "js_composer")
         ),
         array(
             "type" => "colorpicker",
@@ -103,7 +103,7 @@ vc_map(array(
     "base" => "mk_employees",
     'icon' => 'icon-mk-employees vc_mk_element-icon',
     "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Shows Employees posts in multiple styles.', 'mk_framework' ),
+    'description' => __( 'Shows Employees posts in multiple styles.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "dropdown",
@@ -222,13 +222,6 @@ vc_map(array(
             "type" => "dropdown"
         ),
         array(
-            "type" => "toggle",
-            "heading" => __("Employee Image Stretchability", "mk_framework"),
-            "param_name" => "full_width_image",
-            "value" => "false",
-            "description" => __("Enabling this option will set employee image cover the whole grid area.", "mk_framework")
-        ),
-        array(
             "type" => "dropdown",
             "heading" => __("Viewport Animation", "mk_framework"),
             "param_name" => "animation",
@@ -252,7 +245,7 @@ vc_map(array(
     "base" => "mk_clients",
     'icon' => 'icon-mk-clients vc_mk_element-icon',
     "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Shows Clients posts in multiple styles.', 'mk_framework' ),
+    'description' => __( 'Shows Clients posts in multiple styles.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -433,7 +426,7 @@ vc_map(array(
     "base" => "mk_blog",
      'icon' => 'icon-mk-blog vc_mk_element-icon',
     "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Blog loops are here.', 'mk_framework' ),
+    'description' => __( 'Blog loops are here.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -759,7 +752,7 @@ vc_map(array(
         ),
         array(
             'type' => 'item_id',
-            'heading' => __( 'Item ID', 'mk_framework' ),
+            'heading' => __( 'Item ID', 'js_composer' ),
             'param_name' => "item_id"
         )
 
@@ -772,7 +765,7 @@ vc_map(array(
     "base" => "mk_blog_teaser",
     'icon' => 'icon-mk-blog vc_mk_element-icon',
     "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Blog teaser style loops are here.', 'mk_framework' ),
+    'description' => __( 'Blog teaser style loops are here.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -840,7 +833,7 @@ vc_map(array(
     "base" => "mk_portfolio",
     'icon' => 'icon-mk-portfolio vc_mk_element-icon',
     "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Portfolio loops are here.', 'mk_framework' ),
+    'description' => __( 'Portfolio loops are here.', 'js_composer' ),
     "params" => array(
         array(
             "heading" => __("Style", 'mk_framework'),
@@ -941,18 +934,6 @@ vc_map(array(
                     'flip'
                 )
             )
-        ),
-        array(
-            "heading" => __("Image Size", 'mk_framework'),
-            "description" => __("Please note that this option will not work for Masonry option.", 'mk_framework'),
-            "param_name" => "image_size",
-            "value" => array(
-                __("Resize & Crop", 'mk_framework') => "crop",
-                __("Original Size", 'mk_framework') => "full",
-                __("Large Size", 'mk_framework') => "large",
-                __("Medium Size", 'mk_framework') => "medium"
-            ),
-            "type" => "dropdown"
         ),
         array(
             "type" => "range",
@@ -1104,8 +1085,8 @@ vc_map(array(
             "description" => __("please select which pagination style you would like to use on this loop.", 'mk_framework'),
             "param_name" => "pagination_style",
             "value" => array(
-                __("Classic Pagination Navigation", 'mk_framework') => "1",
                 __("Load more button", 'mk_framework') => "2",
+                __("Classic Pagination Navigation", 'mk_framework') => "1"
             ),
             "type" => "dropdown",
             "dependency" => array(
@@ -1170,178 +1151,8 @@ vc_map(array(
         ),
         array(
             'type' => 'item_id',
-            'heading' => __( 'Item ID', 'mk_framework' ),
+            'heading' => __( 'Item ID', 'js_composer' ),
             'param_name' => "item_id"
         )
-    )
-));
-if(function_exists( 'is_woocommerce' )) {
-    $categories = get_terms( 'product_cat', array(
-                    'orderby'    => 'count',
-                    'hide_empty' => 0,
-                 ) );
-    $product_cats = array();
-    if(is_array($categories)){
-        foreach($categories as $cats){
-            $product_cats[$cats->slug] = $cats->slug;
-        }
-    }
-vc_map(array(
-    "name" => __("Product Loops", "mk_framework"),
-    "base" => "mk_products",
-    "icon" => 'icon-mk-blog vc_mk_element-icon',
-    "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Product loops are here.', 'mk_framework' ),
-    "params" => array(
-
-        array(
-            "heading" => __("Style", 'mk_framework'),
-            "description" => __("please select which woocommerce loop style you would like to use.", 'mk_framework'),
-            "param_name" => "style",
-            "value" => array(
-                __("Classic", 'mk_framework') => "classic",
-                __("Modern", 'mk_framework') => "modern",
-            ),
-            "type" => "dropdown"
-        ),
-
-        array(
-            "heading" => __("Display", 'mk_framework'),
-            "description" => __("", 'mk_framework'),
-            "param_name" => "display",
-            "value" => array(
-                __("Recent Products", 'mk_framework') => "recent",
-                __("Featured Products", 'mk_framework') => "featured",
-                __("Top Rated Products", 'mk_framework') => "top_rated",
-                __("Product Category", 'mk_framework') => "product_category",
-                __("Products on Sale", 'mk_framework') => "products_on_sale",
-                __("Best Sellings Products", 'mk_framework') => "best_sellings"
-            ),
-            "type" => "dropdown"
-        ),
-
-        array(
-            "type" => "multiselect",
-            "heading" => __("Select specific Categories", "mk_framework"),
-            "param_name" => "category",
-            "options" => $product_cats,
-            "value" => '',
-            "description" => __("", "mk_framework"),
-            "dependency" => array(
-                'element' => "display",
-                'value' => array(
-                    'product_category',
-                )
-            )
-        ),
-
-        array(
-            "heading" => __("Orderby", 'mk_framework'),
-            "description" => __("Sort retrieved Blog items by parameter.", 'mk_framework'),
-            "param_name" => "orderby",
-            "value" => $mk_product_orderby,
-            "type" => "dropdown"
-        ),
-        array(
-            "heading" => __("Order", 'mk_framework'),
-            "description" => __("Designates the ascending or descending order of the 'orderby' parameter.", 'mk_framework'),
-            "param_name" => "order",
-            "value" => array(
-                __("DESC (descending order)", 'mk_framework') => "DESC",
-                __("ASC (ascending order)", 'mk_framework') => "ASC"
-            ),
-            "type" => "dropdown"
-        ),
-
-        array(
-            "type" => "range",
-            "heading" => __("How many Columns?", "mk_framework"),
-            "param_name" => "column",
-            "value" => "3",
-            "min" => "1",
-            "max" => "4",
-            "step" => "1",
-            "unit" => 'columns',
-            "description" => __("This option defines how many columns will be set in one row.", "mk_framework")
-        ),
-        array(
-            "type" => "range",
-            "heading" => __("How many Product?", "mk_framework"),
-            "param_name" => "product_per_page",
-            "value" => "12",
-            "min" => "4",
-            "max" => "30",
-            "step" => "1",
-            "unit" => 'product',
-            "description" => __("This option defines how many producr will be set in a page.", "mk_framework")
-        ),
-        array(
-            "type" => "toggle",
-            "heading" => __("Pagination", "mk_framework"),
-            "description" => __("", "mk_framework"),
-            "param_name" => "pagination",
-            "value" => "true"
-        ),
-        array(
-            "type" => "textfield",
-            "heading" => __("Extra class name", "mk_framework"),
-            "param_name" => "el_class",
-            "value" => "",
-            "description" => __("If you wish to style particular content element differently, then use this field to add a class name and then refer to it in Custom CSS Shortcode or Masterkey Custom CSS option.", "mk_framework")
-        )
-    )
-));
-}
-
-vc_map(array(
-    "name" => __("Product Categories Loops", "mk_framework"),
-    "base" => "mk_product_categories",
-    "icon" => 'icon-mk-blog vc_mk_element-icon',
-    "category" => __('Loops', 'mk_framework'),
-    'description' => __( 'Product categories loops are here.', 'mk_framework' ),
-    "params" => array(
-
-        array(
-            "type" => "range",
-            "heading" => __("Number of Product?", "mk_framework"),
-            "param_name" => "number_per_page",
-            "value" => "12",
-            "min" => "1",
-            "max" => "30",
-            "step" => "1",
-            "unit" => 'product',
-            "description" => __("How many product would you like to view?", "mk_framework")
-        ),
-
-        array(
-            "type" => "range",
-            "heading" => __("Number of Product on Row?", "mk_framework"),
-            "param_name" => "columns",
-            "value" => "4",
-            "min" => "1",
-            "max" => "4",
-            "step" => "1",
-            "unit" => 'product',
-            "description" => __("How many product would you like to one row?", "mk_framework")
-        ),
-
-        array(
-            "heading" => __("Orderby", 'mk_framework'),
-            "description" => __("Sort retrieved pricing items by parameter.", 'mk_framework'),
-            "param_name" => "orderby",
-            "value" => $mk_product_categories_orderby,
-            "type" => "dropdown"
-        ),
-
-        array(
-            "heading" => __("Order", 'mk_framework'),
-            "description" => __("Designates the ascending or descending order of the 'orderby' parameter.", 'mk_framework'),
-            "param_name" => "order",
-            "value" => array(
-                __("DESC (descending order)", 'mk_framework') => "DESC",
-                __("ASC (ascending order)", 'mk_framework') => "ASC"
-            ),
-            "type" => "dropdown"
-        ),
     )
 ));

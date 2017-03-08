@@ -5,11 +5,10 @@ extract(shortcode_atts(array(
     'slides' => '',
     'order' => 'DESC',
     'navigation' => 'true',
-    "pagination" => "square",
     "el_class" => ''
 ), $atts));
 
-$button2_txt_color = $button1_txt_color = $outline1_hover_color = $outline2_hover_color = $button2_bg_color = $button1_bg_color = $outline2_active_color = $color_mask_css = $outline1_active_color = $button1_underline_color =  '';
+$button2_txt_color = $button1_txt_color = $outline1_hover_color = $outline2_hover_color = $button2_bg_color = $button1_bg_color = $outline2_active_color = $color_mask_css = $outline1_active_color = '';
 
 global $post, $mk_accent_color;
 
@@ -17,6 +16,7 @@ $query = array(
     'post_type' => 'edge',
     'suppress_filters' => false
 );
+
 
 if (!empty($slides)) {
     $query['post__in'] = explode(',', $slides);
@@ -32,7 +32,7 @@ if ($orderby) {
 $loop = new WP_Query($query);
 
 
-$output = '<div id="fullpage" class="mk-edge-one-pager" data-navigation="'.$navigation.'" data-pagination='.$pagination.'>';
+$output = '<div id="fullpage" class="mk-edge-one-pager" data-navigation="'.$navigation.'">';
 while ($loop->have_posts()):
     $loop->the_post();
     
@@ -75,91 +75,61 @@ while ($loop->have_posts()):
     
     
     
-    if ($btn_1_style == 'flat'   ) {
+    if ($btn_1_style == 'flat') {
         if ($btn_1_skin == 'light') {
             $button1_bg_color  = '#ffffff';
             $button1_txt_color = '#252525';
-
+            
         } else if ($btn_1_skin == 'dark') {
             $button1_bg_color  = '#252525';
             $button1_txt_color = '#fff';
-
+            
         } else if ($btn_1_skin == 'skin') {
             $button1_bg_color  = $mk_accent_color;
             $button1_txt_color = '#fff';
         }
     }
-
+    
     if ($btn_2_style == 'flat') {
         if ($btn_2_skin == 'light') {
             $button2_bg_color  = '#ffffff';
             $button2_txt_color = '#252525';
-
+            
         } else if ($btn_2_skin == 'dark') {
             $button2_bg_color  = '#252525';
             $button2_txt_color = '#fff';
-
+            
         } else if ($btn_2_skin == 'skin') {
             $button2_bg_color  = $mk_accent_color;
             $button2_txt_color = '#fff';
         }
     }
-
-    if ($btn_1_style == 'fancy_link'   ) {
-        if ($btn_1_skin == 'light') {
-            $button1_txt_color  = '#ffffff';
-            $button1_underline_color = '#ffffff';
-
-        } else if ($btn_1_skin == 'dark') {
-            $button1_txt_color  = '#252525';
-            $button1_underline_color = '#252525'; 
-
-        } else if ($btn_1_skin == 'skin') {
-            $button1_txt_color  = $mk_accent_color;
-            $button1_underline_color = $mk_accent_color;
-        }
-    }
-
-    if ($btn_2_style == 'fancy_link') {
-        if ($btn_2_skin == 'light') {
-            $button2_txt_color  = '#ffffff';
-            $button2_underline_color = '#ffffff';
-
-        } else if ($btn_2_skin == 'dark') {
-            $button2_txt_color  = '#252525';
-            $button2_underline_color = '#252525';
-
-        } else if ($btn_2_skin == 'skin') {
-            $button2_txt_color  = $mk_accent_color;
-            $button2_underline_color = $mk_accent_color;
-        }
-    }
-
-
-    if ($btn_1_style == 'outline' || $btn_1_style == 'line'|| $btn_1_style == 'fill' || $btn_1_style == 'radius') {
+    
+    
+    if ($btn_1_style == 'outline') {
         if ($btn_1_skin == 'light') {
             $outline1_active_color = '#ffffff';
             $outline1_hover_color  = '#252525';
-
+            
         } else if ($btn_1_skin == 'dark') {
             $outline1_active_color = '#252525';
             $outline1_hover_color  = '#ffffff';
-
+            
         } else if ($btn_1_skin == 'skin') {
             $outline1_active_color = $mk_accent_color;
             $outline1_hover_color  = '#ffffff';
         }
     }
-
-    if ($btn_2_style == 'outline' || $btn_2_style == 'line'|| $btn_2_style == 'fill' || $btn_2_style == 'radius' ) {
+    
+    if ($btn_2_style == 'outline') {
         if ($btn_2_skin == 'light') {
             $outline2_active_color = '#ffffff';
             $outline2_hover_color  = '#252525';
-
+            
         } else if ($btn_2_skin == 'dark') {
             $outline2_active_color = '#252525';
             $outline2_hover_color  = '#ffffff';
-
+            
         } else if ($btn_2_skin == 'skin') {
             $outline2_active_color = $mk_accent_color;
             $outline2_hover_color  = '#ffffff';
@@ -217,10 +187,10 @@ while ($loop->have_posts()):
     
     if (!empty($btn_1_txt) || !empty($btn_2_txt)) {
         $output .= '<div class="edge-buttons">';
-        $smooth_scroll_1 = (preg_match('/#/',$btn_1_url)) ? ' el_class=" mk-smooth"' : '';
-        $smooth_scroll_2 = (preg_match('/#/',$btn_2_url)) ? ' el_class=" mk-smooth"' : '';
-        $output .= (!empty($btn_1_txt)) ? do_shortcode('[mk_button style="' . $btn_1_style . '" size="large" bg_color="' . $button1_bg_color . '" txt_color="' . $button1_txt_color . '" outline_skin="' . $outline1_active_color . '" outline_hover_skin="' . $outline1_hover_color . '" underline_color="' . $button1_underline_color . '" url="' . $btn_1_url . '" target="_self" align="left" margin_top="0" margin_bottom="10"'.$smooth_scroll_1.']' . $btn_1_txt . '[/mk_button]') : '';
-        $output .= (!empty($btn_2_txt)) ? do_shortcode('[mk_button style="' . $btn_2_style . '" size="large" bg_color="' . $button2_bg_color . '" txt_color="' . $button2_txt_color . '" outline_skin="' . $outline2_active_color . '" outline_hover_skin="' . $outline2_hover_color . '" underline_color="' . $button2_underline_color . '" url="' . $btn_2_url . '" target="_self" align="left" margin_top="0" margin_bottom="10"'.$smooth_scroll_2.']' . $btn_2_txt . '[/mk_button]') : '';
+        $smooth_scroll_1 = (preg_match('/#/',$btn_1_url)) ? ' el_class="mk-smooth"' : '';
+        $smooth_scroll_2 = (preg_match('/#/',$btn_2_url)) ? ' el_class="mk-smooth"' : '';
+        $output .= (!empty($btn_1_txt)) ? do_shortcode('[mk_button style="' . $btn_1_style . '" size="large" bg_color="' . $button1_bg_color . '" txt_color="' . $button1_txt_color . '" outline_skin="' . $outline1_active_color . '" outline_hover_skin="' . $outline1_hover_color . '" url="' . $btn_1_url . '" target="_self" align="left" margin_top="0" margin_bottom="10"'.$smooth_scroll_1.']' . $btn_1_txt . '[/mk_button]') : '';
+        $output .= (!empty($btn_2_txt)) ? do_shortcode('[mk_button style="' . $btn_2_style . '" size="large" bg_color="' . $button2_bg_color . '" txt_color="' . $button2_txt_color . '" outline_skin="' . $outline2_active_color . '" outline_hover_skin="' . $outline2_hover_color . '" url="' . $btn_2_url . '" target="_self" align="left" margin_top="0" margin_bottom="10"'.$smooth_scroll_2.']' . $btn_2_txt . '[/mk_button]') : '';
         $output .= '</div>';
     }
     

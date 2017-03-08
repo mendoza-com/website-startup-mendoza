@@ -90,35 +90,8 @@ function mk_portfolio_standard_loop( &$r, $atts, $current ) {
 
 	$item_logo = get_post_meta( get_the_ID(), '_portfolio_item_logo', true );
 
-	switch ($image_size) {
-        case 'full':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-            $image_src = $image_src_array[0];
-            break;
-        case 'crop':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-            $image_src = bfi_thumb($image_src_array[0], array(
-                'width' => $width * $image_quality,
-                'height' => $height * $image_quality
-            ));
-            break;            
-        case 'large':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true);
-            $image_src = $image_src_array[0];
-            break;
-        case 'medium':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium', true);
-            $image_src = $image_src_array[0];
-            break;        
-        default:
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-            $image_src = bfi_thumb($image_src_array[0], array(
-                'width' => $width * $image_quality,
-                'height' => $height * $image_quality
-            ));
-         break;
-    }
-
+	$image_src_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true );
+	$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $width*$image_quality, 'height' => $height*$image_quality, 'crop'=>true));
 
 	$output .='<article id="portfolio-'.get_the_ID().'" class="standard-portfolio-item standard-'.$item_id.' portfolio-ajax-item mk-portfolio-item '.$hover_style.'-hover mk-isotop-item '.$mk_column_css.' ' . implode( ' ', mk_get_portfolio_tax($post->ID, false, true) ) . '"><div class="item-holder">';
 
@@ -134,7 +107,7 @@ function mk_portfolio_standard_loop( &$r, $atts, $current ) {
 	$output .='<div class="portfolio-meta">';
 
 	if($plus_icon == 'true') {
-		$output .='<a href="'.$image_src_array[ 0 ].'" title="'.get_the_title().'"  data-fancybox-group="portfolio-loop"  class="mk-lightbox portfolio-plus-icon"><i class="mk-theme-icon-plus"></i></a>';
+		$output .='<a href="'.$image_src_array[ 0 ].'" title="'.get_the_title().'" rel="portfolio-loop" class="mk-lightbox portfolio-plus-icon"><i class="mk-theme-icon-plus"></i></a>';
 	}
 	if($permalink_icon == 'true') {
 		$output .= '<a class="project-load portfolio-permalink" data-post-id="'.get_the_ID().'" href="'.$permalink.'"><i class="mk-theme-icon-next-big"></i></a>';

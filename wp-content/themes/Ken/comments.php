@@ -2,18 +2,18 @@
 function theme_comments( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment; ?>
 	<li <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent-comment') ?> id="li-comment-<?php comment_ID() ?>">
-		<div class="mk-single-comment" id="comment-<?php comment_ID(); ?>" <?php echo get_schema_markup('comment'); ?>>
+		<div class="mk-single-comment" id="comment-<?php comment_ID(); ?>">
 			<div class="gravatar"><?php echo get_avatar( $comment, $size='45', $default='' ); ?></div>
 			<div class="comment-meta">
-					<?php printf( '<span class="comment-author" '.get_schema_markup('comment_author_link').'>%s</span>', get_comment_author_link() ) ?>	
+					<?php printf( '<span class="comment-author">%s</span>', get_comment_author_link() ) ?>	
                     <?php edit_comment_link( '', '', '' ) ?>
-                    <time class="comment-time" <?php echo get_schema_markup('comment_time'); ?>><?php echo get_comment_time('F jS, Y h:i A'); ?></time>
+                    <time class="comment-time"><?php echo get_comment_time('F jS, Y h:i A'); ?></time>
 			</div>
 			<span class="comment-reply">
 					<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'], 'reply_text' => '<i class="mk-icon-comment"></i>' ) ) ) ?>
 			</span>
 			<div class="clearboth"></div>
-			<div class="comment-content" <?php echo get_schema_markup('comment_text'); ?>>
+			<div class="comment-content">
 
 					<?php comment_text() ?>
 
@@ -44,7 +44,7 @@ function list_pings( $comment, $args, $depth ) {
 				</div>
 				<div class="comment-data">
 					<?php comment_text() ?>
- 
+
 								<time class="comment-time"><?php echo get_comment_time('F jS, Y h:i A'); ?></time>
 <?php if ( $comment->comment_approved == '0' ) : ?>
 					<span class="unapproved">Your comment is awaiting moderation.</span>

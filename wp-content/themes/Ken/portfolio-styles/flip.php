@@ -96,34 +96,8 @@ function mk_portfolio_flip_loop( &$r, $atts, $current ) {
 		$permalink = get_permalink();
 	}
 
-	switch ($image_size) {
-        case 'full':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-            $image_src = $image_src_array[0];
-            break;
-        case 'crop':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-            $image_src = bfi_thumb($image_src_array[0], array(
-                'width' => $width * $image_quality,
-                'height' => $height * $image_quality
-            ));
-            break;            
-        case 'large':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true);
-            $image_src = $image_src_array[0];
-            break;
-        case 'medium':
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium', true);
-            $image_src = $image_src_array[0];
-            break;        
-        default:
-            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-            $image_src = bfi_thumb($image_src_array[0], array(
-                'width' => $width * $image_quality,
-                'height' => $height * $image_quality
-            ));
-         break;
-    }
+	$image_src_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true );
+	$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $width*$image_quality, 'height' => $height*$image_quality, 'crop'=>true));	
 
 	$output .='<article id="portfolio-'.get_the_ID().'" class="flip-portfolio-item flip-'.$item_id.' portfolio-ajax-item '.$mk_column_css.' mk-portfolio-item mk-isotop-item ' . implode( ' ', $terms_slug ) . '"><div class="item-holder">';
 	

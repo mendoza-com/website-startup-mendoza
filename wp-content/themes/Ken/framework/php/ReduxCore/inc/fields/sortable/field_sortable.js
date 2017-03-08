@@ -8,6 +8,12 @@
 
     var scroll = '';
 
+    $( document ).ready(
+        function() {
+            //redux.field_objects.sortable.init();
+        }
+    );
+
     redux.field_objects.sortable.init = function( selector ) {
 
         if ( !selector ) {
@@ -73,10 +79,6 @@
     };
 
     redux.field_objects.sortable.scrolling = function( selector ) {
-        if (selector === undefined) {
-            return;
-        }
-        
         var $scrollable = selector.find( ".redux-sorter" );
 
         if ( scroll == 'up' ) {

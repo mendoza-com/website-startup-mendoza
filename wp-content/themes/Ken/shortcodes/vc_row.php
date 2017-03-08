@@ -6,43 +6,14 @@ extract(shortcode_atts(array(
 	'padding' =>0,
 	'attached' => 'false',
 	'visibility' => '',
-	'equal_height' => '',
-	'content_placement' => '',
-	'css' => '',
     'el_class' => '',
 ), $atts));
 
 $fullwidth_start = $output = $fullwidth_end = '';
 
-wp_enqueue_script( 'wpb_composer_front_js' );
-
 $padding_css = ($attached == 'true') ? ' add-padding-'.$padding : '';
 
-$css_classes = array(
-	'vc_row',
-	'wpb_row', //deprecated
-	'vc_row-fluid',
-	$el_class,
-	vc_shortcode_custom_css_class( $css ),
-);
-
-if ( ! empty( $equal_height ) ) {
-	$flex_row = true;
-	$css_classes[] = ' vc_row-o-equal-height';
-}
-
-
-if ( ! empty( $content_placement ) ) {
-	$flex_row = true;
-	$css_classes[] = ' vc_row-o-content-' . $content_placement;
-}
-
-if ( ! empty( $flex_row ) ) {
-	$css_classes[] = ' vc_row-flex';
-}
-
-$css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $css_classes ) ), $this->settings['base'], $atts ) );
-
+$css_class =  apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'wpb_row vc_row '.get_row_css_class().$el_class, $this->settings['base']);
 
 $id = $id ? (' id="'.$id.'" ') : '';
 
@@ -59,7 +30,7 @@ if($fullwidth == 'true') {
 	}
 }
 
-$output .= $fullwidth_start . '<div'.$id.' class="'.esc_attr( trim( $css_class ) ).' '.$visibility.' mk-fullwidth-'.$fullwidth.$padding_css .' attched-'.$attached.'">';
+$output .= $fullwidth_start . '<div'.$id.' class="'.$css_class.' '.$visibility.' mk-fullwidth-'.$fullwidth.$padding_css .' attched-'.$attached.'">';
 $output .= wpb_js_remove_wpautop($content);
 $output .= '</div>'.$fullwidth_end . $this->endBlockComment('row');
 echo $output;

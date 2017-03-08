@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Tiny_Slider extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Tiny_Slider() {
 		$widget_ops = array( 'classname' => 'tiny_slider_widget', 'description' => 'Small Slider with swipe capability' );
-		WP_Widget::__construct( 'tiny_slider_widget', THEME_SLUG.' - '.'Tiny Slider', $widget_ops );
+		$this->WP_Widget( 'tiny_slider_widget', THEME_SLUG.' - '.'Tiny Slider', $widget_ops );
 
 	}
 
@@ -21,8 +21,8 @@ class Artbees_Widget_Tiny_Slider extends WP_Widget {
 		$width = (int)$instance["width"];
 		$height = (int)$instance["height"];
 
-		$output = '<div class="mk-image-slideshow" style="max-width:' . $width . 'px;max-height:'.$height.'px"><div id="mk-swiper-'.$id.'" data-freeModeFluid="true" data-loop="true" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="5000" data-animationSpeed="600" data-directionNav="true" class="mk-swiper-container mk-swiper-slider ">';
-		$output .= '<div class="mk-swiper-wrapper">';
+		$output = '<div class="mk-image-slideshow" style="max-width:' . $width . 'px;max-height:'.$height.'px"><div id="mk-swiper-'.$id.'" data-freeModeFluid="true" data-loop="true" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="5000" data-animationSpeed="600" data-directionNav="true" class="swiper-container mk-swiper-slider ">';
+		$output .= '<div class="swiper-wrapper">';
 
 		if ( $count > 0 ) {
 
@@ -31,7 +31,7 @@ class Artbees_Widget_Tiny_Slider extends WP_Widget {
 				$image_src = bfi_thumb( $src, array('width' => $width, 'height' => $height, 'crop'=>true));
 
 				$output .= '<div class="swiper-slide">';
-				$output .= '<img width="'.$width.'" height="'.$height.'" height="80" alt="'.get_the_title().'" src="' . $image_src .'" />';
+				$output .= '<img width="'.$width.'" height="'.$height.'" height="80" alt="" src="' . $image_src .'" />';
 				$output .= '</div>' . "\n\n";
 
 			}

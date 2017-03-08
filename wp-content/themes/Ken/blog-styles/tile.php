@@ -43,19 +43,14 @@ function blog_tile_style( $atts) {
 
 
 
-	$cats = '';
-	$categories = get_the_category();
-	foreach ($categories as $category) {
-		$cats .= 'category-'.$category->slug;
-	}
 
-	$output .='<article id="entry-'.get_the_ID().'" class="blog-tile-entry tile-'.$item_id.' mk-isotop-item '.$mk_column_css.' '.$cats.' '.$post_type.'-post-type">';
+	$output .='<article id="entry-'.get_the_ID().'" class="blog-tile-entry tile-'.$item_id.' mk-isotop-item '.$mk_column_css.' '.$post_type.'-post-type">';
 	$output .= '<div class="item-holder">';
 
 
 	/* Blog Heading */
 	$blog_heading .= '<div class="blog-entry-heading">';
-	$blog_heading .= '<h3 class="blog-title"><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
+	$blog_heading .= '<h2 class="blog-title"><a href="'.get_permalink().'">'.get_the_title().'</a></h2>';
 	$blog_heading .= '</div>';
 	/***********/
 
@@ -98,8 +93,8 @@ function blog_tile_style( $atts) {
 		case 'gallery':
 			$attachment_ids = get_post_meta( get_the_id(), '_gallery_images', true );
 			$output .='<div class="blog-gallery-type">';
-			$output .= do_shortcode( '[mk_image_slideshow images="'.$attachment_ids.'" direction="horizontal" margin_bottom="0" image_width="'.$image_width.'" image_height="'.$image_height.'" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="false" direction_nav="true"]' );
-			$output .='<div class="clearboth"></div></div>';
+			$output .= do_shortcode( '[mk_image_slideshow images="'.$attachment_ids.'" margin_bottom="0" image_width="'.$image_width.'" image_height="'.$image_height.'" resposnive="true" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="false" direction_nav="true"]' );
+			$output .='</div>';
 
 			break;
 		/***********/
@@ -209,7 +204,7 @@ function blog_tile_style( $atts) {
 	/***********/
 	if($excerpt_length != 0) {
 		ob_start();
-	    mk_excerpt_max_charlength($excerpt_length);
+	    the_excerpt_max_charlength($excerpt_length);
 	    $output .= '<div class="blog-excerpt">' . ob_get_clean() . '</div>';
 	}
 

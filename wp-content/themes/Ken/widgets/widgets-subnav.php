@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Sub_Navigation extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Sub_Navigation() {
 		$widget_ops = array( 'classname' => 'widget-sub-navigation', 'description' => 'Displays a list of Sub Pages' );
-		WP_Widget::__construct( 'subnav', THEME_SLUG.' - '. 'Sub Navigation', $widget_ops );
+		$this->WP_Widget( 'subnav', THEME_SLUG.' - '. 'Sub Navigation', $widget_ops );
 	}
 
 	function widget( $args, $instance ) {

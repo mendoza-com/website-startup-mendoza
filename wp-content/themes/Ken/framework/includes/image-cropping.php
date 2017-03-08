@@ -452,6 +452,7 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
          */
         public static function thumb( $url, $params = array(), $single = true ) {
             extract( $params );
+            global $mk_options;
 
             //validate inputs
             if ( ! $url ) {
@@ -613,7 +614,7 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
                 ( isset( $dst_h ) ? str_pad( (string) $dst_h, 5, '0', STR_PAD_LEFT ) : '00000' ) .
                 ( ( isset ( $quality ) && $quality > 0 && $quality <= 100 ) ? ( $quality ? (string) $quality : '0' ) : '0' );
             $suffix = self::base_convert_arbitrary( $suffix, 10, 36 );
-            $quality = 100;
+            $quality = isset($mk_options['image_resize_quality']) ? $mk_options['image_resize_quality'] : 100;
 
             // use this to check if cropped image already exists, so we can return that instead
             $dst_rel_path = str_replace( '.' . $ext, '', basename( $img_path ) );
@@ -771,10 +772,7 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
 // don't use the default resizer since we want to allow resizing to larger sizes (than the original one)
 // Parts are copied from media.php
 // Crop is always applied (just like timthumb)
-// Don't use this inside the admin since sometimes images in the media library get resized
-if ( ! is_admin() ) {
-    add_filter( 'image_resize_dimensions', 'bfi_image_resize_dimensions', 10, 5 );
-}
+add_filter( 'image_resize_dimensions', 'bfi_image_resize_dimensions', 10, 5 );
 
 if ( ! function_exists( 'bfi_image_resize_dimensions' ) ) {
     function bfi_image_resize_dimensions( $payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop = false ) {
@@ -783,11 +781,11 @@ if ( ! function_exists( 'bfi_image_resize_dimensions' ) ) {
         $new_w = $dest_w;
         $new_h = $dest_h;
 
-        if ( empty( $new_w ) || $new_w < 0  ) {
+        if ( ! $new_w ) {
             $new_w = intval( $new_h * $aspect_ratio );
         }
 
-        if ( empty( $new_h ) || $new_h < 0 ) {
+        if ( ! $new_h ) {
             $new_h = intval( $new_w / $aspect_ratio );
         }
 
@@ -797,11 +795,6 @@ if ( ! function_exists( 'bfi_image_resize_dimensions' ) ) {
         $crop_h = round( $new_h / $size_ratio );
         $s_x = floor( ( $orig_w - $crop_w ) / 2 );
         $s_y = floor( ( $orig_h - $crop_h ) / 2 );
-        
-        // Safe guard against super large or zero images which might cause 500 errors
-        if ( $new_w > 5000 || $new_h > 5000 || $new_w <= 0 || $new_h <= 0 ) {
-            return null;
-        }
 
         // the return array matches the parameters to imagecopyresampled()
         // int dst_x, int dst_y, int src_x, int src_y, int dst_w, int dst_h, int src_w, int src_h

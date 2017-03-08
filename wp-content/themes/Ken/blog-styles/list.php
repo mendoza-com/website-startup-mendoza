@@ -39,7 +39,7 @@ function blog_list_style($atts)
     
     if($excerpt_length != 0) {
         ob_start();
-        mk_excerpt_max_charlength($excerpt_length);
+        the_excerpt_max_charlength($excerpt_length);
         $output .= '<div class="blog-excerpt">' . ob_get_clean() . '</div>';
     }
     

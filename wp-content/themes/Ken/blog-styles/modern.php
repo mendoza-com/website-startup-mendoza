@@ -55,9 +55,9 @@ function blog_modern_style($atts)
         case 'gallery':
             $attachment_ids = get_post_meta(get_the_id(), '_gallery_images', true);
             $output .= '<div class="blog-gallery-type">';
-            $output .= do_shortcode('[mk_image_slideshow images="' . $attachment_ids . '" direction="horizontal" margin_bottom="0" image_width="' . $image_width . '" image_height="' . $image_height . '" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="true" direction_nav="true"]');
+            $output .= do_shortcode('[mk_image_slideshow images="' . $attachment_ids . '" margin_bottom="0" image_width="' . $image_width . '" image_height="' . $image_height . '" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="true" direction_nav="true"]');
             $output .= '<div class="hover-overlay"></div>';
-            $output .= '<div class="clearboth"></div></div>';
+            $output .= '</div>';
             
             break;
         /***********/
@@ -86,7 +86,7 @@ function blog_modern_style($atts)
     
     /* Blog Heading */
     $output .= '<div class="blog-entry-heading mk-caption-item">';
-    $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+    $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
     $output .= '<a class="blog-modern-button" href="' . get_permalink() . '">' . __('SEE THE POST', 'mk_framework') . '</a>';
     $output .= '</div>';
     /***********/

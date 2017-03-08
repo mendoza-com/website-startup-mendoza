@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Video extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Video() {
 		$widget_ops = array( 'classname' => 'widget_video', 'description' => 'You can add youtube and Vimeo' );
-		WP_Widget::__construct( 'video', THEME_SLUG.' - '.'Video', $widget_ops );
+		$this->WP_Widget( 'video', THEME_SLUG.' - '.'Video', $widget_ops );
 
 
 	}
@@ -40,30 +40,30 @@ class Artbees_Widget_Video extends WP_Widget {
 
 			// Vimeo Video post type
 			if ( $type =='vimeo' ) {
-				echo '<div class="mk-video-container" ><iframe src="http://player.vimeo.com/video/'.$clip_id.'?title=0&amp;byline=0&amp;portrait=0&amp;color=00c65d" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
+				echo '<div class="mk-video-container"><iframe src="http://player.vimeo.com/video/'.$clip_id.'?title=0&amp;byline=0&amp;portrait=0&amp;color=00c65d" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
 			}
 
 			// Youtube Video post type
 			if ( $type =='youtube' ) {
 				$height = intval( $width * 9 / 16 ) + 25;
-				echo '<div class="mk-video-container" '.get_schema_markup('video').'><iframe src="http://www.youtube.com/embed/'.$clip_id.'?showinfo=0&theme=light&color=white&autohide=1" frameborder="0" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
+				echo '<div class="mk-video-container"><iframe src="http://www.youtube.com/embed/'.$clip_id.'?showinfo=0&theme=light&color=white&autohide=1" frameborder="0" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
 			}
 
 			// dailymotion Video post type
 			if ( $type =='dailymotion' ) {
 
-				echo '<div class="mk-video-container" '.get_schema_markup('video').'><iframe frameborder="0" width="'.$width.'" height="'.$height.'" src="http://www.dailymotion.com/embed/video/'.$clip_id.'?foreground=%2300c65d&highlight=%23ffffff&background=%23000000&logo=0"></iframe></div>';
+				echo '<div class="mk-video-container"><iframe frameborder="0" width="'.$width.'" height="'.$height.'" src="http://www.dailymotion.com/embed/video/'.$clip_id.'?foreground=%2300c65d&highlight=%23ffffff&background=%23000000&logo=0"></iframe></div>';
 			}
 
 			// bliptv Video post type
 			if ( $type =='bliptv' ) {
-				echo '<div class="mk-video-container" '.get_schema_markup('video').'><iframe src="http://blip.tv/play/'.$clip_id.'.x?p=1" width="'.$width.'" height="'.$height.'" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#'.$clip_id.'" style="display:none"></embed></div>';
+				echo '<div class="mk-video-container"><iframe src="http://blip.tv/play/'.$clip_id.'.x?p=1" width="'.$width.'" height="'.$height.'" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#'.$clip_id.'" style="display:none"></embed></div>';
 			}
 
 
 			// viddler Video post type
 			if ( $type =='viddler' ) {
-				echo '<div class="mk-video-container" '.get_schema_markup('video').'><iframe id="viddler-bdce8c7" src="//www.viddler.com/embed/'.$clip_id.'/?f=1&offset=0&autoplay=0&secret=18897048&disablebranding=0&view_secret=18897048" width="'.$width.'" height="'.$height.'" frameborder="0" mozallowfullscreen="true" webkitallowfullscreen="true" scrolling="no" style="overflow:hidden !important;"></iframe></div>';
+				echo '<div class="mk-video-container"><iframe id="viddler-bdce8c7" src="//www.viddler.com/embed/'.$clip_id.'/?f=1&offset=0&autoplay=0&secret=18897048&disablebranding=0&view_secret=18897048" width="'.$width.'" height="'.$height.'" frameborder="0" mozallowfullscreen="true" webkitallowfullscreen="true" scrolling="no" style="overflow:hidden !important;"></iframe></div>';
 			}
 
 			if(!empty($video_title)) {

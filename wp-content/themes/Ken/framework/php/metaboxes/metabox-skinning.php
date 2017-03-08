@@ -78,14 +78,6 @@ $options = array(
     "type" => "visual_selector"
   ),
 
-  array(
-    "name" => __( "Boxed Layout Shadow", "mk_framework" ),
-    "subtitle" => __( "", "mk_framework" ),
-    "id" => "boxed_layout_shadow",
-    "default" => "false",
-    "type" => "toggle"
-  ),
-
 
   array(
     "name" => __( "Background color & texture", 'mk_framework' ),
@@ -450,26 +442,11 @@ $options = array(
     "options" => array(
       "dark" => __('Dark', "mk_framework" ),
       "light" => __('Light', "mk_framework" ),
-      "custom" => __('Custom', "mk_framework" ),
     ),
     "type" => "select"
   ),
 
-  array(
-    "name" => __( 'Breadcrumb Custom Color', 'mk_framework' ),
-    "subtitle" => __( "Using this option you can change breadcrumb link and text color.", "mk_framework" ),
-    "id" => "_breadcrumb_custom_color",
-    "default" => "#fff",
-    "type" => "color"
-  ),
 
-  array(
-    "name" => __( 'Breadcrumb Custom Hover Color', 'mk_framework' ),
-    "subtitle" => __( "Using this option you can change breadcrumb link hover color.", "mk_framework" ),
-    "id" => "_breadcrumb_custom_hover_color",
-    "default" => "#000",
-    "type" => "color",
-  ),
 
 );
 new mk_metaboxesGenerator( $config, $options );

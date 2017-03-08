@@ -24,8 +24,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post();
 $post_type = get_post_format( get_the_id() );
 ?>
 
-<div id="theme-page" class="page-master-holder">
-	<div class="background-img background-img--page"></div>
+<div id="theme-page">
 	<div class="mk-main-wrapper-holder">
 	<div class="theme-page-wrapper <?php echo $layout; ?>-layout mk-grid vc_row-fluid <?php echo $padding; ?>">
 		<div class="theme-content single-portfolio <?php echo $padding; ?>">

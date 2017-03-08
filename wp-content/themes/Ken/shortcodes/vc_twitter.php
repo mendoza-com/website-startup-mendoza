@@ -4,12 +4,11 @@ $output = $el_class = $title = $twitter_name = $tweets_count = '';
 extract(shortcode_atts(array(
     'twitter_name' => 'twitter',
     'tweets_count' => 5,
-    'item_id' => '',
     'el_class' => ''
 ), $atts));
 
-global $mk_settings, $post;
-$item_id = (!empty($item_id)) ? $item_id : $post->ID;
+
+global $mk_settings;
 
 $consumer_key        = $mk_settings['twitter-consumer-key'];
 $consumer_secret     = $mk_settings['twitter-consumer-secret'];
@@ -17,19 +16,20 @@ $access_token        = $mk_settings['twitter-access-token'];
 $access_token_secret = $mk_settings['twitter-access-token-secret'];
 
 $el_class = $this->getExtraClass($el_class);
+$id       = uniqid();
 
 $output .= '<div class="mk-shortcode mk-twitter-shortcode ' . $el_class . '">';
 
 
 if ($twitter_name && $consumer_key && $consumer_secret && $access_token && $access_token_secret && $tweets_count) {
     
-    $transName = 'mk_Ken_tweets_' . $item_id;
+    $transName = 'mk_Ken_tweets_' . $id;
     $cacheTime = 10;
     if (false === ($twitterData = get_transient($transName))) {
         
-        $token = get_option('mk_twitter_token_' . $item_id);
+        $token = get_option('mk_twitter_token_' . $id);
         
-        delete_option('mk_twitter_token_' . $item_id);
+        delete_option('mk_twitter_token_' . $id);
         
         
         if (!$token) {
@@ -56,7 +56,7 @@ if ($twitter_name && $consumer_key && $consumer_secret && $access_token && $acce
             $keys = json_decode(wp_remote_retrieve_body($response));
             
             if ($keys) {
-                update_option('mk_twitter_token_' . $item_id, $keys->access_token);
+                update_option('mk_twitter_token_' . $id, $keys->access_token);
                 $token = $keys->access_token;
             }
         }
@@ -79,7 +79,7 @@ if ($twitter_name && $consumer_key && $consumer_secret && $access_token && $acce
     
     if ($twitter && is_array($twitter)) {
         
-        $output .= '<div id="tweets_' . $item_id . '">';
+        $output .= '<div id="tweets_' . $id . '">';
         
         $output .= '<ul class="mk-tweet-shortcode">';
         foreach ($twitter as $tweet):

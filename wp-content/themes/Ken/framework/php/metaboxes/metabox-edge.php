@@ -369,7 +369,7 @@ $options = array(
 
 	array(
 		"name" => __( "Transparent Header Style Skin for this Slide", "mk_framework" ),
-		"subtitle" => __( "If this slide image or video is light color then you should choose dark otherwise light.", "mk_framework" ),
+		"subtitle" => __( "If this slide image or video is dark color then you should choose light otherwise dark.", "mk_framework" ),
 		"desc" => __( "", "mk_framework" ),
 		"id" => "_edge_header_skin",
 		"default" => 'dark',
@@ -383,8 +383,8 @@ $options = array(
 
 	array(
 		"name" => __( "Hash Data Attribute?", "mk_framework" ),
-		"subtitle" => __( 'Add an alias title for this slide (use dash instead of space)', 'mk_framework' ),
-		"desc" => __( "Use this field if you want to navigate to an specific slide using URL hash value. You will also need to enable the 'Hash Navigation?' option from edge slider shortcode options.", "mk_framework" ),
+		"subtitle" => __( '', 'mk_framework' ),
+		"desc" => __( "", "mk_framework" ),
 		"id" => "_hash_attribute",
 		"default" => '',
 		'layout' => 'half',

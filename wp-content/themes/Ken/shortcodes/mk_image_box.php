@@ -2,9 +2,9 @@
 
 extract(shortcode_atts(array(
 	'media_type' => 'image',
-	'autoplay' => 'false',
-	'video_host' => 'self_hosted',
-	'video_host_social' => 'social_hosted_youtube',
+	'autoplay' => '',
+	'video_host' => '',
+	'video_host_social' => '',
 	'social_youtube_id' => '',
 	'social_vimeo_id' => '',
 	'mp4' => '',
@@ -29,20 +29,18 @@ extract(shortcode_atts(array(
 	'visibility' => '',
 	'title_color' => '',
 	'title_text_transform' => '',
-	'title_font_weight' => 'inherit',
+	'title_font_weight' => '',
 ), $atts));
-
-require_once THEME_INCLUDES . "/image-cropping.php";	
 
 $output = $videoContent = $stream_source = '';
 
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 
 $animation_css = ($animation != '') ? (' mk-animate-element ' . $animation . ' ') : '';
 
 if ($media_type == 'video') {
 	if($video_host == 'self_hosted'){
-		$videoContent .= '<div class="mk-imagebox-video mk-video-wrapper video-self-hosted"><div class="mk-video-container"><video poster="" muted="muted" preload="auto" loop="true" >';
+		$videoContent .= '<div class="mk-imagebox-video mk-video-wrapper"><div class="mk-video-container"><video poster="" muted="muted" preload="auto" loop="true" >';
 
 		if (!empty($mp4)) {
 			//MP4 must be first for iPad!
@@ -61,7 +59,7 @@ if ($media_type == 'video') {
 
 		$stream_source = 'self_hosted';
 	}else{
-		$videoContent .= '<div class="mk-imagebox-video mk-video-wrapper video-social-hosted"><div class="mk-video-container">';
+		$videoContent .= '<div class="mk-imagebox-video mk-video-wrapper"><div class="mk-video-container">';
 		if ($video_host_social == 'social_hosted_youtube'){
 			$stream_source = 'youtube';
 			$videoContent .= '<iframe id="player" src="https://www.youtube.com/embed/'.$social_youtube_id.'?rel=0&amp;enablejsapi=1" frameborder="0"  allowfullscreen></iframe>';
@@ -89,11 +87,11 @@ $stream_source_tag = ($stream_source == '') ? '' : 'data-source="'.$stream_sourc
 
 $output .= '<div id="image-box-' . $id . '" class="mk-image-box autoplay-'.$video_autoplay.' rounded-'.$rounded_corner.' align-' . $align . ' ' . $visibility . ' ' . $animation_css . $el_class . '" style="max-width: ' . $media_width . 'px;' . $bg_color .$border_color. '" '.$stream_source_tag.'>';
 
-$output .= '<div class="mk-image-box-media" style="max-height:' . $media_height . 'px;">'; 
+$output .= '<div class="mk-image-box-media" style="max-height:' . $media_height . 'px">';
 if ($media_type == 'video') {
 	$output .= $videoContent;
 } else {
-	$output .= '<div class="featured-image" style="max-height:' . $media_height . 'px;" onClick="return true">';
+	$output .= '<div class="featured-image" onClick="return true">';
 	if ($image_link == 'lightbox') {
 		$output .= '<div class="hover-overlay"></div>';
 		$output .= '<div class="gallery-meta"><a class="mk-lightbox" href="' . $image_src_array[0] . '" title="' . $image_title . '"><i class="mk-theme-icon-plus"></i></a></div>';
@@ -125,16 +123,14 @@ $output .= '<div class="image-box-desc">' . wpb_js_remove_wpautop($content, true
 $output .= '</div>';
 $output .= '<div class="clearboth"></div></div>';
 
+$output .= '
+<style type="text/css">
+#image-box-' . $id . ' .image-box-title,
+#image-box-' . $id . ' .image-box-desc,
+#image-box-' . $id . ' .image-box-desc p
+{
+    ' . $txt_color . '
+}
+</style>';
 
 echo $output;
-
-
-
-Mk_Static_Files::addCSS('
-	#image-box-' . $id . ' .image-box-title,
-	#image-box-' . $id . ' .image-box-desc,
-	#image-box-' . $id . ' .image-box-desc p{
-	    ' . $txt_color . '
-	}
-', $id);
-

@@ -6,7 +6,7 @@ extract(shortcode_atts(array(
     'slides'                => '',
     'order'                 => 'DESC',
     "full_height"           => "true",
-    "height"                => 700,
+    "height"                => 350,
     'first_el'              => 'true',
     "animation_speed"       => 700,
     "slideshow_speed"       => 7000,
@@ -14,7 +14,8 @@ extract(shortcode_atts(array(
     "animation_effect"      => "slide",
     "direction_nav"         => "true",
     "pagination"            => "",
-    'edge_slider_loop'      => 'false',
+    'edge_slider_loop'      => false,
+    'edge_slider_hash'      => false,
     'skip_arrow'            => 'false',
     "el_class"              => ''
 
@@ -49,13 +50,13 @@ if ($orderby) {
 }
 
 
-$id = Mk_Static_Files::shortcode_id();
+$id = uniqid();
 
 $loop = new WP_Query($query);
 
 if($parallax == "true") { $output .= '<div class="mk-parallax mk-parallax--edge">'; }
-$output .= '<div id="mk-edge-slider-'.$id.'" class="mk-edge-slider mk-swiper-container first-el-' . $first_el . '" style="height:' . $height . 'px;" data-first="' . $first_el . '" data-loop="'.$edge_slider_loop.'" data-height="' . $height . '" data-fullHeight="' . $full_height . '" data-pause="' . $slideshow_speed . '" data-speed="' . $animation_speed . '"  data-pagination="'.$pagination_class.'" data-animation="'.$animation_effect.'">';
-$output .= '<div style="height:' . $height . 'px" class="edge-slider-holder mk-swiper-wrapper">';
+$output .= '<div id="mk-edge-slider-'.$id.'" class="mk-edge-slider swiper-container first-el-' . $first_el . '" style="height:' . $height . 'px;" data-first="' . $first_el . '" data-loop="'.$edge_slider_loop.'" data-hash="'.$edge_slider_hash.'" data-height="' . $height . '" data-fullHeight="' . $full_height . '" data-pause="' . $slideshow_speed . '" data-speed="' . $animation_speed . '"  data-pagination="'.$pagination_class.'" data-animation="'.$animation_effect.'">';
+$output .= '<div style="height:' . $height . 'px" class="edge-slider-holder swiper-wrapper">';
 while ($loop->have_posts()):
     $loop->the_post();
 
@@ -218,7 +219,7 @@ while ($loop->have_posts()):
             $output .= '<div style="background-image:url('.$video_preview.');" class="mk-video-section-touch"></div>';
          }
 
-        $output .= '<div class="mk-section-video"><video poster="' . $video_preview . '" muted="muted" preload="auto" loop autoplay>';
+        $output .= '<div class="mk-section-video"><video poster="' . $video_preview . '" muted="muted" preload="auto" loop="true" autoplay="true">';
 
         if (!empty($mp4)) {
             $output .= '<source type="video/mp4" src="' . $mp4 . '" />';
@@ -242,8 +243,8 @@ while ($loop->have_posts()):
 
     if (!empty($btn_1_txt) || !empty($btn_2_txt)) {
         $output .= '<div class="edge-buttons">';
-        $smooth_scroll_1 = (preg_match('/#/',$btn_1_url)) ? ' el_class=" mk-smooth"' : '';
-        $smooth_scroll_2 = (preg_match('/#/',$btn_2_url)) ? ' el_class=" mk-smooth"' : '';
+        $smooth_scroll_1 = (preg_match('/#/',$btn_1_url)) ? ' el_class="mk-smooth"' : '';
+        $smooth_scroll_2 = (preg_match('/#/',$btn_2_url)) ? ' el_class="mk-smooth"' : '';
         $output .= (!empty($btn_1_txt)) ? do_shortcode('[mk_button style="' . $btn_1_style . '" size="large" bg_color="' . $button1_bg_color . '" underline_color="'.$button1_underline_color.'" txt_color="' . $button1_txt_color . '" outline_skin="' . $outline1_active_color . '" outline_hover_skin="' . $outline1_hover_color . '" url="' . $btn_1_url . '" target="_self" align="left" margin_top="0" margin_bottom="10"'.$smooth_scroll_1.']' . $btn_1_txt . '[/mk_button]') : '';
         $output .= (!empty($btn_2_txt)) ? do_shortcode('[mk_button style="' . $btn_2_style . '" size="large" bg_color="' . $button2_bg_color . '" txt_color="' . $button2_txt_color . '" underline_color="'.$button2_underline_color.'" outline_skin="' . $outline2_active_color . '" outline_hover_skin="' . $outline2_hover_color . '" url="' . $btn_2_url . '" target="_self" align="left" margin_top="0" margin_bottom="10"'.$smooth_scroll_2.']' . $btn_2_txt . '[/mk_button]') : '';
         $output .= '</div>';
@@ -280,10 +281,10 @@ if ( !empty($direction_nav) && $direction_nav != 'none' && $direction_nav != 'fa
                                 <span class="slides-all"></span>
                             </span>
                         </span>';
-    $output .= '        <span class="mk-edge-nav">';
-    $output .= '            <span class="edge-nav-bg"></span>'; 
+    $output .= '        <div class="mk-edge-nav">';
+    $output .= '            <span class="edge-nav-bg"></span>';
     $output .= '            <span class="prev-item-caption nav-item-caption"></span>';
-    $output .= '        </span>';
+    $output .= '        </div>';
     $output .= '    </a>';
     $output .= '</span>';
 
@@ -296,10 +297,10 @@ if ( !empty($direction_nav) && $direction_nav != 'none' && $direction_nav != 'fa
                                 <span class="slides-all"></span>
                             </span>
                         </span>';
-    $output .= '        <span class="mk-edge-nav">';
+    $output .= '        <div class="mk-edge-nav">';
     $output .= '            <span class="edge-nav-bg"></span>';
     $output .= '            <span class="next-item-caption nav-item-caption"></span>';
-    $output .= '        </span>';
+    $output .= '        </div>';
     $output .= '    </a>';
     $output .= '</span>';
 }

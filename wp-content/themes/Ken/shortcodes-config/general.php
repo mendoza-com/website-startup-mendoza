@@ -7,7 +7,7 @@ vc_map(array(
     'icon' => 'icon-mk-row vc_mk_element-icon',
     'show_settings_on_create' => false,
     "category" => __('General', 'mk_framework'),
-    'description' => __( 'Place content elements inside the row', 'mk_framework' ),
+    'description' => __( 'Place content elements inside the row', 'js_composer' ),
     "params" => array(
         array(
             "type" => "toggle",
@@ -32,26 +32,7 @@ vc_map(array(
             "max" => "5",
             "step" => "1",
             "unit" => '%',
-            "description" => __("This option will create padding space inside columns to allow. mostly useful when 'Attached Colums' option is enabled. Please note that padding unit is by percent and will be applied to all directions.", "mk_framework")
-        ),
-        array(
-            'type' => 'checkbox',
-            'heading' => __( 'Equal height', 'js_composer' ),
-            'param_name' => 'equal_height',
-            'description' => __( 'If checked columns will be set to equal height.', 'js_composer' ),
-            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' )
-        ),
-        array(
-            'type' => 'dropdown',
-            'heading' => __( 'Content position', 'js_composer' ),
-            'param_name' => 'content_placement',
-            'value' => array(
-                __( 'Default', 'js_composer' ) => '',
-                __( 'Top', 'js_composer' ) => 'top',
-                __( 'Middle', 'js_composer' ) => 'middle',
-                __( 'Bottom', 'js_composer' ) => 'bottom',
-            ),
-            'description' => __( 'Select content position within columns.', 'js_composer' ),
+            "description" => __("This option will create paading space inside columns to allow. mostly useful when 'Attached Colums' option is enabled. Please note that padding unit is by percent and will be applied to all directions.", "mk_framework")
         ),
         array(
             "type" => "textfield",
@@ -65,13 +46,7 @@ vc_map(array(
             "heading" => __("Extra class name", "mk_framework"),
             "param_name" => "el_class",
             "description" => __("If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.", "mk_framework")
-        ),
-        array(
-            'type' => 'css_editor',
-            'heading' => __( 'CSS box', 'js_composer' ),
-            'param_name' => 'css',
-            'group' => __( 'Design Options', 'js_composer' ),
-        ),
+        )
     ),
     "js_view" => 'VcRowView'
 ));
@@ -82,7 +57,7 @@ vc_map(array(
     "is_container" => true,
     "show_settings_on_create" => false,
     'icon' => 'icon-mk-row vc_mk_element-icon',
-    'description' => __( 'Place content elements inside the row', 'mk_framework' ),
+    'description' => __( 'Place content elements inside the row', 'js_composer' ),
     "params" => array(
         $add_device_visibility,
         array(
@@ -95,18 +70,18 @@ vc_map(array(
     "js_view" => 'VcRowView'
 ));
 $column_width_list = array(
-    __('1 column - 1/12', 'mk_framework') => '1/12',
-    __('2 columns - 1/6', 'mk_framework') => '1/6',
-    __('3 columns - 1/4', 'mk_framework') => '1/4',
-    __('4 columns - 1/3', 'mk_framework') => '1/3',
-    __('5 columns - 5/12', 'mk_framework') => '5/12',
-    __('6 columns - 1/2', 'mk_framework') => '1/2',
-    __('7 columns - 7/12', 'mk_framework') => '7/12',
-    __('8 columns - 2/3', 'mk_framework') => '2/3',
-    __('9 columns - 3/4', 'mk_framework') => '3/4',
-    __('10 columns - 5/6', 'mk_framework') => '5/6',
-    __('11 columns - 11/12', 'mk_framework') => '11/12',
-    __('12 columns - 1/1', 'mk_framework') => '1/1'
+    __('1 column - 1/12', 'js_composer') => '1/12',
+    __('2 columns - 1/6', 'js_composer') => '1/6',
+    __('3 columns - 1/4', 'js_composer') => '1/4',
+    __('4 columns - 1/3', 'js_composer') => '1/3',
+    __('5 columns - 5/12', 'js_composer') => '5/12',
+    __('6 columns - 1/2', 'js_composer') => '1/2',
+    __('7 columns - 7/12', 'js_composer') => '7/12',
+    __('8 columns - 2/3', 'js_composer') => '2/3',
+    __('9 columns - 3/4', 'js_composer') => '3/4',
+    __('10 columns - 5/6', 'js_composer') => '5/6',
+    __('11 columns - 11/12', 'js_composer') => '11/12',
+    __('12 columns - 1/1', 'js_composer') => '1/1'
 );
 vc_map(array(
     "name" => __("Column", "mk_framework"),
@@ -130,33 +105,33 @@ vc_map(array(
         ),
          array(
             'type' => 'css_editor',
-            'heading' => __( 'Css', 'mk_framework' ),
+            'heading' => __( 'Css', 'js_composer' ),
             'param_name' => 'css',
-            // 'description' => __( 'If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'mk_framework' ),
-            'group' => __( 'Design options', 'mk_framework' )
+            // 'description' => __( 'If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'js_composer' ),
+            'group' => __( 'Design options', 'js_composer' )
         ),
         array(
             'type' => 'dropdown',
-            'heading' => __( 'Width', 'mk_framework' ),
+            'heading' => __( 'Width', 'js_composer' ),
             'param_name' => 'width',
             'value' => $column_width_list,
-            'group' => __( 'Width & Responsiveness', 'mk_framework' ),
-            'description' => __( 'Select column width.', 'mk_framework' ),
+            'group' => __( 'Width & Responsiveness', 'js_composer' ),
+            'description' => __( 'Select column width.', 'js_composer' ),
             'std' => '1/1'
         ),
         array(
             'type' => 'column_offset',
-            'heading' => __('Responsiveness', 'mk_framework'),
+            'heading' => __('Responsiveness', 'js_composer'),
             'param_name' => 'offset',
-            'group' => __( 'Width & Responsiveness', 'mk_framework' ),
-            'description' => __('Adjust column for different screen sizes. Control width, offset and visibility settings.', 'mk_framework')
+            'group' => __( 'Width & Responsiveness', 'js_composer' ),
+            'description' => __('Adjust column for different screen sizes. Control width, offset and visibility settings.', 'js_composer')
         )
     ),
     "js_view" => 'VcColumnView'
 ));
 
 vc_map( array(
-    "name" => __( "Column", "mk_framework" ),
+    "name" => __( "Column", "js_composer" ),
     "base" => "vc_column_inner",
     "class" => "",
     "icon" => "",
@@ -168,25 +143,25 @@ vc_map( array(
     "params" => array(
         array(
             "type" => "textfield",
-            "heading" => __( "Extra class name", "mk_framework" ),
+            "heading" => __( "Extra class name", "js_composer" ),
             "param_name" => "el_class",
             "value" => "",
-            "description" => __( "If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.", "mk_framework" )
+            "description" => __( "If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.", "js_composer" )
         ),
          array(
             'type' => 'css_editor',
-            'heading' => __( 'Css', 'mk_framework' ),
+            'heading' => __( 'Css', 'js_composer' ),
             'param_name' => 'css',
-            // 'description' => __( 'If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'mk_framework' ),
-            'group' => __( 'Design options', 'mk_framework' )
+            // 'description' => __( 'If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'js_composer' ),
+            'group' => __( 'Design options', 'js_composer' )
         ),
         array(
             'type' => 'dropdown',
-            'heading' => __( 'Width', 'mk_framework' ),
+            'heading' => __( 'Width', 'js_composer' ),
             'param_name' => 'width',
             'value' => $column_width_list,
-            'group' => __( 'Width & Responsiveness', 'mk_framework' ),
-            'description' => __( 'Select column width.', 'mk_framework' ),
+            'group' => __( 'Width & Responsiveness', 'js_composer' ),
+            'description' => __( 'Select column width.', 'js_composer' ),
             'std' => '1/1'
         ),
     ),
@@ -201,8 +176,7 @@ vc_map(array(
     'icon' => 'icon-mk-page-section vc_mk_element-icon',
     "content_element" => true,
     "show_settings_on_create" => true,
-    "is_container" => true,
-    'description' => __( 'Customisable full width page section.', 'mk_framework' ),
+    'description' => __( 'Customisable full width page section.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "dropdown",
@@ -308,7 +282,6 @@ vc_map(array(
             "type" => "toggle",
             "heading" => __("Enable Parallax background", "mk_framework"),
             "param_name" => "parallax",
-            "description" => __("Please not that parallax works better with Background Attachement set to scroll. Background Attachement fixed is also possible but make sure to choose repeating background as well.", "mk_framework"),
             "value" => "false",
             "dependency" => array(
                 'element' => "layout_structure",
@@ -401,7 +374,17 @@ vc_map(array(
                 )
             )
         ),
-
+        array(
+            "type" => "dropdown",
+            "heading" => __("Expandable Page Section", "mk_framework"),
+            "param_name" => "expandable",
+            "width" => 300,
+            "value" => array(
+                __('No', "mk_framework") => "false",
+                __('Yes', "mk_framework") => "true"
+            ),
+            "description" => __("If you want to have your page section content in a toggle that can be clicked to expand/collapse, Choose Yes and customize below options. This option will not work if \"Full Height\" option is enabled.", "mk_framework")
+        ),
         array(
             "type" => "toggle",
             "heading" => __("Mask Pattern? (optional)", "mk_framework"),
@@ -446,19 +429,6 @@ vc_map(array(
             )
         ),
         array(
-            "type" => "dropdown",
-            "heading" => __("Expandable Page Section", "mk_framework"),
-            "param_name" => "expandable",
-            "width" => 300,
-            "value" => array(
-                __('No', "mk_framework") => "false",
-                __('Yes', "mk_framework") => "true"
-            ),
-            "description" => __("If you want to have your page section content in a toggle that can be clicked to expand/collapse, Choose Yes and customize below options. This option will not work if \"Full Height\" option is enabled.", "mk_framework")
-        ),
-
-
-        array(
             "type" => "textfield",
             "heading" => __("Expandable Page Section Text", "mk_framework"),
             "param_name" => "expandable_txt",
@@ -483,7 +453,7 @@ vc_map(array(
             "heading" => __("Expandable Page Section Hover Icon", "mk_framework"),
             "param_name" => "expandable_icon",
             "value" => "mk-theme-icon-plus",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
         ),
         array(
             "type" => "range",
@@ -508,8 +478,8 @@ vc_map(array(
             "param_name" => "expandable_txt_align",
             "width" => 300,
             "value" => array(
-                __('Center', "mk_framework") => "center",
                 __('Left', "mk_framework") => "left",
+                __('Center', "mk_framework") => "center",
                 __('Right', "mk_framework") => "right"
             ),
             "description" => __("", "mk_framework"),
@@ -697,7 +667,7 @@ vc_map(array(
         ),
         array(
             "type" => "toggle",
-            "heading" => __("Cover Whole Background", "mk_framework"),
+            "heading" => __("Scale the background image to be as large as possible so that the background area is completely covered by the background image. Some parts of the background image may not be in view within the background positioning area", "mk_framework"),
             "param_name" => "bg_stretch",
             "value" => "false"
         ),
@@ -759,7 +729,7 @@ vc_map(array(
     "name" => __("Image", "mk_framework"),
     "base" => "mk_image",
     "category" => __('General', 'mk_framework'),
-    'description' => __( 'Adds Image element with many styles.', 'mk_framework' ),
+    'description' => __( 'Adds Image element with many styles.', 'js_composer' ),
     'icon' => 'icon-mk-image vc_mk_element-icon',
     "params" => array(
         array(
@@ -785,7 +755,7 @@ vc_map(array(
             "type" => "range",
             "heading" => __("Image Height", "mk_framework"),
             "param_name" => "image_height",
-            "value" => "350",
+            "value" => "400",
             "min" => "10",
             "max" => "5000",
             "step" => "1",
@@ -909,7 +879,7 @@ vc_map(array(
     "name" => __("Image Box", "mk_framework"),
     "base" => "mk_image_box",
     "category" => __('General', 'mk_framework'),
-    'description' => __( 'A custom box with image and content.', 'mk_framework' ),
+    'description' => __( 'A custom box with image and content.', 'js_composer' ),
     'icon' => 'icon-mk-content-box vc_mk_element-icon',
     "params" => array(
          array(
@@ -1098,7 +1068,7 @@ vc_map(array(
             "type" => "range",
             "heading" => __("Image Height", "mk_framework"),
             "param_name" => "media_height",
-            "value" => "350",
+            "value" => "400",
             "min" => "10",
             "max" => "5000",
             "step" => "1",
@@ -1285,7 +1255,7 @@ vc_map(array(
     "base" => "mk_moving_image",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-moving-image vc_mk_element-icon',
-    'description' => __( 'Images powered by CSS3 moving animations.', 'mk_framework' ),
+    'description' => __( 'Images powered by CSS3 moving animations.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -1347,7 +1317,7 @@ vc_map(array(
     "name" => __("Image Gallery", "mk_framework"),
     "base" => "mk_gallery",
     'icon' => 'icon-mk-image-gallery vc_mk_element-icon',
-    'description' => __( 'Adds images in grids in many styles.', 'mk_framework' ),
+    'description' => __( 'Adds images in grids in many styles.', 'js_composer' ),
     "category" => __('General', 'mk_framework'),
     "params" => array(
         array(
@@ -1406,24 +1376,6 @@ vc_map(array(
             )
         ),
         array(
-            "heading" => __("Image Size", 'mk_framework'),
-            "description" => __("", 'mk_framework'),
-            "param_name" => "image_size",
-            "value" => array(
-                __("Resize & Crop", 'mk_framework') => "crop",
-                __("Original Size", 'mk_framework') => "full",
-                __("Large Size", 'mk_framework') => "large",
-                __("Medium Size", 'mk_framework') => "medium"
-            ),
-            "type" => "dropdown",
-            "dependency" => array(
-                'element' => "style",
-                'value' => array(
-                    'grid'
-                )
-            )
-        ),
-        array(
             "heading" => __("Item Spacing", 'mk_framework'),
             "description" => __("Space between items.", 'mk_framework'),
             "param_name" => "item_spacing",
@@ -1445,7 +1397,7 @@ vc_map(array(
             "type" => "range",
             "heading" => __("How many Columns?", "mk_framework"),
             "param_name" => "column",
-            "value" => "4",
+            "value" => "3",
             "min" => "1",
             "max" => "6",
             "step" => "1",
@@ -1548,7 +1500,7 @@ vc_map(array(
                 'element' => "structure",
                 'value' => array(
                     'column'
-                ),
+                )
             )
         ),
         array(
@@ -1588,7 +1540,7 @@ vc_map(array(
         ),
          array(
             'type' => 'item_id',
-            'heading' => __( 'Item ID', 'mk_framework' ),
+            'heading' => __( 'Item ID', 'js_composer' ),
             'param_name' => "item_id"
         )
 
@@ -1603,13 +1555,14 @@ vc_map(array(
     "base" => "mk_button",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-button vc_mk_element-icon',
-    'description' => __( 'Powerful & versatile button shortcode', 'mk_framework' ),
+    'description' => __( 'Powerful & versatile button shortcode', 'js_composer' ),
     "params" => array(
         array(
             "type" => "textfield",
             "holder" => "div",
             "heading" => __("Button Text", "mk_framework"),
             "param_name" => "content",
+            "rows" => 1,
             "value" => "",
             "description" => __("", "mk_framework")
         ),
@@ -1779,7 +1732,7 @@ vc_map(array(
             "heading" => __("Add Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
             "dependency" => array(
                 "element" => "style",
                 "value" => array(
@@ -1883,7 +1836,7 @@ vc_map(array(
     "base" => "mk_call_to_action",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-mini-callout-box vc_mk_element-icon',
-    'description' => __( 'Callout box for important infos.', 'mk_framework' ),
+    'description' => __( 'Callout box for important infos.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "dropdown",
@@ -2089,7 +2042,7 @@ vc_map(array(
     "base" => "mk_message_box",
     'icon' => 'icon-mk-message-box vc_mk_element-icon',
     "category" => __('General', 'mk_framework'),
-    'description' => __( 'Message Box with multiple types.', 'mk_framework' ),
+    'description' => __( 'Message Box with multiple types.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -2125,7 +2078,7 @@ vc_map(array(
             "heading" => __("Add Box Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
             "dependency" => array(
                 'element' => "type",
                 'value' => array(
@@ -2198,7 +2151,7 @@ vc_map(array(
     "base" => "mk_icon_box",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-icon-box vc_mk_element-icon',
-    'description' => __( 'Powerful & versatile Icon Boxes.', 'mk_framework' ),
+    'description' => __( 'Powerful & versatile Icon Boxes.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "dropdown",
@@ -2232,7 +2185,7 @@ vc_map(array(
             "heading" => __("Add Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
             "dependency" => array(
                 'element' => "icon_type",
                 'value' => array(
@@ -2298,9 +2251,9 @@ vc_map(array(
             "heading" => __("Icon Size (Style 7 only)", "mk_framework"),
             "param_name" => "icon_size",
             "value" => array(
-                __('Large (64px)', "mk_framework") => "large",
-                __('Medium (48px)', "mk_framework") => "medium",
                 __('Small (32px)', "mk_framework") => "small",
+                __('Medium (48px)', "mk_framework") => "medium",
+                __('Large (64px)', "mk_framework") => "large",
             ),
             "description" => __("Please note that this option will not work for image type icon.", "mk_framework"),
             "dependency" => array(
@@ -2343,7 +2296,7 @@ vc_map(array(
             "description" => __("", "mk_framework")
         ),
 
-
+        
 
         array(
             "type" => "colorpicker",
@@ -2425,7 +2378,7 @@ vc_map(array(
     "base" => "mk_divider",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-divider vc_mk_element-icon',
-    'description' => __( 'Dividers with many styles & options.', 'mk_framework' ),
+    'description' => __( 'Dividers with many styles & options.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -2554,7 +2507,7 @@ vc_map(array(
     "base" => "mk_table",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-table vc_mk_element-icon',
-    'description' => __( 'Adds styles to your data tables.', 'mk_framework' ),
+    'description' => __( 'Adds styles to your data tables.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "textarea_html",
@@ -2621,7 +2574,7 @@ vc_map(array(
     "name" => __("Skill Meter", "mk_framework"),
     "base" => "mk_skill_meter",
     'icon' => 'icon-mk-skill-meter vc_mk_element-icon',
-    'description' => __( 'Show skills in bars by percent.', 'mk_framework' ),
+    'description' => __( 'Show skills in bars by percent.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -2695,7 +2648,7 @@ vc_map(array(
     "base" => "mk_chart",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-chart vc_mk_element-icon',
-    'description' => __( 'Powerful & versatile Chart element.', 'mk_framework' ),
+    'description' => __( 'Powerful & versatile Chart element.', 'js_composer' ),
     "params" => array(
 
         array(
@@ -2824,7 +2777,7 @@ vc_map(array(
             "heading" => __("Add Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
             "dependency" => array(
                 'element' => "content_type",
                 'value' => array(
@@ -2854,13 +2807,6 @@ vc_map(array(
             "description" => __("Description will appear below each chart.", "mk_framework")
         ),
         array(
-            "type" => "colorpicker",
-            "heading" => __("Description Color", "mk_framework"),
-            "param_name" => "desc_color",
-            "value" => "",
-            "description" => __("The color of the description.", "mk_framework")
-        ),
-        array(
             "type" => "dropdown",
             "heading" => __("Viewport Animation", "mk_framework"),
             "param_name" => "animation",
@@ -2886,7 +2832,7 @@ vc_map(array(
     "base" => "mk_padding_divider",
    'icon' => 'icon-mk-padding-space vc_mk_element-icon',
     "category" => __('General', 'mk_framework'),
-    'description' => __( 'Adds space between elements', 'mk_framework' ),
+    'description' => __( 'Adds space between elements', 'js_composer' ),
     "params" => array(
         array(
             "type" => "range",
@@ -2898,8 +2844,7 @@ vc_map(array(
             "step" => "1",
             "unit" => 'px',
             "description" => __("How much space would you like to drop in this specific padding shortcode?", "mk_framework")
-        ),
-        $add_device_visibility
+        )
     )
 ));
 
@@ -2908,7 +2853,7 @@ vc_map(array(
     "base" => "mk_animated_columns",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-animated-columns vc_mk_element-icon',
-    'description' => __( 'Columns with cool animations.', 'mk_framework' ),
+    'description' => __( 'Columns with cool animations.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "range",
@@ -2931,28 +2876,6 @@ vc_map(array(
             "step" => "1",
             "unit" => 'columns',
             "description" => __("How many columns would you like to show in one row?", "mk_framework")
-        ),
-        array(
-            "type" => "range",
-            "heading" => __("Item Spacing", "mk_framework"),
-            "param_name" => "item_spacing",
-            "value" => "0",
-            "min" => "0",
-            "max" => "50",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("Space between items.", "mk_framework")
-        ),
-        array(
-            "type" => "range",
-            "heading" => __("Margin Bottom", "mk_framework"),
-            "param_name" => "item_margin_bottom",
-            "value" => "0",
-            "min" => "0",
-            "max" => "500",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("", "mk_framework")
         ),
         array(
             "type" => "multiselect",
@@ -2992,38 +2915,31 @@ vc_map(array(
             "description" => __("Please choose your columns styles. In each style the feeding content and hover scenarios will be different.", "mk_framework")
         ),
         array(
-            "type" => "toggle",
-            "heading" => __("Cover Whole with Link?", "mk_framework"),
-            "param_name" => "cover_link",
-            "value" => "false",
-            "description" => __("If you wish the whole area to be covered with a link, enable this option.", "mk_framework"),
-        ),
-        array(
             "type" => "colorpicker",
             "heading" => __("Columns Border Color", "mk_framework"),
             "param_name" => "border_color",
-            "value" => "#ccc",
+            "value" => "",
             "description" => __("The column box color.", "mk_framework")
         ),
         array(
             "type" => "colorpicker",
             "heading" => __("Columns Hover Border Color", "mk_framework"),
             "param_name" => "border_hover_color",
-            "value" => "#ccc",
+            "value" => "",
             "description" => __("The column box color.", "mk_framework")
         ),
         array(
             "type" => "colorpicker",
             "heading" => __("Columns background Color", "mk_framework"),
             "param_name" => "bg_color",
-            "value" => "#fff",
+            "value" => "",
             "description" => __("", "mk_framework")
         ),
         array(
             "type" => "colorpicker",
             "heading" => __("Columns background Hover Color", "mk_framework"),
             "param_name" => "bg_hover_color",
-            "value" => "#333333",
+            "value" => "",
             "description" => __("", "mk_framework")
         ),
 
@@ -3061,14 +2977,14 @@ vc_map(array(
             "type" => "colorpicker",
             "heading" => __("Text Color (Active)", "mk_framework"),
             "param_name" => "txt_color",
-            "value" => "#444",
+            "value" => "",
             "description" => __("This color will be used for title and description normal color. Description will have 70% opacity.", "mk_framework")
         ),
         array(
             "type" => "colorpicker",
             "heading" => __("Text Color (Hover)", "mk_framework"),
             "param_name" => "txt_hover_color",
-            "value" => "#fff",
+            "value" => "",
             "description" => __("This color will be used for title and description hover color.", "mk_framework")
         ),
 
@@ -3076,7 +2992,7 @@ vc_map(array(
             "type" => "colorpicker",
             "heading" => __("Button Color (Active)", "mk_framework"),
             "param_name" => "btn_color",
-            "value" => "#444",
+            "value" => "",
             "description" => __("", "mk_framework")
         ),
 
@@ -3084,7 +3000,7 @@ vc_map(array(
             "type" => "colorpicker",
             "heading" => __("Button Color (Hover)", "mk_framework"),
             "param_name" => "btn_hover_color",
-            "value" => "#fff",
+            "value" => "",
             "description" => __("", "mk_framework")
         ),
         array(
@@ -3113,11 +3029,11 @@ vc_map(array(
     "base" => "mk_milestone",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-milestone vc_mk_element-icon',
-    'description' => __( 'Milestone numbers to show statistics.', 'mk_framework' ),
+    'description' => __( 'Milestone numbers to show statistics.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "dropdown",
-            "heading" => __("Milestones Style?", "mk_framework"),
+            "heading" => __("Content Below Numbers?", "mk_framework"),
             "param_name" => "style",
             "width" => 200,
             "value" => array(
@@ -3188,7 +3104,7 @@ vc_map(array(
             "heading" => __("Add Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
              "dependency" => array(
                 'element' => "type",
                 'value' => array(
@@ -3307,7 +3223,7 @@ vc_map(array(
             "param_name" => "text_icon_color",
             "value" => "",
             "description" => __("", "mk_framework"),
-        ),
+        ), 
 
         array(
             "type" => "textfield",
@@ -3326,7 +3242,7 @@ vc_map(array(
     "base" => "mk_audio",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-audio-player vc_mk_element-icon',
-    'description' => __( 'Adds player to your audio files.', 'mk_framework' ),
+    'description' => __( 'Adds player to your audio files.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "textfield",
@@ -3379,23 +3295,23 @@ vc_map(array(
     "as_parent" => array('only' => 'mk_step'),
     "content_element" => true,
     'icon' => 'icon-mk-process-builder vc_mk_element-icon',
-    'description' => __( 'Adds process steps element.', 'mk_framework' ),
+    'description' => __( 'Adds process steps element.', 'js_composer' ),
     "category" => __('Content', 'mk_framework'),
     "params" => array(
         array(
             "type" => "dropdown",
-            "heading" => __("Orientation", "mk_framework"),
+            "heading" => __("Orientation", "js_composer"),
             "param_name" => "orientation",
             "value" => array(
                 "Vertical" => "vertical",
                 "Horizontal" => "horizontal"
 
             ),
-            "description" => __("", "mk_framework")
+            "description" => __("", "js_composer")
         ),
         array(
             "type" => "dropdown",
-            "heading" => __("Skin", "mk_framework"),
+            "heading" => __("Skin", "js_composer"),
             "param_name" => "skin",
             "value" => array(
                 "dark" => "dark",
@@ -3403,13 +3319,13 @@ vc_map(array(
                 "Custom" => "custom"
 
             ),
-            "description" => __("", "mk_framework")
+            "description" => __("", "js_composer")
         ),
         array(
             "type" => "colorpicker",
             "heading" => __("Background Color?", "mk_framework"),
             "param_name" => "background_color",
-            "value" => "#fff",
+            "value" => "",
             "description" => __("", "mk_framework"),
             "dependency" => array(
                 'element' => "skin",
@@ -3572,8 +3488,15 @@ vc_map(array(
             "heading" => __("Add Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "mk-li-smile",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
         ),
+        array(
+            'type' => 'item_id',
+            'heading' => __( 'Item ID', 'js_composer' ),
+            'param_name' => "tab_id"
+        )
+
+
     ),
     "js_view" => 'VcColumnView'
 ));
@@ -3586,7 +3509,7 @@ vc_map(array(
     "base" => "mk_icon_text",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-icon-box vc_mk_element-icon',
-    'description' => __( 'Powerful & versatile Icon Text.', 'mk_framework' ),
+    'description' => __( 'Powerful & versatile Icon Text.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "dropdown",
@@ -3621,22 +3544,6 @@ vc_map(array(
             "description" => __("", "mk_framework")
         ),
         array(
-            "type" => "dropdown",
-            "heading" => __("Default Text Font Weight", "mk_framework"),
-            "param_name" => "default_txt_font_weight",
-            "width" => 200,
-            "default" => 'bold',
-            "value" => array(
-                __('Default', "mk_framework") => "inherit",
-                __('Light', "mk_framework") => "300",
-                __('Normal', "mk_framework") => "normal",
-                __('Bold', "mk_framework") => "bold",
-                __('Bolder', "mk_framework") => "bolder",
-                __('Extra Bold', "mk_framework") => "900",
-            ),
-            "description" => __("", "mk_framework")
-        ),
-        array(
             "type" => "range",
             "heading" => __("Default Text Font Size?", "mk_framework"),
             "param_name" => "font_size",
@@ -3653,44 +3560,6 @@ vc_map(array(
             "heading" => __("On Hover Text", "mk_framework"),
             "param_name" => "hover_txt",
             "value" => "",
-            "description" => __("", "mk_framework")
-        ),
-        array(
-            "heading" => __("On Hover Text Font Size", "mk_framework"),
-            "param_name" => "hover_font_size",
-            "value" => "16",
-            "min" => "15",
-            "max" => "30",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("", "mk_framework"),
-            'type' => 'range'
-        ),
-        array(
-            "heading" => __("On Hover Text Line Height", "mk_framework"),
-            "param_name" => "hover_line_height",
-            "value" => "18",
-            "min" => "15",
-            "max" => "50",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("", "mk_framework"),
-            'type' => 'range'
-        ),
-        array(
-            "type" => "dropdown",
-            "heading" => __("On Hover Text Font Weight", "mk_framework"),
-            "param_name" => "hover_txt_font_weight",
-            "width" => 200,
-            "default" => 'bold',
-            "value" => array(
-                __('Default', "mk_framework") => "inherit",
-                __('Light', "mk_framework") => "300",
-                __('Normal', "mk_framework") => "normal",
-                __('Bold', "mk_framework") => "bold",
-                __('Bolder', "mk_framework") => "bolder",
-                __('Extra Bold', "mk_framework") => "900",
-            ),
             "description" => __("", "mk_framework")
         ),
 
@@ -3716,7 +3585,7 @@ vc_map(array(
             "heading" => __("Add Icon Class Name", "mk_framework"),
             "param_name" => "icon",
             "value" => "",
-            "description" => __("<a target='_blank' href='" . admin_url('admin.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
+            "description" => __("<a target='_blank' href='" . admin_url('tools.php?page=icon-library') . "'>Click here</a> to get the icon class name (or any other font icons library that you have installed in the theme)", "mk_framework"),
         ),
 
         array(
@@ -3796,33 +3665,12 @@ vc_map(array(
             "value" => "true",
             "description" => __("If you dont want to show search icon in secondary header, disable this option.", "mk_framework")
         ),
-        array(
+         array(
             "type" => "toggle",
             "heading" => __("Header Cart?", "mk_framework"),
             "param_name" => "show_cart",
             "value" => "true",
-            "description" => __("If you dont want to show cart section in secondary header, disable this option.", "mk_framework")
-        ),
-        array(
-            "type" => "toggle",
-            "heading" => __("Header Wpml?", "mk_framework"),
-            "param_name" => "show_wpml",
-            "value" => "true",
-            "description" => __("If you dont want to show wpml section in secondary header, disable this option.", "mk_framework")
-        ),
-        array(
-            "type" => "toggle",
-            "heading" => __("Header Border Top?", "mk_framework"),
-            "param_name" => "show_border",
-            "value" => "true",
-            "description" => __("If you dont want to show border top in secondary header, disable this option.", "mk_framework")
-        ),
-        array(
-            "type" => "toggle",
-            "heading" => __("Header Dashboard Trigger Icon?", "mk_framework"),
-            "param_name" => "show_dashboard_trigger",
-            "value" => "true",
-            "description" => __("If you dont want to show dashboard trigger icon, disable this option.", "mk_framework")
+            "description" => __("If you dont want to show cart secion in secondary header, disable this option.", "mk_framework")
         ),
          array(
             "type" => "dropdown",
@@ -3847,69 +3695,13 @@ vc_map(array(
 
             "description" => __("", "mk_framework")
         ),
-          array(
-            "heading" => __("Header Custom Height", "mk_framework"),
-            "param_name" => "custom_header_height",
-            "value" => "0",
-            "min" => "0",
-            "max" => "300",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("If you want to inherit from default value you have for regular menu set the option value to zero. Its recommended to use this option when you disable logo for this header.", "mk_framework"),
-            'type' => 'range'
-        ),
-        array(
-            "type" => "colorpicker",
-            "heading" => __("Background Color?", "mk_framework"),
-            "param_name" => "background_color",
-            "value" => "",
-            "description" => __("", "mk_framework"),
-            "group" => "Styling Settings",
-        ),
-        array(
-            "type" => "colorpicker",
-            "heading" => __("Link Color?", "mk_framework"),
-            "param_name" => "link_color",
-            "value" => "",
-            "description" => __("", "mk_framework"),
-            "group" => "Styling Settings",
-        ),
-        array(
-            "type" => "colorpicker",
-            "heading" => __("Link Hover Color?", "mk_framework"),
-            "param_name" => "link_hover_color",
-            "value" => "",
-            "description" => __("", "mk_framework"),
-            "group" => "Styling Settings",
-        ),
-        array(
-            "type" => "colorpicker",
-            "heading" => __("Border Top Color?", "mk_framework"),
-            "param_name" => "border_color",
-            "value" => "",
-            "description" => __("", "mk_framework"),
-            "group" => "Styling Settings",
-        ),
-        array(
-            "heading" => __("Main Navigation Top Level Font Size", "mk_framework"),
-            "param_name" => "top_level_item_size",
-            "value" => "0",
-            "min" => "0",
-            "max" => "50",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("If you want to inherit from default value you set it for main header set the value to zero.", "mk_framework"),
-            'type' => 'range',
-            "group" => "Styling Settings",
-        ),
         array(
             "type" => "textfield",
             "heading" => __("Extra class name", "mk_framework"),
             "param_name" => "el_class",
             "value" => "",
             "description" => __("If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.", "mk_framework")
-        ),
-
+        )
 
     )
 ));
@@ -3920,14 +3712,14 @@ vc_map(array(
     "base" => "mk_countdown",
     "category" => __('General', 'mk_framework'),
     'icon' => 'icon-mk-event-countdown vc_mk_element-icon',
-    'description' => __( 'Countdown module for your events.', 'mk_framework' ),
+    'description' => __( 'Countdown module for your events.', 'js_composer' ),
     "params" => array(
         array(
             "type" => "textfield",
             "heading" => __("Upcoming Event Date", "mk_framework"),
             "param_name" => "date",
             "value" => "",
-            "description" => __("Please fill this field with expect date. eg : 12/24/2016 12:00:00 => month/day/year hour:minute:second", "mk_framework")
+            "description" => __("Please fill this field with expect date. eg : 12/24/2015 12:00:00 => month/day/year hour:minute:second", "mk_framework")
         ),
 
         array(
@@ -4030,7 +3822,7 @@ vc_map(array(
     "base" => "mk_flipbox",
     'icon' => 'icon-mk-tab-slider vc_mk_element-icon',
     "category" => __('General', 'mk_framework'),
-    'description' => __( 'Flip based boxes.', 'mk_framework' ),
+    'description' => __( 'Flip based boxes.', 'js_composer' ),
     'params' => array(
         array(
             "type" => "dropdown",
@@ -4080,54 +3872,6 @@ vc_map(array(
             "unit" => 'alpha',
             "description" => __("", "mk_framework"),
         ),
-        array(
-            "type" => "dropdown",
-            "heading" => __("Front Aligment", "mk_framework"),
-            "param_name" => "front_align",
-            "width" => 200,
-            "value" => array(
-                __('Left', "mk_framework") => "left",
-                __('Center', "mk_framework") => "center",
-                __('Right', "mk_framework") => "right"
-            ),
-            "description" => __("", "mk_framework")
-        ),
-        array(
-            "type" => "dropdown",
-            "heading" => __("Back Aligment", "mk_framework"),
-            "param_name" => "back_align",
-            "width" => 200,
-            "value" => array(
-                __('Left', "mk_framework") => "left",
-                __('Center', "mk_framework") => "center",
-                __('Right', "mk_framework") => "right"
-            ),
-            "description" => __("", "mk_framework")
-        ),
-        array(
-            "type" => "dropdown",
-            "heading" => __("Front Vertical Aligment", "mk_framework"),
-            "param_name" => "front_vertical_align",
-            "width" => 200,
-            "value" => array(
-                __('Middle', "mk_framework") => "middle",
-                __('Top', "mk_framework") => "top",
-                __('Bottom', "mk_framework") => "bottom"
-            ),
-            "description" => __("", "mk_framework")
-        ),
-        array(
-            "type" => "dropdown",
-            "heading" => __("Back Vertical Aligment", "mk_framework"),
-            "param_name" => "back_vertical_align",
-            "width" => 200,
-            "value" => array(
-                __('Middle', "mk_framework") => "middle",
-                __('Top', "mk_framework") => "top",
-                __('Bottom', "mk_framework") => "bottom"
-            ),
-            "description" => __("", "mk_framework")
-        ),
 
         array(
             "heading" => __("Minimum Height", "mk_framework"),
@@ -4150,24 +3894,6 @@ vc_map(array(
             "unit" => 'px',
             "description" => __("", "mk_framework"),
             'type' => 'range'
-        ),
-        array(
-            "heading" => __("Left / Right Padding", "mk_framework"),
-            "param_name" => "box_padding",
-            "value" => "20",
-            "min" => "10",
-            "max" => "100",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("", "mk_framework"),
-            'type' => 'range'
-        ),
-        array(
-            "type" => "toggle",
-            "heading" => __('Border Radius?', 'mk_framework'),
-            "description" => __("", "mk_framework"),
-            "param_name" => "box_radius",
-            "value" => "false"
         ),
 
         array(
@@ -4224,17 +3950,6 @@ vc_map(array(
             "value" => "20",
             "min" => "15",
             "max" => "30",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("", "mk_framework"),
-            'type' => 'range'
-        ),
-        array(
-            "heading" => __("Front Description Line Height", "mk_framework"),
-            "param_name" => "front_desc_line_height",
-            "value" => "26",
-            "min" => "15",
-            "max" => "50",
             "step" => "1",
             "unit" => 'px',
             "description" => __("", "mk_framework"),
@@ -4308,17 +4023,6 @@ vc_map(array(
             'type' => 'range'
         ),
         array(
-            "heading" => __("Back Description Line Height", "mk_framework"),
-            "param_name" => "back_desc_line_height",
-            "value" => "26",
-            "min" => "15",
-            "max" => "50",
-            "step" => "1",
-            "unit" => 'px',
-            "description" => __("", "mk_framework"),
-            'type' => 'range'
-        ),
-        array(
             "type" => "colorpicker",
             "heading" => __("Back Description Font Color", "mk_framework"),
             "param_name" => "back_desc_color",
@@ -4346,8 +4050,8 @@ vc_map(array(
             "description" => __("", 'mk_framework'),
             "param_name" => "button_size",
             "value" => array(
-                __("Medium", 'mk_framework') => "medium",
                 __("Small", 'mk_framework') => "small",
+                __("Medium", 'mk_framework') => "medium",
                 __("Large", 'mk_framework') => "large"
             ),
             "type" => "dropdown"
@@ -4379,17 +4083,7 @@ vc_map(array(
             "value" => "",
             "description" => __("", "mk_framework")
         ),
-        array(
-            "heading" => __("Button Alignment", 'mk_framework'),
-            "description" => __("", 'mk_framework'),
-            "param_name" => "btn_alignment",
-            "value" => array(
-                __("Left", 'mk_framework') => "left",
-                __("Center", 'mk_framework') => "center",
-                __("Right", 'mk_framework') => "right"
-            ),
-            "type" => "dropdown"
-        ),
+
 
         array(
             "type" => "textfield",

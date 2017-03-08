@@ -1,9 +1,15 @@
 <?php
-extract( shortcode_atts( array(
-			'el_class' => ''
-		), $atts ) );
-?>
+$el_class = $width = $el_position = '';
 
-<div class="mk-fancy-table <?php echo $el_class; ?>">
-	<?php echo wpb_js_remove_wpautop( $content ); ?>
-</div>
+extract( shortcode_atts( array(
+			'el_class' => '',
+			'style' => 'style1',
+		), $atts ) );
+
+$output = '';
+
+$output .= "\n\t".'<div class="'.$el_class.'"><div class="mk-fancy-table mk-shortcode table-'.$style.'">';
+$output .= "\n\t\t\t".wpb_js_remove_wpautop( $content );
+$output .= "\n\t".'</div></div>';
+
+echo $output;

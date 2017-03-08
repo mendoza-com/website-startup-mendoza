@@ -278,41 +278,36 @@ function mk_fonts_settings_field($settings, $value) {
 	$google_webfonts = array(
 		'ABeeZee',
 		'Abel',
+		'Source+Sans+Pro',
 		'Abril+Fatface',
+		'Acid',
 		'Aclonica',
 		'Acme',
 		'Actor',
 		'Adamina',
 		'Advent+Pro',
 		'Aguafina+Script',
-		'Akronim',
 		'Aladin',
 		'Aldrich',
-		'Alef',
 		'Alegreya',
 		'Alegreya+SC',
-		'Alegreya+Sans',
-		'Alegreya+Sans+SC',
 		'Alex+Brush',
 		'Alfa+Slab+One',
 		'Alice',
 		'Alike',
 		'Alike+Angular',
 		'Allan',
+		'Allan',
 		'Allerta',
 		'Allerta+Stencil',
 		'Allura',
 		'Almendra',
-		'Almendra+Display',
 		'Almendra+SC',
-		'Amarante',
 		'Amaranth',
 		'Amatic+SC',
 		'Amethysta',
-		'Anaheim',
 		'Andada',
 		'Andika',
-		'Angkor',
 		'Annie+Use+Your+Telescope',
 		'Anonymous+Pro',
 		'Antic',
@@ -321,10 +316,7 @@ function mk_fonts_settings_field($settings, $value) {
 		'Anton',
 		'Arapey',
 		'Arbutus',
-		'Arbutus+Slab',
 		'Architects+Daughter',
-		'Archivo+Black',
-		'Archivo+Narrow',
 		'Arimo',
 		'Arizonia',
 		'Armata',
@@ -337,9 +329,7 @@ function mk_fonts_settings_field($settings, $value) {
 		'Atomic+Age',
 		'Aubrey',
 		'Audiowide',
-		'Autour+One',
 		'Average',
-		'Average+Sans',
 		'Averia+Gruesa+Libre',
 		'Averia+Libre',
 		'Averia+Sans+Libre',
@@ -348,22 +338,17 @@ function mk_fonts_settings_field($settings, $value) {
 		'Balthazar',
 		'Bangers',
 		'Basic',
-		'Battambang',
 		'Baumans',
-		'Bayon',
 		'Belgrano',
 		'Belleza',
-		'BenchNine',
 		'Bentham',
 		'Berkshire+Swash',
 		'Bevan',
-		'Bigelow+Rules',
 		'Bigshot+One',
 		'Bilbo',
 		'Bilbo+Swash+Caps',
 		'Bitter',
 		'Black+Ops+One',
-		'Bokor',
 		'Bonbon',
 		'Boogaloo',
 		'Bowlby+One',
@@ -371,28 +356,26 @@ function mk_fonts_settings_field($settings, $value) {
 		'Brawler',
 		'Bree+Serif',
 		'Bubblegum+Sans',
-		'Bubbler+One',
+		'Buda',
 		'Buda',
 		'Buenard',
 		'Butcherman',
+		'Butcherman+Caps',
 		'Butterfly+Kids',
 		'Cabin',
 		'Cabin+Condensed',
 		'Cabin+Sketch',
+		'Cabin+Sketch',
+		'Cabin',
 		'Caesar+Dressing',
 		'Cagliostro',
 		'Calligraffitti',
-		'Cambay',
 		'Cambo',
 		'Candal',
 		'Cantarell',
 		'Cantata+One',
-		'Cantora+One',
-		'Capriola',
 		'Cardo',
 		'Carme',
-		'Carrois+Gothic',
-		'Carrois+Gothic+SC',
 		'Carter+One',
 		'Caudex',
 		'Cedarville+Cursive',
@@ -400,62 +383,47 @@ function mk_fonts_settings_field($settings, $value) {
 		'Changa+One',
 		'Chango',
 		'Chau+Philomene+One',
-		'Chela+One',
 		'Chelsea+Market',
-		'Chenla',
 		'Cherry+Cream+Soda',
-		'Cherry+Swash',
 		'Chewy',
 		'Chicle',
 		'Chivo',
-		'Cinzel',
-		'Cinzel+Decorative',
-		'Clicker+Script',
 		'Coda',
-		'Coda+Caption',
+		'Coda',
 		'Codystar',
-		'Combo',
 		'Comfortaa',
 		'Coming+Soon',
 		'Concert+One',
 		'Condiment',
-		'Content',
 		'Contrail+One',
 		'Convergence',
 		'Cookie',
 		'Copse',
 		'Corben',
-		'Courgette',
+		'Corben',
 		'Cousine',
 		'Coustard',
 		'Covered+By+Your+Grace',
 		'Crafty+Girls',
 		'Creepster',
+		'Creepster+Caps',
 		'Crete+Round',
-		'Crimson+Text',
-		'Croissant+One',
+		'Crimson',
 		'Crushed',
 		'Cuprum',
 		'Cutive',
-		'Cutive+Mono',
 		'Damion',
 		'Dancing+Script',
-		'Dangrek',
 		'Dawning+of+a+New+Day',
 		'Days+One',
-		'Dekko',
 		'Delius',
 		'Delius+Swash+Caps',
 		'Delius+Unicase',
 		'Della+Respira',
-		'Denk+One',
 		'Devonshire',
-		'Dhurjati',
 		'Didact+Gothic',
 		'Diplomata',
 		'Diplomata+SC',
-		'Domine',
-		'Donegal+One',
 		'Doppio+One',
 		'Dorsa',
 		'Dosis',
@@ -466,39 +434,26 @@ function mk_fonts_settings_field($settings, $value) {
 		'Duru+Sans',
 		'Dynalight',
 		'EB+Garamond',
-		'Eagle+Lake',
 		'Eater',
+		'Eater+Caps',
 		'Economica',
-		'Ek+Mukta',
 		'Electrolize',
-		'Elsie',
-		'Elsie+Swash+Caps',
 		'Emblema+One',
 		'Emilys+Candy',
 		'Engagement',
-		'Englebert',
 		'Enriqueta',
 		'Erica+One',
 		'Esteban',
 		'Euphoria+Script',
 		'Ewert',
 		'Exo',
-		'Exo+2',
 		'Expletus+Sans',
 		'Fanwood+Text',
 		'Fascinate',
 		'Fascinate+Inline',
-		'Faster+One',
-		'Fasthand',
-		'Fauna+One',
 		'Federant',
 		'Federo',
 		'Felipa',
-		'Fenix',
-		'Finger+Paint',
-		'Fira+Mono',
-		'Fira+Sans',
-		'Fjalla+One',
 		'Fjord+One',
 		'Flamenco',
 		'Flavors',
@@ -506,28 +461,19 @@ function mk_fonts_settings_field($settings, $value) {
 		'Fontdiner+Swanky',
 		'Forum',
 		'Francois+One',
-		'Freckle+Face',
 		'Fredericka+the+Great',
 		'Fredoka+One',
-		'Freehand',
 		'Fresca',
 		'Frijole',
-		'Fruktur',
 		'Fugaz+One',
-		'GFS+Didot',
-		'GFS+Neohellenic',
-		'Gabriela',
-		'Gafata',
+		'Fjalla+One',
 		'Galdeano',
-		'Galindo',
 		'Gentium+Basic',
 		'Gentium+Book+Basic',
 		'Geo',
 		'Geostar',
 		'Geostar+Fill',
 		'Germania+One',
-		'Gidugu',
-		'Gilda+Display',
 		'Give+You+Glory',
 		'Glass+Antiqua',
 		'Glegoo',
@@ -537,38 +483,20 @@ function mk_fonts_settings_field($settings, $value) {
 		'Gorditas',
 		'Goudy+Bookletter+1911',
 		'Graduate',
-		'Grand+Hotel',
 		'Gravitas+One',
 		'Great+Vibes',
-		'Griffy',
 		'Gruppo',
 		'Gudea',
-		'Gurajada',
 		'Habibi',
-		'Halant',
 		'Hammersmith+One',
-		'Hanalei',
-		'Hanalei+Fill',
 		'Handlee',
-		'Hanuman',
 		'Happy+Monkey',
-		'Headland+One',
 		'Henny+Penny',
 		'Herr+Von+Muellerhoff',
-		'Hind',
 		'Holtwood+One+SC',
 		'Homemade+Apple',
 		'Homenaje',
-		'IM+Fell+DW+Pica',
-		'IM+Fell+DW+Pica+SC',
-		'IM+Fell+Double+Pica',
-		'IM+Fell+Double+Pica+SC',
-		'IM+Fell+English',
-		'IM+Fell+English+SC',
-		'IM+Fell+French+Canon',
-		'IM+Fell+French+Canon+SC',
-		'IM+Fell+Great+Primer',
-		'IM+Fell+Great+Primer+SC',
+		'IM+Fell',
 		'Iceberg',
 		'Iceland',
 		'Imprima',
@@ -577,49 +505,33 @@ function mk_fonts_settings_field($settings, $value) {
 		'Indie+Flower',
 		'Inika',
 		'Irish+Grover',
+		'Irish+Growler',
 		'Istok+Web',
 		'Italiana',
 		'Italianno',
-		'Jacques+Francois',
-		'Jacques+Francois+Shadow',
 		'Jim+Nightshade',
 		'Jockey+One',
 		'Jolly+Lodger',
 		'Josefin+Sans',
 		'Josefin+Slab',
-		'Joti+One',
 		'Judson',
 		'Julee',
-		'Julius+Sans+One',
 		'Junge',
 		'Jura',
 		'Just+Another+Hand',
 		'Just+Me+Again+Down+Here',
-		'Kalam',
 		'Kameron',
-		'Kantumruy',
 		'Karla',
-		'Karma',
 		'Kaushan+Script',
-		'Kavoon',
-		'Kdam+Thmor',
-		'Keania+One',
 		'Kelly+Slab',
 		'Kenia',
-		'Khand',
-		'Khmer',
-		'Khula',
-		'Kite+One',
 		'Knewave',
 		'Kotta+One',
-		'Koulen',
 		'Kranky',
 		'Kreon',
 		'Kristi',
 		'Krona+One',
 		'La+Belle+Aurore',
-		'Laila',
-		'Lakki+Reddy',
 		'Lancelot',
 		'Lato',
 		'League+Script',
@@ -627,18 +539,15 @@ function mk_fonts_settings_field($settings, $value) {
 		'Ledger',
 		'Lekton',
 		'Lemon',
-		'Libre+Baskerville',
-		'Life+Savers',
 		'Lilita+One',
-		'Lily+Script+One',
 		'Limelight',
 		'Linden+Hill',
 		'Lobster',
 		'Lobster+Two',
-		'Londrina+Outline',
 		'Londrina+Shadow',
 		'Londrina+Sketch',
 		'Londrina+Solid',
+		'LondrinaOutline',
 		'Lora',
 		'Love+Ya+Like+A+Sister',
 		'Loved+by+the+King',
@@ -651,54 +560,37 @@ function mk_fonts_settings_field($settings, $value) {
 		'Magra',
 		'Maiden+Orange',
 		'Mako',
-		'Mallanna',
-		'Mandali',
-		'Marcellus',
-		'Marcellus+SC',
 		'Marck+Script',
-		'Margarine',
 		'Marko+One',
 		'Marmelad',
 		'Marvel',
 		'Mate',
 		'Mate+SC',
 		'Maven+Pro',
-		'McLaren',
 		'Meddon',
 		'MedievalSharp',
 		'Medula+One',
 		'Megrim',
-		'Meie+Script',
-		'Merienda',
 		'Merienda+One',
 		'Merriweather',
-		'Merriweather+Sans',
-		'Metal',
-		'Metal+Mania',
 		'Metamorphous',
 		'Metrophobic',
 		'Michroma',
-		'Milonga',
 		'Miltonian',
 		'Miltonian+Tattoo',
 		'Miniver',
 		'Miss+Fajardose',
+		'Miss+Saint+Delafield',
 		'Modern+Antiqua',
 		'Molengo',
-		'Molle',
-		'Monda',
 		'Monofett',
 		'Monoton',
 		'Monsieur+La+Doulaise',
 		'Montaga',
 		'Montez',
 		'Montserrat',
-		'Montserrat+Alternates',
-		'Montserrat+Subrayada',
-		'Moul',
-		'Moulpali',
 		'Mountains+of+Christmas',
-		'Mouse+Memoirs',
+		'Mr+Bedford',
 		'Mr+Bedfort',
 		'Mr+Dafoe',
 		'Mr+De+Haviland',
@@ -706,43 +598,29 @@ function mk_fonts_settings_field($settings, $value) {
 		'Mrs+Sheppards',
 		'Muli',
 		'Mystery+Quest',
-		'NTR',
 		'Neucha',
 		'Neuton',
-		'New+Rocker',
 		'News+Cycle',
 		'Niconne',
 		'Nixie+One',
 		'Nobile',
-		'Nokora',
 		'Norican',
 		'Nosifer',
-		'Nothing+You+Could+Do',
+		'Nosifer+Caps',
 		'Noticia+Text',
-		'Noto+Sans',
-		'Noto+Serif',
-		'Nova+Cut',
 		'Nova+Flat',
 		'Nova+Mono',
 		'Nova+Oval',
 		'Nova+Round',
 		'Nova+Script',
 		'Nova+Slim',
-		'Nova+Square',
 		'Numans',
 		'Nunito',
-		'Odor+Mean+Chey',
-		'Offside',
 		'Old+Standard+TT',
 		'Oldenburg',
 		'Oleo+Script',
-		'Oleo+Script+Swash+Caps',
 		'Open+Sans',
-		'Open+Sans+Condensed',
-		'Oranienbaum',
 		'Orbitron',
-		'Oregano',
-		'Orienta',
 		'Original+Surfer',
 		'Oswald',
 		'Over+the+Rainbow',
@@ -750,37 +628,27 @@ function mk_fonts_settings_field($settings, $value) {
 		'Overlock+SC',
 		'Ovo',
 		'Oxygen',
-		'Oxygen+Mono',
 		'PT+Mono',
 		'PT+Sans',
-		'PT+Sans+Caption',
 		'PT+Sans+Narrow',
 		'PT+Serif',
 		'PT+Serif+Caption',
 		'Pacifico',
-		'Paprika',
 		'Parisienne',
 		'Passero+One',
 		'Passion+One',
-		'Pathway+Gothic+One',
 		'Patrick+Hand',
-		'Patrick+Hand+SC',
 		'Patua+One',
 		'Paytone+One',
-		'Peddana',
-		'Peralta',
 		'Permanent+Marker',
-		'Petit+Formal+Script',
 		'Petrona',
 		'Philosopher',
 		'Piedra',
 		'Pinyon+Script',
-		'Pirata+One',
 		'Plaster',
 		'Play',
 		'Playball',
 		'Playfair+Display',
-		'Playfair+Display+SC',
 		'Podkova',
 		'Poiret+One',
 		'Poller+One',
@@ -790,146 +658,97 @@ function mk_fonts_settings_field($settings, $value) {
 		'Port+Lligat+Sans',
 		'Port+Lligat+Slab',
 		'Prata',
-		'Preahvihear',
 		'Press+Start+2P',
 		'Princess+Sofia',
 		'Prociono',
 		'Prosto+One',
 		'Puritan',
-		'Purple+Purse',
-		'Quando',
 		'Quantico',
 		'Quattrocento',
 		'Quattrocento+Sans',
 		'Questrial',
 		'Quicksand',
-		'Quintessential',
 		'Qwigley',
-		'Racing+Sans+One',
 		'Radley',
-		'Rajdhani',
 		'Raleway',
-		'Raleway+Dots',
-		'Ramabhadra',
-		'Ramaraja',
-		'Rambla',
+		'Raleway',
 		'Rammetto+One',
-		'Ranchers',
 		'Rancho',
-		'Ranga',
 		'Rationale',
-		'Ravi+Prakash',
 		'Redressed',
 		'Reenie+Beanie',
 		'Revalia',
 		'Ribeye',
 		'Ribeye+Marrow',
 		'Righteous',
-		'Risque',
 		'Roboto',
-		'Roboto+Condensed',
-		'Roboto+Slab',
 		'Rochester',
 		'Rock+Salt',
 		'Rokkitt',
-		'Romanesco',
 		'Ropa+Sans',
 		'Rosario',
 		'Rosarivo',
 		'Rouge+Script',
-		'Rozha+One',
-		'Rubik+Mono+One',
-		'Rubik+One',
 		'Ruda',
-		'Rufina',
 		'Ruge+Boogie',
 		'Ruluko',
-		'Rum+Raisin',
 		'Ruslan+Display',
-		'Russo+One',
+		'Russo One',
 		'Ruthie',
-		'Rye',
-		'Sacramento',
 		'Sail',
 		'Salsa',
-		'Sanchez',
 		'Sancreek',
 		'Sansita+One',
 		'Sarina',
-		'Sarpanch',
 		'Satisfy',
-		'Scada',
 		'Schoolbell',
 		'Seaweed+Script',
 		'Sevillana',
-		'Seymour+One',
 		'Shadows+Into+Light',
 		'Shadows+Into+Light+Two',
 		'Shanti',
 		'Share',
-		'Share+Tech',
-		'Share+Tech+Mono',
 		'Shojumaru',
 		'Short+Stack',
-		'Siemreap',
 		'Sigmar+One',
 		'Signika',
 		'Signika+Negative',
 		'Simonetta',
-		'Sintony',
 		'Sirin+Stencil',
 		'Six+Caps',
-		'Skranji',
-		'Slabo+13px',
-		'Slabo+27px',
 		'Slackey',
 		'Smokum',
 		'Smythe',
 		'Sniglet',
+		'Sniglet',
 		'Snippet',
-		'Snowburst+One',
-		'Sofadi+One',
 		'Sofia',
 		'Sonsie+One',
 		'Sorts+Mill+Goudy',
-		'Source+Code+Pro',
-		'Source+Sans+Pro',
-		'Source+Serif+Pro',
 		'Special+Elite',
 		'Spicy+Rice',
 		'Spinnaker',
 		'Spirax',
 		'Squada+One',
-		'Sree+Krushnadevaraya',
-		'Stalemate',
-		'Stalinist+One',
 		'Stardos+Stencil',
 		'Stint+Ultra+Condensed',
 		'Stint+Ultra+Expanded',
 		'Stoke',
-		'Strait',
 		'Sue+Ellen+Francisco',
 		'Sunshiney',
 		'Supermercado+One',
-		'Suranna',
-		'Suravaram',
-		'Suwannaphum',
 		'Swanky+and+Moo+Moo',
 		'Syncopate',
 		'Tangerine',
-		'Taprom',
-		'Tauri',
-		'Teko',
 		'Telex',
-		'Tenali+Ramakrishna',
 		'Tenor+Sans',
-		'Text+Me+One',
+		'Terminal+Dosis',
+		'Terminal+Dosis+Light',
 		'The+Girl+Next+Door',
 		'Tienne',
-		'Timmana',
 		'Tinos',
-		'Titan+One',
 		'Titillium+Web',
+		'Titan+One',
 		'Trade+Winds',
 		'Trocchi',
 		'Trochut',
@@ -940,19 +759,16 @@ function mk_fonts_settings_field($settings, $value) {
 		'Ubuntu+Mono',
 		'Ultra',
 		'Uncial+Antiqua',
-		'Underdog',
-		'Unica+One',
+		'UnifrakturCook',
 		'UnifrakturCook',
 		'UnifrakturMaguntia',
 		'Unkempt',
 		'Unlock',
 		'Unna',
 		'VT323',
-		'Vampiro+One',
 		'Varela',
 		'Varela+Round',
 		'Vast+Shadow',
-		'Vesper+Libre',
 		'Vibur',
 		'Vidaloka',
 		'Viga',
@@ -963,9 +779,7 @@ function mk_fonts_settings_field($settings, $value) {
 		'Waiting+for+the+Sunrise',
 		'Wallpoet',
 		'Walter+Turncoat',
-		'Warnes',
 		'Wellfleet',
-		'Wendy+One',
 		'Wire+One',
 		'Yanone+Kaffeesatz',
 		'Yellowtail',
@@ -1210,166 +1024,124 @@ class WPBakeryShortCode_mk_fade_txt_item extends WPBakeryShortCode
 {
 }
 
-class WPBakeryShortCode_mk_products extends WPBakeryShortCode {
-}
+class WPBakeryShortCode_mk_page_section extends WPBakeryShortCode {
+	protected $predefined_atts = array('el_class' => '');
 
-class WPBakeryShortCode_mk_product_categories extends WPBakeryShortCode {
+	protected function content($atts, $content = null) {
+		$prefix = '';
+		return $prefix . $this->loadTemplate($atts, $content);
+	}
+
+	/* This returs block controls
+	---------------------------------------------------------- */
+	public function getColumnControls($controls, $extended_css = '') {
+		global $vc_row_layouts;
+		$controls_start = '<div class="controls controls_row vc_clearfix">';
+		$controls_end = '</div>';
+
+		//Create columns
+		$controls_layout = '<span class="vc_row_layouts vc_control">';
+		foreach ($vc_row_layouts as $layout) {
+			$controls_layout .= '<a class="vc_control-set-column set_columns ' . $layout['icon_class'] . '" data-cells="' . $layout['cells'] . '" data-cells-mask="' . $layout['mask'] . '" title="' . $layout['title'] . '"></a> ';
+		}
+		$controls_layout .= '<br/><a class="vc_control-set-column set_columns custom_columns" data-cells="custom" data-cells-mask="custom" title="' . __('Custom layout', 'js_composer') . '">' . __('Custom', 'js_composer') . '</a> ';
+		$controls_layout .= '</span>';
+
+		$controls_move = ' <a class="vc_control column_move" href="#" title="' . __('Drag Page Section to reorder', 'js_composer') . '"><i class="vc_icon"></i></a>';
+		$controls_add = ' <a class="vc_control column_add" href="#" title="' . __('Add column', 'js_composer') . '"><i class="vc_icon"></i></a>';
+		$controls_delete = '<a class="vc_control column_delete" href="#" title="' . __('Delete this Page Section', 'js_composer') . '"><i class="vc_icon"></i></a>';
+		$controls_edit = ' <a class="vc_control column_edit" href="#" title="' . __('Edit this Page Section', 'js_composer') . '"><i class="vc_icon"></i></a>';
+		$controls_clone = ' <a class="vc_control column_clone" href="#" title="' . __('Clone this Page Section', 'js_composer') . '"><i class="vc_icon"></i></a>';
+		$controls_toggle = ' <span class="vc_control vc_row_section_mark" title="' . $this->settings['name'] . '">' . $this->settings['name'] . '</span><a class="vc_control column_toggle" href="#" title="' . __('Toggle row', 'js_composer') . '"><i class="vc_icon"></i></a>';
+		$controls_center_end = '</span>';
+
+		$row_edit_clone_delete = '<span class="vc_row_edit_clone_delete">';
+		$row_edit_clone_delete .= $controls_delete . $controls_clone . $controls_edit . $controls_toggle;
+
+		//$column_controls_full =  $controls_start. $controls_move . $controls_center_start . $controls_layout . $controls_delete . $controls_clone . $controls_edit . $controls_center_end . $controls_end;
+		$column_controls_full = $controls_start . $controls_move . $controls_layout . $controls_add . $row_edit_clone_delete . $controls_end;
+
+		return $column_controls_full;
+	}
+
+	public function contentAdmin($atts, $content = null) {
+		$width = $el_class = '';
+		extract(shortcode_atts($this->predefined_atts, $atts));
+
+		$output = '';
+
+		$column_controls = $this->getColumnControls($this->settings('controls'));
+
+		for ($i = 0; $i < count($width);
+			$i++) {
+			$output .= '<div' . $this->customAdminBockParams() . ' data-element_type="' . $this->settings["base"] . '" class="wpb_' . $this->settings['base'] . ' wpb_vc_row wpb_sortable">';
+			$output .= str_replace("%column_size%", 1, $column_controls);
+			$output .= '<div class="wpb_element_wrapper">';
+			$output .= '<div class="vc_row vc_row-fluid wpb_row_container vc_container_for_children">';
+			if ($content == '' && !empty($this->settings["default_content_in_template"])) {
+				$output .= do_shortcode(shortcode_unautop($this->settings["default_content_in_template"]));
+			} else {
+				$output .= do_shortcode(shortcode_unautop($content));
+
+			}
+			$output .= '</div>';
+			if (isset($this->settings['params'])) {
+				$inner = '';
+				foreach ($this->settings['params'] as $param) {
+					$param_value = isset($$param['param_name']) ? $$param['param_name'] : '';
+					if (is_array($param_value)) {
+						// Get first element from the array
+						reset($param_value);
+						$first_key = key($param_value);
+						$param_value = $param_value[$first_key];
+					}
+					$inner .= $this->singleParamHtmlHolder($param, $param_value);
+				}
+				$output .= $inner;
+			}
+			$output .= '</div>';
+			$output .= '</div>';
+		}
+
+		return $output;
+	}
+
+	public function customAdminBockParams() {
+		return '';
+	}
+
+	public function buildStyle($bg_image = '', $bg_color = '', $bg_image_repeat = '', $font_color = '', $padding = '', $margin_bottom = '') {
+		$has_image = false;
+		$style = '';
+		if ((int) $bg_image > 0 && ($image_url = wp_get_attachment_url($bg_image, 'large')) !== false) {
+			$has_image = true;
+			$style .= "background-image: url(" . $image_url . ");";
+		}
+		if (!empty($bg_color)) {
+			$style .= vc_get_css_color('background-color', $bg_color);
+		}
+		if (!empty($bg_image_repeat) && $has_image) {
+			if ($bg_image_repeat === 'cover') {
+				$style .= "background-repeat:no-repeat;background-size: cover;";
+			} elseif ($bg_image_repeat === 'contain') {
+				$style .= "background-repeat:no-repeat;background-size: contain;";
+			} elseif ($bg_image_repeat === 'no-repeat') {
+				$style .= 'background-repeat: no-repeat;';
+			}
+		}
+		if (!empty($font_color)) {
+			$style .= vc_get_css_color('color', $font_color);// 'color: '.$font_color.';';
+		}
+		if ($padding != '') {
+			$style .= 'padding: ' . (preg_match('/(px|em|\%|pt|cm)$/', $padding) ? $padding : $padding . 'px') . ';';
+		}
+		if ($margin_bottom != '') {
+			$style .= 'margin-bottom: ' . (preg_match('/(px|em|\%|pt|cm)$/', $margin_bottom) ? $margin_bottom : $margin_bottom . 'px') . ';';
+		}
+		return empty($style) ? $style : ' style="' . $style . '"';
+	}
 }
 
 class WPBakeryShortCode_mk_flipbox extends WPBakeryShortCode
 {
 }
-
-class WPBakeryShortCode_mk_gradient_text extends WPBakeryShortCode
-{
-}
-
-
-
-class WPBakeryShortCode_mk_page_section extends WPBakeryShortCode
-{
-    protected $predefined_atts = array('el_class' => '');
-
-    protected function content($atts, $content = null)
-    {
-        $prefix = '';
-        return $prefix . $this->loadTemplate($atts, $content);
-    }
-
-
-    public function getLayoutsControl() {
-        global $vc_row_layouts;
-        $controls_layout = '<span class="vc_row_layouts vc_control">';
-        foreach ( $vc_row_layouts as $layout ) {
-            $controls_layout .= '<a class="vc_control-set-column set_columns ' . $layout['icon_class'] . '" data-cells="' . $layout['cells'] . '" data-cells-mask="' . $layout['mask'] . '" title="' . $layout['title'] . '"></a> ';
-        }
-        $controls_layout .= '<br/><a class="vc_control-set-column set_columns custom_columns" data-cells="custom" data-cells-mask="custom" title="' . __( 'Custom layout', 'mk_framework' ) . '">' . __( 'Custom', 'mk_framework' ) . '</a> ';
-        $controls_layout .= '</span>';
-
-        return $controls_layout;
-    }
-
-    public function getColumnControls( $controls, $extended_css = '' ) {
-        $output       = '<div class="vc_controls vc_controls-row controls controls_row vc_clearfix">';
-        $controls_end = '</div>';
-        //Create columns
-        $controls_layout = $this->getLayoutsControl();
-
-        $controls_move   = ' <a class="vc_control column_move vc_column-move" href="#" title="'
-                           . __( 'Drag Page Section to reorder', 'mk_framework' ) . '" data-vc-control="move"><i class="vc_icon"></i></a>';
-        $controls_add    = ' <a class="vc_control column_add vc_column-add" href="#" title="'
-                           . __( 'Add column', 'mk_framework' ) . '" data-vc-control="add"><i class="vc_icon"></i></a>';
-        $controls_delete = '<a class="vc_control column_delete vc_column-delete" href="#" title="'
-                           . __( 'Delete this Page Section', 'mk_framework' ) . '" data-vc-control="delete"><i class="vc_icon"></i></a>';
-        $controls_edit   = ' <a class="vc_control column_edit vc_column-edit" href="#" title="'
-                           . __( 'Edit this Page Section', 'mk_framework' ) . '" data-vc-control="edit"><i class="vc_icon"></i></a>';
-        $controls_clone  = ' <a class="vc_control column_clone vc_column-clone" href="#" title="'
-                           . __( 'Clone this Page Section', 'mk_framework' ) . '" data-vc-control="clone"><i class="vc_icon"></i></a>';
-        $controls_toggle = ' <span class="vc_control vc_row_section_mark" title="">Page Section</span><a class="vc_control column_toggle vc_column-toggle" href="#" title="'
-                           . __( 'Toggle Page Section', 'mk_framework' ) . '" data-vc-control="toggle"><i class="vc_icon"></i></a>';
-        if ( is_array( $controls ) && ! empty( $controls ) ) {
-            foreach ( $controls as $control ) {
-                $control_var = 'controls_' . $control;
-                $output .= $$control_var;
-            }
-            $output .= $controls_end;
-        } elseif ( is_string( $controls ) ) {
-            $control_var = 'controls_' . $controls;
-            $output .= $$control_var . $controls_end;
-        } else {
-            $row_edit_clone_delete = '<span class="vc_row_edit_clone_delete">';
-            $row_edit_clone_delete .= $controls_delete . $controls_clone . $controls_edit . $controls_toggle;
-            $row_edit_clone_delete .= '</span>';
-
-            //$column_controls_full =  $controls_start. $controls_move . $controls_center_start . $controls_layout . $controls_delete . $controls_clone . $controls_edit . $controls_center_end . $controls_end;
-            $output .= $controls_move . $controls_layout . $controls_add . $row_edit_clone_delete . $controls_end;
-        }
-        return $output;
-    }
-
-   public function contentAdmin( $atts, $content = null ) {
-        $width = $el_class = '';
-        extract( shortcode_atts( $this->predefined_atts, $atts ) );
-
-        $output = '';
-
-        $column_controls = $this->getColumnControls( $this->settings( 'controls' ) );
-
-        for ( $i = 0; $i < count( $width ); $i ++ ) {
-            $output .= '<div' . $this->customAdminBockParams() . ' data-element_type="' . $this->settings["base"] . '" class="' . $this->cssAdminClass() . '">';
-            $output .= str_replace( "%column_size%", 1, $column_controls );
-            $output .= '<div class="wpb_element_wrapper">';
-            $output .= '<div class="vc_row vc_row-fluid wpb_row_container vc_container_for_children">';
-            if ( $content == '' && ! empty( $this->settings["default_content_in_template"] ) ) {
-                $output .= do_shortcode( shortcode_unautop( $this->settings["default_content_in_template"] ) );
-            } else {
-                $output .= do_shortcode( shortcode_unautop( $content ) );
-
-            }
-            $output .= '</div>';
-            if ( isset( $this->settings['params'] ) ) {
-                $inner = '';
-                foreach ( $this->settings['params'] as $param ) {
-                    $param_value = isset( $$param['param_name'] ) ? $$param['param_name'] : '';
-                    if ( is_array( $param_value ) ) {
-                        // Get first element from the array
-                        reset( $param_value );
-                        $first_key   = key( $param_value );
-                        $param_value = $param_value[ $first_key ];
-                    }
-                    $inner .= $this->singleParamHtmlHolder( $param, $param_value );
-                }
-                $output .= $inner;
-            }
-            $output .= '</div>';
-            $output .= '</div>';
-        }
-
-        return $output;
-    }
-
-    public function cssAdminClass() {
-        return 'wpb_' . $this->settings['base'] . ' wpb_sortable';
-    }
-    /**
-     * @deprecated - due to it is not used anywhere?
-     * @typo Bock - Block
-     * @return string
-     */
-    public function customAdminBockParams() {
-        return '';
-    }
-
-    public function buildStyle( $bg_image = '', $bg_color = '', $bg_image_repeat = '', $font_color = '', $padding = '', $margin_bottom = '' ) {
-        $has_image = false;
-        $style     = '';
-        if ( (int) $bg_image > 0 && ( $image_url = wp_get_attachment_url( $bg_image, 'large' ) ) !== false ) {
-            $has_image = true;
-            $style .= "background-image: url(" . $image_url . ");";
-        }
-        if ( ! empty( $bg_color ) ) {
-            $style .= vc_get_css_color( 'background-color', $bg_color );
-        }
-        if ( ! empty( $bg_image_repeat ) && $has_image ) {
-            if ( $bg_image_repeat === 'cover' ) {
-                $style .= "background-repeat:no-repeat;background-size: cover;";
-            } elseif ( $bg_image_repeat === 'contain' ) {
-                $style .= "background-repeat:no-repeat;background-size: contain;";
-            } elseif ( $bg_image_repeat === 'no-repeat' ) {
-                $style .= 'background-repeat: no-repeat;';
-            }
-        }
-        if ( ! empty( $font_color ) ) {
-            $style .= vc_get_css_color( 'color', $font_color ); // 'color: '.$font_color.';';
-        }
-        if ( $padding != '' ) {
-            $style .= 'padding: ' . ( preg_match( '/(px|em|\%|pt|cm)$/', $padding ) ? $padding : $padding . 'px' ) . ';';
-        }
-        if ( $margin_bottom != '' ) {
-            $style .= 'margin-bottom: ' . ( preg_match( '/(px|em|\%|pt|cm)$/', $margin_bottom ) ? $margin_bottom : $margin_bottom . 'px' ) . ';';
-        }
-
-        return empty( $style ) ? $style : ' style="' . esc_attr( $style ) . '"';
-    }
-}
-

@@ -129,8 +129,6 @@ Blog Classic Style
 		.blog-title {
 			display: block !important;
 			margin-bottom: 10px !important;
-			float: none !important;
-			padding-right: 0 !important;
 		}
 		.blog-comments, .mk-love-holder {
 			float: left !important;
@@ -172,7 +170,6 @@ Blog Masonry Style
 	display: block;
 	opacity: 0;
 	float: left;
-	position: relative;
 	.item-holder {
 		margin: 0 15px 30px 30px;
 		background-color: #fdfdfd;
@@ -607,13 +604,11 @@ Blog Scroller Style
 	}
 	&:hover{
 		background-color: #fff !important;
-		i {
+		i{
 			color: #000 !important;
 		}
 	}
 }
-
-.mk-scroller-wrapper .thumb-featured-image img { width: 100%; }
 
 /* *
 *
@@ -947,7 +942,7 @@ Blog Tile Style
 		}
 	}
 	&.two-column {
-		width: 49.6%;
+		width: 50%;
 		.blog-title {
 			font-size: 18px !important;
 		}
@@ -959,7 +954,7 @@ Blog Tile Style
 		}
 	}
 	&.four-column {
-		width: 24.8%;
+		width: 25%;
 		.blog-title {
 			font-size: 13px !important;
 		}
@@ -996,7 +991,6 @@ Blog Modern Style
 	.hover-overlay {
 		background-color: #000;
 		opacity: 0.6;
-
 	}
 	&:hover {
 		.hover-overlay {
@@ -1063,7 +1057,7 @@ Blog Modern Style
 	.slideshow-swiper-arrows {
 		z-index: 15;
 	}
-	.modern-featured-image {
+	.modern-featured-image, {
 		overflow: hidden;
 	}
 	.modern-featured-image, .blog-gallery-type {
@@ -1180,13 +1174,6 @@ Blog Modern Style
 	}
 }
 
-.IE .blog-modern-entry:hover {
-	.modern-featured-image, .blog-gallery-type {
-		img {
-			.scale(1.1);
-		}
-	}
-}
 /* *
 *
 *
@@ -1348,7 +1335,7 @@ General Settings
 ********************************************* */
 .blog-gallery-type {
 	.mk-image-slideshow {
-		.mk-swiper-container {
+		.swiper-container {
 			&:hover {
 				.slideshow-swiper-arrows {
 					.opacity(100 );

@@ -4,7 +4,7 @@
  *
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     2.6.3
+ * @version     2.0.14
   *
  * @package This template is overrided by theme
  */
@@ -34,8 +34,8 @@ $quality = isset($mk_settings['woo-image-quality']) ? $mk_settings['woo-image-qu
 
 	<div class="gallery-thumb-large">
 
-		<div id="mk-single-product-swiper" style="max-height:<?php echo $image_height; ?>px;overflow:hidden;" class="mk-swiper-container mk-swiper-slider" data-freeModeFluid="false" data-loop="false" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="100000" data-animationSpeed="600" data-directionNav="true">
-			<div class="mk-swiper-wrapper">
+		<div id="mk-single-product-swiper" style="max-height:<?php echo $image_height; ?>px;overflow:hidden;" class="swiper-container mk-swiper-slider" data-freeModeFluid="false" data-loop="false" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="100000" data-animationSpeed="600" data-directionNav="true">
+			<div class="swiper-wrapper">
 	<?php
 
 
@@ -152,5 +152,3 @@ if ( $attachment_ids ) {
 } ?>
 
 </div>
-
-

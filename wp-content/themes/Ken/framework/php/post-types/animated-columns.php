@@ -32,7 +32,7 @@ function register_animated_columns_post_type(){
 		'menu_position' => 100,
 		'query_var' => false,
 		'show_in_nav_menus' => false,
-		'supports' => array('title', 'page-attributes', 'revisions', 'editor')
+		'supports' => array('title', 'page-attributes', 'revisions')
 	));
 }
 add_action('init','register_animated_columns_post_type');

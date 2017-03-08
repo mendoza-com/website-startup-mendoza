@@ -17,7 +17,6 @@ class Artbees_Widget_Social extends WP_Widget {
 			'youtube',
 			'tumblr',
 			'vimeo',
-			'spotify',
 	);
 
 	var $align = array(
@@ -39,9 +38,9 @@ class Artbees_Widget_Social extends WP_Widget {
 
 	);
 
-	function __construct() {
+	function Artbees_Widget_Social() {
 		$widget_ops = array( 'classname' => 'widget_social_networks', 'description' => 'Displays a list of Social Icon icons' );
-		WP_Widget::__construct( 'social', THEME_SLUG.' - '.'Social Networks', $widget_ops );
+		$this->WP_Widget( 'social', THEME_SLUG.' - '.'Social Networks', $widget_ops );
 
 		if ( 'widgets.php' == basename( $_SERVER['PHP_SELF'] ) ) {
 			add_action( 'admin_print_scripts', array( &$this, 'add_admin_script' ) );
@@ -73,21 +72,13 @@ class Artbees_Widget_Social extends WP_Widget {
 		if ( !empty( $instance['enable_sites'] ) ) {
 			foreach ( $instance['enable_sites'] as $site ) {
 				$link = isset( $instance[strtolower( $site )] )?$instance[strtolower( $site )]:'#';
-					if($site == 'vimeo' || $site == 'spotify') {
-						$site_class = 'mk-theme-icon-social-'.$site;
-					} else {
-						$site_class = 'mk-icon-'.$site;
-					}
-					$output .= '<a href="'.$link.'" rel="nofollow" class="builtin-icons '.$skin.' '.$site.'-hover" target="_blank" title="'.$alt.' '.$site.'"><i class="'.$site_class.'"></i></a>';
+					$output .= '<a href="'.$link.'" rel="nofollow" class="builtin-icons '.$skin.' '.$site.'-hover" target="_blank" title="'.$alt.' '.$site.'"><i class="mk-icon-'.$site.'"></i></a>';
 	
 			}
 			if($skin == 'custom' || !empty($icons_margin) ) {
 				if ( !empty($icon_color) || !empty($icon_hover_color) || !empty($icon_bg_color) || !empty($icon_bg_main_color) || !empty($icon_border_color) || !empty($icons_margin) ) {
-					//$output .= $icon_bg_color;
-
-
-					$output .= '<style>';
 					$output .= '
+					<style>
 						#'.$uniqueID.' a { 
 							opacity: 100 !important;';
 					if ( !empty($icons_margin) ) {
@@ -113,8 +104,8 @@ class Artbees_Widget_Social extends WP_Widget {
 						$output .= 'border-color: '.$icon_bg_color.' !important;';
 						$output .= 'background-color: '.$icon_bg_color.' !important;';
 					}
-					$output .= '}';
-					$output .= '</style>';
+					$output .= '}
+					</style>';
 				}
 			} 
 		}
@@ -134,11 +125,8 @@ class Artbees_Widget_Social extends WP_Widget {
 
 		if ( !empty( $output ) ) {
 			echo $before_widget;
-			if ( $title ) {
-				echo '<div class="social-title widgettitle '.$align.'">';
-				echo $title;
-				echo '</div>';
-			}
+			if ( $title )
+				echo $before_title . $title . $after_title;
 				echo '<div id="'.$uniqueID.'">';
 				echo $output;
 				echo '</div>';
@@ -231,23 +219,23 @@ class Artbees_Widget_Social extends WP_Widget {
 
 			<p>
 				<label for="<?php echo $this->get_field_id( 'icon_color' ); ?>"><?php _e('Icon Color:', 'mk_framework'); ?></label>
-				<div class="color-picker-holder"><input data-default-color="<?php $icon_color; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_color' ); ?>" type="text" value="<?php echo $icon_color; ?>" /></div>
+				<div class="color-picker-holder"><input data-default-color="<?php $value['default']; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_color' ); ?>" type="text" value="<?php echo $icon_color; ?>" /></div>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'icon_hover_color' ); ?>"><?php _e('Icon Hover Color:', 'mk_framework'); ?></label>
-				<div class="color-picker-holder"><input data-default-color="<?php $icon_hover_color; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_hover_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_hover_color' ); ?>" type="text" value="<?php echo $icon_hover_color; ?>" /></div>
+				<div class="color-picker-holder"><input data-default-color="<?php $value['default']; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_hover_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_hover_color' ); ?>" type="text" value="<?php echo $icon_hover_color; ?>" /></div>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'icon_border_color' ); ?>"><?php _e('Icon Border Color:', 'mk_framework'); ?></label>
-				<div class="color-picker-holder"><input data-default-color="<?php $icon_border_color; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_border_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_border_color' ); ?>" type="text" value="<?php echo $icon_border_color; ?>" /></div>
+				<div class="color-picker-holder"><input data-default-color="<?php $value['default']; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_border_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_border_color' ); ?>" type="text" value="<?php echo $icon_border_color; ?>" /></div>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'icon_bg_main_color' ); ?>"><?php _e('Icon Background Color:', 'mk_framework'); ?></label>
-				<div class="color-picker-holder"><input data-default-color="<?php $icon_bg_main_color; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_bg_main_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_bg_main_color' ); ?>" type="text" value="<?php echo $icon_bg_main_color; ?>" /></div>
+				<div class="color-picker-holder"><input data-default-color="<?php $value['default']; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_bg_main_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_bg_main_color' ); ?>" type="text" value="<?php echo $icon_bg_main_color; ?>" /></div>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'icon_bg_color' ); ?>"><?php _e('Icon Hover Background Color:', 'mk_framework'); ?></label>
-				<div class="color-picker-holder"><input data-default-color="<?php $icon_bg_color; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_bg_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_bg_color' ); ?>" type="text" value="<?php echo $icon_bg_color; ?>" /></div>
+				<div class="color-picker-holder"><input data-default-color="<?php $value['default']; ?>" class="color-picker" id="<?php echo $this->get_field_id( 'icon_bg_color' ); ?>" name="<?php echo $this->get_field_name( 'icon_bg_color' ); ?>" type="text" value="<?php echo $icon_bg_color; ?>" /></div>
 			</p>
 
 		</div>

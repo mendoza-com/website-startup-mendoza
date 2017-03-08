@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Testimonials extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Testimonials() {
 		$widget_ops = array( 'classname' => 'widget_testimonials', 'description' => 'Displays a testimonail slider.' );
-		WP_Widget::__construct( 'testimonial_widget', THEME_SLUG.' - '.'Testimonial', $widget_ops );
+		$this->WP_Widget( 'testimonial_widget', THEME_SLUG.' - '.'Testimonial', $widget_ops );
 
 
 	}
@@ -20,8 +20,8 @@ class Artbees_Widget_Testimonials extends WP_Widget {
 		$count = (int)$instance["count"];
 		$id = mt_rand(99,999);
 
-		$output = '<div class="testimonial-slider"><div id="mk-swiper-'.$id.'" data-freeModeFluid="false" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-loop="true" data-mousewheelControl="true" data-direction="horizontal" data-slideshowSpeed="5000" data-animationSpeed="500" data-directionNav="true" class="mk-swiper-container mk-swiper-slider">';
-		$output .= '<div class="mk-swiper-wrapper">';
+		$output = '<div class="testimonial-slider"><div id="mk-swiper-'.$id.'" data-freeModeFluid="false" data-slidesPerView="1" data-pagination="false" data-freeMode="false" data-loop="true" data-mousewheelControl="true" data-direction="horizontal" data-slideshowSpeed="5000" data-animationSpeed="500" data-directionNav="true" class="swiper-container mk-swiper-slider">';
+		$output .= '<div class="swiper-wrapper">';
 		if ( $count > 0 ) {
 
 			for ( $i=1; $i<=$count; $i++ ) {

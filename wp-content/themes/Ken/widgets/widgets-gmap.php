@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Google_Map extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Google_Map() {
 		$widget_ops = array( 'classname' => 'widget_gmap', 'description' => __( 'Displays google map.', 'mk_framework' ) );
-		WP_Widget::__construct( 'gmap', THEME_SLUG. '- Google Maps', $widget_ops );
+		$this->WP_Widget( 'gmap', THEME_SLUG. '- Google Maps', $widget_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -25,14 +25,6 @@ class Artbees_Widget_Google_Map extends WP_Widget {
 		$zoom = (int)$instance['zoom'];
 		$height = (int)$instance['height'];
 
-		
-		global $mk_settings;
-		$apikey = $mk_settings['google-maps-key'];
-
-		if(isset($apikey) && !empty($apikey)) {
-			$apikey = 'key='.$apikey.'&';
-		}
-
 		if ( $zoom < 1 ) {
 			$zoom = 1;
 		}
@@ -45,6 +37,7 @@ class Artbees_Widget_Google_Map extends WP_Widget {
 ?>
 
 		<div id="gmap_widget_<?php echo $id;?>" class="google_map" style="height:<?php echo $height;?>px; width:100%;"></div>
+			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 			<script type="text/javascript">
 			jQuery(document).ready(function($) {
   var map;
@@ -81,9 +74,6 @@ if(gmap_marker == true) {
 
 			<div class="clearboth"></div>
 		<?php
-
-		wp_enqueue_script('gmaps', '//maps.googleapis.com/maps/api/js?'.$apikey.'ver=1', false, false, false); 
-
 		echo $after_widget;
 	}
 

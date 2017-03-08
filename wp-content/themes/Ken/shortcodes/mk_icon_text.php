@@ -8,21 +8,17 @@ extract( shortcode_atts( array(
             'icon' => '',
             'icon_size' => 48,
             'default_txt' => '',
-            'default_txt_font_weight' => 'inherit',
             'hover_txt' => '',
-            'hover_font_size' => '16',
-            'hover_txt_font_weight' => 'inherit',
-            'hover_line_height' => '18',
             'link' => '',
             'target' => '_self',
-            'font_size' => '30',
+            'font_size' => '',
             'custom_color' => '',
             'animation' => '',
         ), $atts ) );
 
-$output = '';
+$output = $style_css = '';
 
-$style_id = Mk_Static_Files::shortcode_id();
+$style_id = uniqid();
 
 if(!empty( $icon )) {
     $icon = (strpos($icon, 'mk-') !== FALSE) ? ( $icon ) : ( 'mk-'.$icon);    
@@ -33,16 +29,13 @@ if(!empty( $icon )) {
 /***********************************
 Style for Custom Color
 ***********************************/
-
-
-Mk_Static_Files::addCSS('
-    #mk-box-text-'.$style_id.' .icon-txt-default{
-        font-size: '.$font_size.'px;
-    }
-', $style_id);
-
+$style_css .= '<style type="text/css">';
+$style_css .= '
+        #mk-box-text-'.$style_id.' .icon-txt-default{
+            font-size: '.$font_size.'px;
+        }';
 if ( $skin == 'custom') {
-    Mk_Static_Files::addCSS('
+    $style_css .= '
         #mk-box-text-'.$style_id.'.custom-skin i{
             color: '.$custom_color.' !important;
         }
@@ -51,9 +44,9 @@ if ( $skin == 'custom') {
         }
         #mk-box-text-'.$style_id.'.custom-skin .icon-txt-hover{
             color: '.$custom_color.' !important;
-        }
-    ', $style_id);
+        }';
 }
+$style_css .= '</style>';
 
 /***********************************
 Size Class
@@ -74,11 +67,11 @@ $smooth_scroll = (preg_match('/#/',$link)) ? ' class="mk-smooth" ' : '';
 
 $output .= ($link != '') ? '<a target="'.$target.'" '.$smooth_scroll.'href="'.$link.'"><i style="font-size:'.$icon_size.'px" class="'.$icon.'"></i></a>' : '<i style="font-size:'.$icon_size.'px" class="'.$icon.'"></i>';
 
-$output .= '<span class="icon-txt-default" style="font-weight:'.$default_txt_font_weight.';">'.$default_txt.'</span>';
-$output .= '<span class="icon-txt-hover" style="font-size:'.$hover_font_size.'px; line-height:'.$hover_line_height.'px; font-weight:'.$hover_txt_font_weight.';">'.$hover_txt.'</span>';
+$output .= '<span class="icon-txt-default">'.$default_txt.'</span>';
+$output .= '<span class="icon-txt-hover">'.$hover_txt.'</span>';
 
 
 $output .= '</div>';
+$output .= $style_css;
 
 echo $output;
-

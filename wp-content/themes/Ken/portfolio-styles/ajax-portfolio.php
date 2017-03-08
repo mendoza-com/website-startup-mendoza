@@ -18,10 +18,6 @@ function mk_ajax_portfolio()
 
 function get_ajax_portfolio_item($id = false)
 {
-    if(method_exists('WPBMap', 'addAllMappedShortcodes')) {
-        WPBMap::addAllMappedShortcodes();
-    }
-
     require_once THEME_INCLUDES . "/image-cropping.php";
     $query = array();
     global $wp_embed, $mk_settings;
@@ -96,9 +92,14 @@ function get_ajax_portfolio_item($id = false)
             } else if ($post_type == 'image') {
                 
                 $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+                $image_src       = bfi_thumb($image_src_array[0], array(
+                    'width' => $image_width,
+                    'height' => $image_height,
+                    'crop' => true
+                ));
                 
                 $html .= '<div class="project-featured-image">
-						<img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src_array[0], $image_width, $image_height) . '" height="' . $image_height . '" width="' . $image_width . '" itemprop="image" />
+						<img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . $image_src . '" height="' . $image_height . '" width="' . $image_width . '" itemprop="image" />
 					 </div>';
                 
                 
@@ -113,9 +114,14 @@ function get_ajax_portfolio_item($id = false)
                 
             } else {
                 $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+                $image_src       = bfi_thumb($image_src_array[0], array(
+                    'width' => $image_width,
+                    'height' => $image_height,
+                    'crop' => true
+                ));
                 
                 $html .= '<div class="project-featured-image">
-						<img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src_array[0], $image_width, $image_height) . '" height="' . $image_height . '" width="' . $image_width . '" />
+						<img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src, $image_width, $image_height) . '" height="' . $image_height . '" width="' . $image_width . '" />
 					 </div>';
             }
             

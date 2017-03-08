@@ -33,7 +33,7 @@ function blog_magazine_style($atts, $i)
             $output .= '<img alt="' . get_the_title() . '" width="' . $image_width . '" class="item-featured-image" height="' . $image_height . '" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src, $image_width, $image_height) . '" itemprop="image" />';
             $output .= '<div class="hover-overlay"></div>';
             $output .= '<a title="' . get_the_title() . '" href="' . get_permalink() . '"><i class="mk-theme-icon-next-big hover-plus-icon-xsmall"></i></a>';
-            $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+            $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
             $output .= '</div>';
         }
         
@@ -60,7 +60,7 @@ function blog_magazine_style($atts, $i)
        
        if($excerpt_length != 0) {
             ob_start();
-            mk_excerpt_max_charlength($excerpt_length);
+            the_excerpt_max_charlength($excerpt_length);
             $output .= '<div class="blog-excerpt">' . ob_get_clean() . '</div>';
         }
         
@@ -89,7 +89,7 @@ function blog_magazine_style($atts, $i)
         $output .= '<a href="' . get_month_link(get_the_time("Y"), get_the_time("m")) . '">' . get_the_date() . '</a>';
         $output .= '</time>';
         $output .= '<span class="blog-cat">' . get_the_category_list(', ') . '</span>';
-        $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+        $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
         $output .= '<div class="clearboth"></div></div>';
         
         $output .= '</article>';

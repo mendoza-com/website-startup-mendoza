@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Blog_Tab extends WP_Widget {
 
-	function __construct() {
+	function Artbees_Widget_Blog_Tab() {
 		$widget_ops = array( "classname" => "widget_posts_tabs", "description" => "Displays the Recent posts, Popular Posts, Recent Comments in a tab" );
-		WP_Widget::__construct( "recent_posts", THEME_SLUG . " - Blog Posts Tab", $widget_ops );
+		$this-> WP_Widget( "recent_posts", THEME_SLUG . " - Blog Posts Tab", $widget_ops );
 		$this-> alt_option_name = "widget_recent_posts";
 
 		add_action( "save_post", array( &$this, "flush_widget_cache" ) );
