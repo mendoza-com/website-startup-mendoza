@@ -23,7 +23,7 @@ function blog_scroller_style($atts)
         $output .= '</a></div>';
     }
     
-    $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+    $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
    
     $output .= '</article>';
     

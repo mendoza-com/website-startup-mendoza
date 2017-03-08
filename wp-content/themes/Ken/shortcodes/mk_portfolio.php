@@ -10,8 +10,8 @@ extract(shortcode_atts(array(
     'sortable_align' => 'center',
     'pagination' => 'true',
     'pagination_style' => '1',
-    'width' => 300,
-    'height' => 300,
+    'width' => 400,
+    'height' => 400,
     'dimension' => 400,
     'cat' => '', // Deprecated
     'categories' => '',
@@ -21,19 +21,20 @@ extract(shortcode_atts(array(
     'order' => 'DESC',
     'orderby' => 'date',
     'image_quality' => 1,
-    'ajax' => 'true',
+    'ajax' => 'false',
     'item_row' => 1,
     'show_logo' => 'true',
     'plus_icon' => 'true',
     'permalink_icon' => 'true',
     'item_id' => '',
+    'image_size' => 'crop',
 ), $atts));
 
 global $mk_settings;
 
-$cat = !empty($categories) ? $categories : $cat;
+$ken_styles = '';
 
-$gradient_style_css = '';
+$cat = !empty($categories) ? $categories : $cat;
 
 $grid_width    = $mk_settings['grid-width'];
 $content_width = $mk_settings['content-width'];
@@ -47,9 +48,7 @@ $query = array(
     'paged' => $paged,
     'suppress_filters' => 0
 );
-if ($offset) {
-    $query['offset'] = $offset;
-}
+
 if ($cat != '') {
     $query['tax_query'] = array(
         array(
@@ -71,6 +70,10 @@ if ($order) {
 
 if ($author) {
     $query['author'] = $author;
+}
+
+if ($offset && $pagination_style != 2) {
+    $query['offset'] = $offset;
 }
 
 $r = new WP_Query($query);
@@ -101,7 +104,8 @@ $atts                  = array(
     'permalink_icon' => $permalink_icon,
     'plus_icon' => $plus_icon,
     'hover_style' => $hover_style,
-    'item_id' => $item_id
+    'item_id' => $item_id,
+    'image_size' => $image_size
 );
 $paginaton_style_class = $output = '';
 
@@ -126,12 +130,12 @@ $enable_isotop = ($style != 'scroller') ? 'isotop-enabled mk-theme-loop ' : '';
 
 if ($style == 'scroller') {
     $scroller_style = array(
-        'swiper-container mk-swiper-slider ',
+        'mk-swiper-container mk-swiper-slider ',
         ' data-freeModeFluid="true" data-loop="false" data-slidesPerView="auto" data-pagination="false" data-freeMode="true" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="5000" data-animationSpeed="600" data-directionNav="false" '
     );
 }
 
-$id = uniqid();
+$id = Mk_Static_Files::shortcode_id();
 
 
 
@@ -198,7 +202,7 @@ $output .= '<div class="portfolio-loader"><div class="mk-loader"></div></div>';
 $output .= '<section id="mk-portfolio-loop-' . $id . '" data-uniqid="'.$item_id.'" data-style="' . $style . '" class="mk-portfolio-container ' . $enable_isotop . 'mk-portfolio-' . $style . ' ' . $scroller_style[0] . $paginaton_style_class . ' "' . $scroller_style[1] . '>' . "\n";
 
 if ($style == 'scroller') {
-    $output .= '<div class="swiper-wrapper">';
+    $output .= '<div class="mk-swiper-wrapper">';
 }
 
 $i = 0;
@@ -268,17 +272,16 @@ if ($style == 'scroller') {
 $gradient_color = isset($hove_bg_color) && !empty($hove_bg_color) ? $hove_bg_color : $mk_settings['accent-color'] ;
 
 if ($hover_style == 'gradient'){
-    $gradient_style_css .= '<style type="text/css">';
-    $gradient_style_css .= '
-        .hover-overlay {
+
+    Mk_Static_Files::addCSS('
+        #mk-portfolio-loop-' . $id .' .hover-overlay {
             background: -webkit-linear-gradient('.mk_convert_rgba($gradient_color, 0).' 0%, '.mk_convert_rgba($gradient_color, 0.6).' 100%);
             background: -o-linear-gradient('.mk_convert_rgba($gradient_color, 0).' 0%, '.mk_convert_rgba($gradient_color, 0.6).' 100%);
             background: linear-gradient('.mk_convert_rgba($gradient_color, 0).' 0%, '.mk_convert_rgba($gradient_color, 0.6).' 100%);
         }
-        ';
-    $gradient_style_css .= '</style>';
+    ', $id);
 }
-$output .= $gradient_style_css;
+
 $output .= '</section><div class="clearboth"></div>' . "\n\n";
 
 
@@ -295,3 +298,6 @@ if ($style != 'scroller') {
 $output .= '</div></div>';
 wp_reset_postdata();
 echo $output;
+
+
+

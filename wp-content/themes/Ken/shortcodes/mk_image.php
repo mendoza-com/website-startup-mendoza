@@ -22,6 +22,9 @@ extract(shortcode_atts(array(
 
 $output = '';
 
+
+require_once THEME_INCLUDES . "/image-cropping.php";	
+
 $animation_css = ($animation != '') ? (' mk-animate-element ' . $animation . ' ') : '';
 
 $image_id = mk_get_attachment_id_from_url($src);
@@ -38,29 +41,23 @@ if ($crop == 'true') {
 	$output .= '<img alt="' . $alt . '" title="' . $title . '" src="' . $src . '" />';
 }
 
+$output .= ($custom_url != '') ? '<a target="' . $target . '" href="' . $custom_url . '" title="' . $title . '" class="full-cover-link">&nbsp</a>' : '';
+
 if ($hover != 'false') {
 	$output .= '<div class="hover-overlay"></div>';
 
 	$output .= '<div class="mk-image-hover">';
-	if ($custom_url != '') {
-	$output .= '<a target="' . $target . '" href="' . $custom_url . '" title="' . $title . '">';
-	} else {
+
+	//if ($custom_url == ''){
 		$lightbox_src = !empty($custom_lightbox_url) ? $custom_lightbox_url : $src;
 		$lightbox_ifarme = ($lightbox_ifarme == 'true') ? ' fancybox.iframe' : '';
-		$output .= ($hover != 'false') ? '<a href="' . $lightbox_src . '" title="' . $title . '" rel="image-' . $group . '" class="mk-lightbox' . $lightbox_ifarme . '">' : '';
-	}
-	$output .= '<i class="mk-theme-icon-plus"></i>';
+		$output .= ($hover != 'false') ? '<a href="' . $lightbox_src . '" title="' . $title . '" rel="image-' . $group . '" class="mk-lightbox' . $lightbox_ifarme . '"><i class="mk-theme-icon-plus"></i></a>' : '';
+	//}
 
-	if ($custom_url != '') {
-		$output .= '</a>';
-	} else {
-		if ($hover != 'false') {
-			$output .= '</a>';
-		}
-	}
 	if (!empty($title)) {
 		$output .= '<div class="mk-image-caption">' . $title . '</div>';
 	}
+
 	$output .= '</div>';
 }
 

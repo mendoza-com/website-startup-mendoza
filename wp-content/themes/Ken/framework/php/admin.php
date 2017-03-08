@@ -210,7 +210,7 @@ function mk_theme_admin_scripts_styles() {
 	wp_enqueue_script('jquery-ui-slider');
     wp_enqueue_style('wp-color-picker');
     wp_enqueue_script('wp-color-picker');
-	wp_enqueue_script( 'admin-scripts', THEME_ADMIN_ASSETS_URI .'/js/admin-scripts.js');
+	wp_enqueue_script( 'mk-admin-scripts', THEME_ADMIN_ASSETS_URI .'/js/admin-scripts.js');
 	wp_register_script( 'chosen', THEME_ADMIN_ASSETS_URI . '/js/chosen.min.js', array( 'jquery' ), false, true );
 	wp_enqueue_script( 'chosen');
 	wp_enqueue_style( 'admin-styles', THEME_ADMIN_ASSETS_URI .'/css/admin.css');
@@ -243,10 +243,23 @@ if ( mk_theme_is_menus() ) {
 	
 }
 
+function mk_enqueue_icon_lib() {
+    $theme_data = wp_get_theme();
+    wp_enqueue_style('mk-icon-libs', THEME_ADMIN_ASSETS_URI . '/css/icon-library.css', false, $theme_data['Version'], 'all');
+    wp_enqueue_script('icon-libs-filter', THEME_ADMIN_ASSETS_URI . '/js/icon-libs-filter.js', array(
+        'jquery',
+    ), $theme_data['Version'], true);
+    wp_enqueue_style('theme-icons', THEME_STYLES . '/theme-font-icons.min.css', false, $theme_data['Version'], 'all');
+}
+
+if (mk_theme_is_icon_library()) {
+    add_action('admin_init', 'mk_enqueue_icon_lib');
+}
+
 function mk_theme_activated(){
 		if ('themes.php' == basename($_SERVER['PHP_SELF']) && isset($_GET['activated']) && $_GET['activated']=='true' ) {
 			update_option( 'woocommerce_enable_lightbox', "no" );
-			wp_redirect( admin_url('admin.php?page=theme_settings') );
+			wp_redirect( admin_url('admin.php?page='.THEME_NAME) );
 		}
 }
 

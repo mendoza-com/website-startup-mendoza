@@ -1,6 +1,6 @@
-	var $ = jQuery;
 
-	$(document).ready(function() {
+
+	jQuery(document).ready(function() {
 
 		mk_social_network_widgets();
 		mk_color_picker();
@@ -11,16 +11,16 @@
 
 	function mk_social_network_widgets() {
 
-		$('.social_icon_select_sites').live('change', function() {
+		jQuery('.social_icon_select_sites').live('change', function() {
 			var wrap = jQuery(this).closest('p').siblings('.social_icon_wrap');
 			wrap.children('p').hide();
-			$('option:selected', this).each(function() {
+			jQuery('option:selected', this).each(function() {
 				wrap.find('.social_icon_' + this.value).show();
 			});
 		});
-		$('.social_icon_custom_count').live('change', function() {
+		jQuery('.social_icon_custom_count').live('change', function() {
 
-			var wrap = $(this).closest('p').siblings('.social_custom_icon_wrap');
+			var wrap = jQuery(this).closest('p').siblings('.social_custom_icon_wrap');
 			wrap.children('div').hide();
 			var count = jQuery(this).val();
 			for (var i = 1; i <= count; i++) {
@@ -87,9 +87,9 @@
 
 	function mk_social_networks_custom_skin() {
 
-			$('.social-network-select-skin').live('change', function() {
-				var $container = $(this).parent('p').siblings('#mk-social-custom-skin');
-				if($(this).val() == 'custom') {
+			jQuery('.social-network-select-skin').live('change', function() {
+				var $container = jQuery(this).parent('p').siblings('#mk-social-custom-skin');
+				if(jQuery(this).val() == 'custom') {
 					$container.show();
 				} else {
 					$container.hide();

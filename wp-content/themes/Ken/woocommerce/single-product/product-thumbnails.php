@@ -4,7 +4,7 @@
  *
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     2.0.3
+ * @version     2.6.3
  *
  * @package This template is overrided by theme
  */

@@ -5,9 +5,9 @@
 */
 class Artbees_Widget_Instagram_Feeds extends WP_Widget {
 
-	function Artbees_Widget_Instagram_Feeds() {
+	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_instagram', 'description' => 'Displays photos from Instagram' );
-		$this->WP_Widget( 'instagram', THEME_SLUG.' - '.'Instagram', $widget_ops );
+		WP_Widget::__construct( 'instagram', THEME_SLUG.' - '.'Instagram', $widget_ops );
 
 	}
 
@@ -114,7 +114,7 @@ class Artbees_Widget_Instagram_Feeds extends WP_Widget {
 		</select>
 		</p>
 
-		<p><em>Don't know your user id or token? <a href="https://instagram.com/oauth/authorize/?client_id=467ede5a6b9b48ae8e03f4e2582aeeb3&redirect_uri=http://instafeedjs.com&response_type=token">Click here</a> to get one.</em></p>
+		<p><em>Don't know your user id or token? <a target="_blank" href="https://instagram.com/oauth/authorize/?client_id=12087cfb5d6b4a639e77bb8438c8e47c&redirect_uri=https://www.artbees.net/instagram-api/&response_type=token">Click here</a> to get one.</em></p>
 
 <?php
 	}

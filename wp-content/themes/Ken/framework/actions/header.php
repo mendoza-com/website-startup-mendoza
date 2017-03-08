@@ -17,6 +17,10 @@ add_action( 'vertical_navigation', 'mk_vertical_navigation' );
 add_action( 'header_search', 'mk_header_search' );
 add_action( 'header_search_form', 'mk_header_search_form' );
 add_action( 'header_social', 'mk_header_social');
+add_action( 'header_toolbar_social', 'mk_header_toolbar_social');
+
+add_action( 'header_toolbar_contact', 'mk_header_toolbar_contact');
+add_action( 'header_toolbar_menu', 'mk_header_toolbar_menu');
 
 
 add_action( 'side_dashboard', 'mk_side_dashboard' );
@@ -143,8 +147,9 @@ if(!function_exists('mk_vertical_navigation')) {
 if ( !function_exists( 'mk_header_search' ) ) {
 	function mk_header_search() {
 		global $mk_settings;
+		$header_location = (isset($mk_settings['header-search-location']) && !empty($mk_settings['header-search-location']) && $mk_settings['header-search-location'] == 'left') ? 'align-left' : '';
 		if($mk_settings['header-search']){
-			echo '<li class="mk-header-search">
+			echo '<li class="mk-header-search '.$header_location.'">
 				<a class="header-search-icon" href="#"><i class="mk-icon-search"></i></a>
 			</li>';	
 		}
@@ -219,10 +224,10 @@ if ( !function_exists( 'mk_dashboard_trigger_link' ) ) {
 	function mk_dashboard_trigger_link() {
 		global $mk_settings;
 
-		if(!isset($mk_settings['side-dashboard-icon']) && empty($mk_settings['side-dashboard-icon'])){
-			$dashboard_icon = 'mk-theme-icon-dashboard2';
-		}else{
+		if(!empty($mk_settings['side-dashboard-icon'])){
 			$dashboard_icon = $mk_settings['side-dashboard-icon'];
+		}else{
+			$dashboard_icon = 'mk-theme-icon-dashboard2';
 		}
 
 		if($mk_settings['header-structure'] == 'vertical') return false;
@@ -263,14 +268,17 @@ if ( !function_exists( 'mk_header_social' ) ) {
 	function mk_header_social($location) {
 		global $mk_settings;
 
-		if($mk_settings['header-social'] != 1) return false;
+		if($mk_settings['header-social-select'] == 'disabled') return false;
+		if($mk_settings['header-social-select'] == 'header_toolbar') return false;
 
 		$output = '';
+
 		if($location == 'outside-grid') {
 			$output .= '<div class="mk-header-social '.$location.'">';
 		} else {
 			$output .= '<li class="mk-header-social '.$location.'">';	
-		}
+		}	
+		
 		
 
 		if(!empty($mk_settings['header-social-facebook'])) {
@@ -302,6 +310,12 @@ if ( !function_exists( 'mk_header_social' ) ) {
 		}
 		if(!empty($mk_settings['header-social-youtube'])) {
 			$output .= '<a target="_blank" href="'.$mk_settings['header-social-youtube'].'"><i class="mk-icon-youtube"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-vimeo'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-vimeo'].'"><i class="mk-theme-icon-social-vimeo"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-spotify'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-spotify'].'"><i class="mk-theme-icon-social-spotify"></i></a>';
 		}
 
 		if(!empty($mk_settings['header-social-weibo'])) {
@@ -411,7 +425,7 @@ if ( !function_exists( 'mk_main_navigation' ) ) {
 
 		if($header_style == 'vertical') return false;
 
-		$output = '<nav id="mk-main-navigation">';
+		$output = '<nav id="mk-main-navigation" '.get_schema_markup('nav').'>';
 
 		$output .= wp_nav_menu( array(
 				'theme_location' => $menu_location,
@@ -447,15 +461,11 @@ if ( !function_exists( 'mk_main_navigation' ) ) {
 ******/
 if ( !function_exists( 'link_to_menu_editor' ) ) {
 	function link_to_menu_editor( $args ) {
-	    if ( ! current_user_can( 'manage_options' ) )
-	    {
-	        return;
-	    }
+		global $mk_settings;
+
 	    extract( $args );
 
-	    $link = $link_before
-	        . '<a href="' .admin_url( 'nav-menus.php' ) . '">' . $before . 'Add a menu' . $after . '</a>'
-	        . $link_after;
+	    $link = '';
 
 	    if ( FALSE !== stripos( $items_wrap, '<ul' )
 	        or FALSE !== stripos( $items_wrap, '<ol' )
@@ -463,6 +473,13 @@ if ( !function_exists( 'link_to_menu_editor' ) ) {
 	    {
 	        $link = "<li class='menu-item'>$link</li>";
 	    }
+
+	    if($mk_settings['side-dashboard']) {
+			ob_start();
+			do_action( 'dashboard_trigger_link' );
+			$link .= ob_get_contents();
+			ob_end_clean();
+		}
 
 	    ob_start();
 		do_action( 'header_logo' );
@@ -593,7 +610,8 @@ if ( !function_exists( 'mk_side_dashboard' ) ) {
 
 	if($mk_settings['side-dashboard'] && $mk_settings['header-structure'] != 'vertical') {
 		$output = '';
-		$output .= '<div class="mk-side-dashboard">';
+		$margin_style = $mk_settings['header-structure'] == 'margin' ? 'header-margin-style' : '';
+		$output .= '<div class="mk-side-dashboard '.$margin_style.'">';
 		//$output .= '<span class="mk-sidedasboard-close"><i class="mk-icon-close"></i></span>';
 		ob_start();
 		dynamic_sidebar('Side Dashboard');
@@ -613,9 +631,128 @@ if ( !function_exists( 'mk_side_dashboard' ) ) {
 
 
 
+/*
+* Header Toolbar Contact
+******/
+if ( !function_exists( 'mk_header_toolbar_contact' ) ) {
+	function mk_header_toolbar_contact() {
+	global $mk_settings;
+
+		if ( !empty( $mk_settings['header-toolbar-phone'] ) ) {
+			echo '<span class="header-toolbar-contact"><i class="'.$mk_settings['header-toolbar-phone-icon'].'"></i>'.stripslashes( $mk_settings['header-toolbar-phone'] ).'</span>';
+		}
+		if ( !empty( $mk_settings['header-toolbar-email'] ) ) {
+			echo '<span class="header-toolbar-contact"><i class="'.$mk_settings['header-toolbar-email-icon'].'"></i><a href="mailto:'.antispambot( $mk_settings['header-toolbar-email'] ).'">'.antispambot( $mk_settings['header-toolbar-email'] ).'</a></span>';
+		}
+
+	}
+}
+/***************************************/
+
+/*
+* Header Toolbar Menu
+******/
+if ( !function_exists( 'mk_header_toolbar_menu' ) ) {
+	function mk_header_toolbar_menu() {
+	global $mk_settings;
+		echo "<div class='toolbar-nav'>";
+		echo wp_nav_menu( array(
+			'container' => false,
+			'menu'	=> ''.$mk_settings['toolbar-custom-menu'].'',
+			'container_id' => false,
+			'container_class' => false,
+			'menu_class' => 'mk-toolbar-menu',
+			'fallback_cb' => '',
+			'walker' => new header_icon_walker()
+		));
+		echo "</div>";
+	}
+}
+/***************************************/
 
 
 
+/*
+* Header Toolbar Social Networks
+******/
+if ( !function_exists( 'mk_header_toolbar_social' ) ) {
+	function mk_header_toolbar_social() {
+		global $mk_settings;
 
+		if($mk_settings['header-social-select'] == 'disabled') return false;
+		if($mk_settings['header-social-select'] == 'header_section') return false;
 
+		$output = '';
 
+		$output .= '<li class="mk-header-toolbar-social">';
+		
+
+		if(!empty($mk_settings['header-social-facebook'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-facebook'].'"><i class="mk-icon-facebook"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-twitter'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-twitter'].'"><i class="mk-icon-twitter"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-google-plus'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-google-plus'].'"><i class="mk-icon-google-plus"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-rss'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-rss'].'"><i class="mk-icon-rss"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-pinterest'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-pinterest'].'"><i class="mk-icon-pinterest"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-instagram'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-instagram'].'"><i class="mk-icon-instagram"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-dribbble'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-dribbble'].'"><i class="mk-icon-dribbble"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-linkedin'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-linkedin'].'"><i class="mk-icon-linkedin"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-tumblr'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-tumblr'].'"><i class="mk-icon-tumblr"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-youtube'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-youtube'].'"><i class="mk-icon-youtube"></i></a>';
+		}
+
+		if(!empty($mk_settings['header-social-vimeo'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-vimeo'].'"><i class="mk-theme-icon-social-vimeo"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-spotify'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-spotify'].'"><i class="mk-theme-icon-social-spotify"></i></a>';
+		}
+
+		if(!empty($mk_settings['header-social-weibo'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-weibo'].'"><i class="mk-theme-icon-weibo"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-wechat'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-wechat'].'"><i class="mk-theme-icon-wechat"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-renren'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-renren'].'"><i class="mk-theme-icon-renren"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-imdb'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-imdb'].'"><i class="mk-theme-icon-imdb"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-vkcom'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-vkcom'].'"><i class="mk-theme-icon-vk"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-qzone'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-qzone'].'"><i class="mk-theme-icon-qzone"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-whatsapp'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-whatsapp'].'"><i class="mk-theme-icon-whatsapp"></i></a>';
+		}
+		if(!empty($mk_settings['header-social-behance'])) {
+			$output .= '<a target="_blank" href="'.$mk_settings['header-social-behance'].'"><i class="mk-theme-icon-behance"></i></a>';
+		}
+
+		$output .= '</li>';
+		
+
+		echo $output;
+	}
+}

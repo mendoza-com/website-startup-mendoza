@@ -1,4 +1,4 @@
-<aside id="mk-sidebar" class="mk-builtin ">
+<aside id="mk-sidebar" class="mk-builtin" <?php echo get_schema_markup('sidebar'); ?>>
     <div class="sidebar-wrapper">
 	    <?php
 	    global $post;

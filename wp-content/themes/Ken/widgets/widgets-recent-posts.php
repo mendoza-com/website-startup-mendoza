@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Recent_Posts extends WP_Widget {
 
-	function Artbees_Widget_Recent_Posts() {
+	function __construct() {
 		$widget_ops = array( "classname" => "widget_posts_lists", "description" => "Displays the Recent posts" );
-		$this-> WP_Widget( "recent_posts", THEME_SLUG . " - Recent Posts", $widget_ops );
+		WP_Widget::__construct( "recent_posts", THEME_SLUG . " - Recent Posts", $widget_ops );
 		$this-> alt_option_name = "widget_recent_posts";
 
 		add_action( "save_post", array( &$this, "flush_widget_cache" ) );

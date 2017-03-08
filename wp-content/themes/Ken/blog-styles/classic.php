@@ -60,8 +60,8 @@ function blog_classic_style($atts)
         case 'gallery':
             $attachment_ids = get_post_meta(get_the_id(), '_gallery_images', true);
             $output .= '<div class="blog-gallery-type">';
-            $output .= do_shortcode('[mk_image_slideshow images="' . $attachment_ids . '" margin_bottom="0" image_width="' . $image_width . '" image_height="' . $image_height . '" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="false" direction_nav="true"]');
-            $output .= '</div>';
+            $output .= do_shortcode('[mk_image_slideshow images="' . $attachment_ids . '" direction="horizontal" margin_bottom="0" image_width="' . $image_width . '" image_height="' . $image_height . '" effect="slide" animation_speed="700" slideshow_speed="7000" pause_on_hover="false" direction_nav="true"]');
+            $output .= '<div class="clearboth"></div></div>';
 
             break;
         /***********/
@@ -141,7 +141,7 @@ function blog_classic_style($atts)
 
     /* Blog Heading */
     $output .= '<div class="blog-entry-heading">';
-    $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+    $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
 
     ob_start();
     comments_number(__('0', 'mk_framework'), __('1', 'mk_framework'), __('%', 'mk_framework'));
@@ -176,7 +176,7 @@ function blog_classic_style($atts)
     if ($classic_excerpt == 'excerpt') {
         if($excerpt_length != 0) {
             ob_start();
-            the_excerpt_max_charlength($excerpt_length);
+            mk_excerpt_max_charlength($excerpt_length);
             $output .= '<div class="blog-excerpt">' . ob_get_clean() . '</div>';
         }
 

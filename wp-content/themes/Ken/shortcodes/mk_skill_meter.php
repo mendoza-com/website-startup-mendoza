@@ -4,9 +4,9 @@ global $mk_accent_color;
 
 extract( shortcode_atts( array(
 			'title' => '',
-			'title_color' => '',
+			'title_color' => '#777',
 			'progress_bar_color' => $mk_accent_color,
-			'track_bar_color' => '',
+			'track_bar_color' => '#eee',
 			'percent' => 50,
 			'height' => '17',
 			'el_class' => '',

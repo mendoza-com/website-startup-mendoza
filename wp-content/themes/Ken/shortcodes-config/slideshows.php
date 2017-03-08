@@ -126,7 +126,7 @@ vc_map(array(
     "base" => "mk_image_slideshow",
     'icon' => 'icon-mk-image-slideshow vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Simple image slideshow.', 'js_composer' ),
+    'description' => __( 'Simple image slideshow.', 'mk_framework' ),
     "params" => array(
 
         array(
@@ -248,7 +248,7 @@ vc_map( array(
         "base"      => "mk_tablet_slideshow",
         'icon' => 'icon-mk-image-slideshow vc_mk_element-icon',
         "category" => __('Slideshows', 'mk_framework'),
-        'description' => __( 'Slideshow inside a tablet.', 'js_composer' ),
+        'description' => __( 'Slideshow inside a tablet.', 'mk_framework' ),
         "params"    => array(
             array(
                 "heading" => __( "Tablet Color", 'mk_framework' ),
@@ -323,7 +323,7 @@ vc_map( array(
         "base"      => "mk_mobile_slideshow",
         'icon' => 'icon-mk-image-slideshow vc_mk_element-icon',
         "category" => __('Slideshows', 'mk_framework'),
-        'description' => __( 'Slideshow inside a mobile.', 'js_composer' ),
+        'description' => __( 'Slideshow inside a mobile.', 'mk_framework' ),
         "params"    => array(
             array(
                 "heading" => __( "Orientation", 'mk_framework' ),
@@ -337,11 +337,11 @@ vc_map( array(
             ),
 
             array(
-                "heading" => __( "Tablet Color", 'mk_framework' ),
+                "heading" => __( "Mobile Color", 'mk_framework' ),
                 "description" => __( "", 'mk_framework' ),
                 "param_name" => "mobile_color",
                 "value" => array(
-                    __( "Balck", 'mk_framework' )  =>  "black",
+                    __( "Black", 'mk_framework' )  =>  "black",
                     __( "White", 'mk_framework' ) =>  "white",
                 ),
                 "type" => "dropdown"
@@ -409,7 +409,7 @@ vc_map(array(
     "base" => "mk_edge_slider",
     'icon' => 'icon-mk-edge-slider vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Powerful Edge Slider.', 'js_composer' ),
+    'description' => __( 'Powerful Edge Slider.', 'mk_framework' ),
     "params" => array(
         array(
             "type" => "toggle",
@@ -432,8 +432,8 @@ vc_map(array(
             "description" => __("Designates the ascending or descending order of the 'orderby' parameter.", 'mk_framework'),
             "param_name" => "order",
             "value" => array(
+                __("DESC (descending order)", 'mk_framework') => "DESC",
                 __("ASC (ascending order)", 'mk_framework') => "ASC",
-                __("DESC (descending order)", 'mk_framework') => "DESC"
             ),
             "type" => "dropdown"
         ),
@@ -464,7 +464,7 @@ vc_map(array(
         ),
         array(
             "heading" => __("Animation Effect", 'mk_framework'),
-            "description" => __("", 'mk_framework'),
+            "description" => __("Note that Horizontal Curtain is reverted to Slide effect for Internet Explorer.", 'mk_framework'),
             "param_name" => "animation_effect",
             "value" => array(
                 __("Slide", 'mk_framework') => "slide",
@@ -500,13 +500,6 @@ vc_map(array(
             "description" => __("How long each slide will show.", "mk_framework")
         ),
 
-        // array(
-        //     "type" => "toggle",
-        //     "heading" => __("Direction Nav", "mk_framework"),
-        //     "param_name" => "direction_nav",
-        //     "value" => "true",
-        //     "description" => __("", "mk_framework")
-        // ),
 
         array(
             "type" => "dropdown",
@@ -515,19 +508,12 @@ vc_map(array(
             "width" => 300,
             "value" => array(
                 __('Classic', "mk_framework") => "classic",
-                // __('Classic Retouched', "mk_framework") => "classic_retouched",
                 __('Bar', "mk_framework") => "bar",
                 __('Round', "mk_framework") => "round",
                 __('Flip', "mk_framework") => "flip",
                 __('-- No Pagination', "mk_framework") => "false"
             ),
             "description" => __("", "mk_framework"),
-            // "dependency" => array(
-            //     "element" => "direction_nav",
-            //     "value" => array(
-            //         "true"
-            //     )
-            // )
         ),
 
         array(
@@ -560,14 +546,6 @@ vc_map(array(
             "description" => __("", "mk_framework")
         ),
         array(
-            "type" => "toggle",
-            "heading" => __("Hash Navigation?", "mk_framework"),
-            "param_name" => "edge_slider_hash",
-            "value" => "false",
-            "description" => __("", "mk_framework")
-        ),
-
-        array(
             "type" => "textfield",
             "heading" => __("Extra class name", "mk_framework"),
             "param_name" => "el_class",
@@ -584,7 +562,7 @@ vc_map(array(
     "base" => "mk_tab_slider",
     'icon' => 'icon-mk-edge-slider vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Powerful Tab Slider.', 'js_composer' ),
+    'description' => __( 'Powerful Tab Slider.', 'mk_framework' ),
     "params" => array(
         array(
             "type" => "multiselect",
@@ -599,8 +577,8 @@ vc_map(array(
             "description" => __("Designates the ascending or descending order of the 'orderby' parameter.", 'mk_framework'),
             "param_name" => "order",
             "value" => array(
+                __("DESC (descending order)", 'mk_framework') => "DESC",
                 __("ASC (ascending order)", 'mk_framework') => "ASC",
-                __("DESC (descending order)", 'mk_framework') => "DESC"
             ),
             "type" => "dropdown"
         ),
@@ -657,7 +635,7 @@ vc_map(array(
     "base" => "mk_edge_one_pager",
     'icon' => 'icon-mk-edge-one-pager vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Converts Edge Slider to vertical scroll.', 'js_composer' ),
+    'description' => __( 'Converts Edge Slider to vertical scroll.', 'mk_framework' ),
     "params" => array(
         array(
             "type" => "multiselect",
@@ -673,8 +651,8 @@ vc_map(array(
             "description" => __("Designates the ascending or descending order of the 'orderby' parameter.", 'mk_framework'),
             "param_name" => "order",
             "value" => array(
+                __("DESC (descending order)", 'mk_framework') => "DESC",
                 __("ASC (ascending order)", 'mk_framework') => "ASC",
-                __("DESC (descending order)", 'mk_framework') => "DESC"
             ),
             "type" => "dropdown"
         ),
@@ -692,6 +670,28 @@ vc_map(array(
             "value" => "true",
             "description" => __("", "mk_framework")
         ),
+        
+        array(
+            "type" => "dropdown",
+            "heading" => __("Pagination Style", "mk_framework"),
+            "param_name" => "pagination",
+            "width" => 300,
+            "value" => array(
+                __('Square', "mk_framework") => "square",
+                __('Small Stroke', "mk_framework") => "small_stroke",
+                __('Rounded Underline', "mk_framework") => "rounded",
+                __('Underline', "mk_framework") => "underline",
+
+            ),
+            "dependency" => array(
+                "element" => "navigation",
+                "value" => array(
+                    "true"
+                )
+            ),
+            "description" => __("", "mk_framework")
+        ),
+
         array(
             "type" => "textfield",
             "heading" => __("Extra class name", "mk_framework"),
@@ -709,7 +709,7 @@ vc_map(array(
     "content_element" => true,
     'icon' => 'icon-mk-image-slideshow vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Swiper enabled content slideshow.', 'js_composer' ),
+    'description' => __( 'Swiper enabled content slideshow.', 'mk_framework' ),
     "params" => array(
         array(
             "type" => "colorpicker",
@@ -807,6 +807,17 @@ vc_map(array(
             "unit" => 'ms',
             "description" => __("", "mk_framework")
         ),
+        array(
+            "type" => "range",
+            "heading" => __("Padding", "mk_framework"),
+            "param_name" => "padding",
+            "value" => "0",
+            "min" => "0",
+            "max" => "200",
+            "step" => "1",
+            "unit" => 'px',
+            "description" => __("", "mk_framework")
+        ),
 
         array(
             "type" => "toggle",
@@ -852,7 +863,7 @@ vc_map(array(
     "base" => "mk_testimonials",
     'icon' => 'icon-mk-testimonial-slideshow vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Shows Testimonials in multiple styles.', 'js_composer' ),
+    'description' => __( 'Shows Testimonials in multiple styles.', 'mk_framework' ),
     "params" => array(
 
 
@@ -1009,7 +1020,7 @@ vc_map(array(
     "base" => "mk_window_scroller",
     'icon' => 'icon-mk-image-slideshow vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( 'Vertical widnow scroll in a frame.', 'js_composer' ),
+    'description' => __( 'Vertical widnow scroll in a frame.', 'mk_framework' ),
     "params" => array(
         array(
             "type" => "upload",
@@ -1082,7 +1093,7 @@ vc_map(array(
     "base" => "mk_theatre_slider",
     'icon' => 'vc_mk_element-icon',
     "category" => __('Slideshows', 'mk_framework'),
-    'description' => __( '', 'js_composer' ),
+    'description' => __( '', 'mk_framework' ),
     "params" => array(
         array(
             "heading" => __("Background Style", 'mk_framework'),
@@ -1200,6 +1211,13 @@ vc_map(array(
             "type" => "toggle",
             "heading" => __("Autoplay?", "mk_framework"),
             "param_name" => "autoplay",
+            "value" => "false",
+            "description" => __("", "mk_framework"),
+        ),
+        array(
+            "type" => "toggle",
+            "heading" => __("Loop?", "mk_framework"),
+            "param_name" => "loop",
             "value" => "false",
             "description" => __("", "mk_framework"),
         ),

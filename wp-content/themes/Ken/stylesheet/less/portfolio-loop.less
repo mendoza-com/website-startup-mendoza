@@ -19,7 +19,7 @@
 		color: #fff;
 		font-size: 23px;
 		display: block;
-		line-height: initial;
+		line-height: 1.2;
 		text-transform: uppercase;
 		a{
 			color: #fff;
@@ -740,11 +740,9 @@
 			width: 100%;
 		}
 	}
-	@media handheld, only screen and (max-width:600px) {
-		width: 100% !important;
-	}
 
-	/*&.regular-entry, &.tall-entry {
+
+	&.regular-entry, &.tall-entry {
 		width: 24.9%;
 	}
 	&.wide-entry, &.wide-tall-entry {
@@ -765,7 +763,7 @@
 	}
 	@media handheld, only screen and (max-width:767px) {
 		width: 100% !important;
-	}*/
+	}
 	.featured-image {
 		line-height: 4px;
 		position: relative;
@@ -897,6 +895,13 @@
 			border-right: none;
 			width: 32px;
 		}
+		&.next-ajax, &.prev-ajax {
+			&:hover{
+				background-color: transparent;
+				border-color: #eee; 
+				color: #333; 
+			}
+		}
 		&:hover {
 			background-color: #909090;
 			color: #fff;
@@ -961,32 +966,39 @@
 .flip-portfolio-item {
 	margin: 0;
 	padding: 0;
-	opacity: 0;
-	.perspective(800px);
-	.backface-visibility();
-	.transform(translate3d(0, 0, 0));
-	&:hover .flip-wrapper {
-		.transform(translateY( 0% ) rotateX(180deg));
+	.perspective(1000px);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	&:hover {
+		figure.back{
+			.rotateX(0deg);
+		}
+		figure.front{
+		    .rotateX(-180deg);
+		}
 	}
 	.flip-wrapper {
+		.transition(all 0.5s ease-in-out);
+		.perspective(1000px);
 		-webkit-transform-style: preserve-3d;
 		-moz-transform-style: preserve-3d;
+		-ms-transform-style: preserve-3d;
 		transform-style: preserve-3d;
-		.transition(all 0.3s ease-out);
 		position: relative;
-		-webkit-transform-origin: right center;
-		-moz-transform-origin: right center;
-		-o-transform-origin: right center;
-		transform-origin: right center;
+		
 		width: 100%;
 		height: 100%;
 	}
 	figure {
-		.backface-visibility();
 		display: block;
 		line-height: 4px;
 		height: 100%;
 		width: 100%;
+		.perspective(1000px);
+		.backface-visibility();
+		.transition(all 0.5s ease-in-out);
 		img {
 			width: 100%;
 		}
@@ -994,11 +1006,12 @@
 	figure.front {
 		position: absolute;
 		z-index: 2;
-		.transform(rotateX(0deg));
+		.rotateX(0deg);
 	}
 	figure.back {
+		position: relative;
 		z-index: 1;
-		.transform(rotateX(-180deg));
+		.rotateX(180deg);
 	}
 	.flip-overlay {
 		.opacity(60);
@@ -1012,9 +1025,8 @@
 		z-index: 10;
 	}
 	.portfolio-meta {
-		position: absolute;
-		z-index: 10;
-		top: 50%;
+		.backface-visibility();
+
 		//left:0;
 		text-align: center;
 		opacity: 1;
@@ -1022,6 +1034,7 @@
 	.the-title {
 		font-size: 25px;
 		font-weight: 300;
+		.backface-visibility();
 		color: #fff;
 		line-height: 28px;
 		margin-bottom: 10px;
@@ -1033,6 +1046,7 @@
 		font-size: 12px;
 		line-height: 12px;
 		display: inline-block;
+		.backface-visibility();
 		color: #fff;
 	}
 	&.portfolio-four-column, &.portfolio-five-column {

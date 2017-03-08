@@ -83,19 +83,19 @@ if( !class_exists( 'ReduxFramework_nav_color' ) ) {
         public function render() {
 
             if ( $this->field['regular'] === true && $this->field['default']['regular'] !== false ):
-                echo '<span class="linkColor"><strong>' . __( 'Regular', 'redux-framework' ) . '</strong><input id="' . $this->field['id'] . '-regular" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][regular]" value="'.$this->value['regular'].'" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['regular'] . '" /></span><br>';
+                echo '<span class="linkColor"><strong>' . __( 'Regular', 'mk_framework' ) . '</strong><input id="' . $this->field['id'] . '-regular" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][regular]" value="'.$this->value['regular'].'" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['regular'] . '" /></span><br>';
             endif;
 
             if ( $this->field['hover'] === true && $this->field['default']['hover'] !== false ):
-                echo '<span class="linkColor"><strong>' . __( 'Hover', 'redux-framework' ) . '</strong><input id="' . $this->field['id'] . '-hover" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][hover]" value="' . $this->value['hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['hover'] . '" /></span><br>';
+                echo '<span class="linkColor"><strong>' . __( 'Hover', 'mk_framework' ) . '</strong><input id="' . $this->field['id'] . '-hover" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][hover]" value="' . $this->value['hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['hover'] . '" /></span><br>';
             endif;
 
             if ( $this->field['bg'] === true && $this->field['default']['bg'] !== false ):
-                echo '<span class="linkColor"><strong>' . __( 'Background Color', 'redux-framework' ) . '</strong><input id="' . $this->field['id'] . '-bg" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][bg]" value="' . $this->value['bg'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['bg'] . '" /></span><br>';
+                echo '<span class="linkColor"><strong>' . __( 'Background Color', 'mk_framework' ) . '</strong><input id="' . $this->field['id'] . '-bg" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][bg]" value="' . $this->value['bg'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['bg'] . '" /></span><br>';
             endif;            
 
             if ( $this->field['bg-hover'] === true && $this->field['default']['bg-hover'] !== false ):
-                echo '<span class="linkColor"><strong>' . __( 'Hover Background Color', 'redux-framework' ) . '</strong><input id="' . $this->field['id'] . '-bg-hover" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][bg-hover]" value="' . $this->value['bg-hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['bg-hover'] . '" /></span>';
+                echo '<span class="linkColor"><strong>' . __( 'Hover Background Color', 'mk_framework' ) . '</strong><input id="' . $this->field['id'] . '-bg-hover" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][bg-hover]" value="' . $this->value['bg-hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['bg-hover'] . '" /></span>';
             endif;
         
         }

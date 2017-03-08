@@ -14,7 +14,7 @@ function register_portfolio_post_type(){
 		'labels' => array(
 			'name' => __('Portfolios', 'mk_framework' ),
 			'singular_name' => __('Portfolio', 'mk_framework' ),
-			'add_new' => __('Add New', 'portfolio', 'mk_framework' ),
+			'add_new' => __('Add New', 'mk_framework' ),
 			'add_new_item' => __('Add New Portfolio', 'mk_framework' ),
 			'edit_item' => __('Edit Portfolio', 'mk_framework' ),
 			'new_item' => __('New Portfolio', 'mk_framework' ),

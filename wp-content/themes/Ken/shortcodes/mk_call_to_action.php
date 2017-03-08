@@ -4,21 +4,21 @@ $el_class = $width = $el_position = '';
 
 extract( shortcode_atts( array(
 			'el_class' => '',
-			'box_border_width' => '',
-			'button_border_width' => '',
+			'box_border_width' => 2,
+			'button_border_width' => 2,
 			'text' => '',
 			'button_style' => 'outline',
 			'button_text' => '',
 			'button_url' => '',
-			'outline_hover_skin' => '',
-			'outline_skin' => '',
-			'style' => '',
+			'outline_hover_skin' => '#fff',
+			'outline_skin' => '#444',
+			'style' => 'default',
 			'layout_style' => 'expended',
 			'bg_color' => '',
 			'border_color' => '',
-			'text_size' => 22,
+			'text_size' => 18,
 			'font_weight' => 'inherit',
-			'text_transform' => 'normal',
+			'text_transform' => '',
 			'text_color' => '',
 		), $atts ) );
 
@@ -44,9 +44,9 @@ if($layout_style == 'expended'){
 		$output .= do_shortcode( '[mk_button style="'.$button_style.'" outline_border_width="'.$button_border_width.'" size="medium" target="_self" align="right" margin_bottom="0" outline_skin="'.$outline_skin.'" outline_hover_skin="'.$outline_hover_skin.'" url="'.$button_url.'"]'.$button_text.'[/mk_button]' );
 	}
 
-	$output .= '<div class="callout-desc"><span class="callout-desc-holder">';
+	$output .= '<div class="callout-desc"><div class="callout-desc-holder">';
 	$output .= '<h4'.$custom_box_title_css.' class="callout-title">'.$text.'</h4><div class="clearboth"></div>';
-	$output .='</span></div>';
+	$output .='</div></div>';
 
 	$output .= '</div><div class="clearboth"></div></div>';
 }else{

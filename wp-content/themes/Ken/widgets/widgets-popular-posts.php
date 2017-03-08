@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Popular_Posts extends WP_Widget {
 
-	function Artbees_Widget_Popular_Posts() {
+	function __construct() {
 		$widget_ops = array( "classname" => "widget_posts_lists", "description" => "Displays the Popular posts" );
-		$this-> WP_Widget( "popular_posts", THEME_SLUG . " - Popular Posts", $widget_ops );
+		WP_Widget::__construct( "popular_posts", THEME_SLUG . " - Popular Posts", $widget_ops );
 		$this-> alt_option_name = "widget_popular_posts";
 
 		add_action( "save_post", array( &$this, "flush_widget_cache" ) );

@@ -13,7 +13,8 @@ if(empty($layout)) {
 $padding = ($padding == 'true') ? 'no-padding' : '';
 
 get_header(); ?>
-<div id="theme-page">
+<div id="theme-page" class="page-master-holder" <?php echo get_schema_markup('main'); ?>>
+  	<div class="background-img background-img--page"></div>
 	<div class="mk-main-wrapper-holder">
 		<div class="theme-page-wrapper mk-main-wrapper <?php echo $layout; ?>-layout <?php echo $padding; ?> mk-grid vc_row-fluid">
 			<div class="theme-content <?php echo $padding; ?>" itemprop="mainContentOfPage">

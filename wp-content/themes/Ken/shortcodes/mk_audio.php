@@ -9,7 +9,7 @@ extract( shortcode_atts( array(
         ), $atts ) );
 wp_enqueue_script( 'jquery-jplayer' );
 $output = '';
-$audio_id = uniqid();
+$audio_id = Mk_Static_Files::shortcode_id();
 $title_exists = !empty($file_title) ? 'add-baloon' : '';
 $output .= '<div class="mk-audio small-version-'.$small_version.' '.$title_exists.' '.$el_class.'">';
 if ( $file_title ) {

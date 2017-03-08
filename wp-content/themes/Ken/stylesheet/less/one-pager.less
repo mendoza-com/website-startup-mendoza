@@ -11,6 +11,25 @@
 			.edge-slide-content {
 				margin-top: 100px;
 			}
+			
+			// Need to align items for js calculations of content height. Isotope stuff will carry placing it later
+			.mk-isotop-item {
+				float: left;
+			}
+
+			// .scrollable {
+			// 	position: absolute;
+			// 	width: 100%;
+			// 	height: 100%;
+			//     overflow: scroll;
+			//     -webkit-overflow-scrolling: touch;
+			//     overflow-scrolling: touch;
+			//     .mk-grid {
+			// 	    padding-bottom: 150px;
+			// 	}
+			// 	z-index: 100;
+			// }
+
 			&.left_top .edge-slide-content,
 			&.center_top .edge-slide-content,
 			&.right_top .edge-slide-content {
@@ -318,9 +337,21 @@ html, body {
 }
 #fullPage-nav.right {
     right: 17px;
+    -webkit-transform: translateX(50%) rotate(90deg);
+	-moz-transform: translateX(50%) rotate(90deg);
+	-ms-transform: translateX(50%) rotate(90deg);
+	-o-transform: translateX(50%) rotate(90deg);
+	transform: translateX(50%) rotate(90deg);
+    .transform-origin(50%, 50%);
 }
 #fullPage-nav.left {
     left: 17px;
+    -webkit-transform: translateX(-50%) rotate(90deg);
+	-moz-transform: translateX(-50%) rotate(90deg);
+	-ms-transform: translateX(-50%) rotate(90deg);
+	-o-transform: translateX(-50%) rotate(90deg);
+	transform: translateX(-50%) rotate(90deg);
+    .transform-origin(50%, 50%);
 }
 .fullPage-slidesNav {
     position: absolute;
@@ -339,7 +370,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
-#fullPage-nav li,
+// #fullPage-nav li,
 .fullPage-slidesNav li {
     display: block;
     width: 14px;
@@ -350,7 +381,7 @@ html, body {
 .fullPage-slidesNav li {
     display: inline-block;
 }
-#fullPage-nav li a,
+// #fullPage-nav li a,
 .fullPage-slidesNav li a {
     display: block;
     position: relative;
@@ -360,15 +391,15 @@ html, body {
     cursor: pointer;
     text-decoration: none;
 }
-#fullPage-nav.light-skin li .active span,
+// #fullPage-nav.light-skin li .active span,
 .fullPage-slidesNav.light-skin .active span {
     background: #fff;
 }
-#fullPage-nav.dark-skin li .active span,
+// #fullPage-nav.dark-skin li .active span,
 .fullPage-slidesNav.dark-skin .active span {
     background: #444;
 }
-#fullPage-nav span,
+// #fullPage-nav span,
 .fullPage-slidesNav span {
     top: 2px;
     left: 2px;
@@ -378,11 +409,11 @@ html, body {
     position: absolute;
     z-index: 1;
 }
-#fullPage-nav.light-skin span,
+// #fullPage-nav.light-skin span,
 .fullPage-slidesNav.light-skin span {
 	border:1px solid #fff; 
 }
-#fullPage-nav.dark-skin span,
+// #fullPage-nav.dark-skin span,
 .fullPage-slidesNav.dark-skin span {
 	border:1px solid #444; 
 }

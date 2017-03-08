@@ -11,7 +11,8 @@ if(empty($layout)) {
 
 
 get_header(); ?>
-<div id="theme-page">
+<div id="theme-page" class="page-master-holder">
+  	<div class="background-img background-img--page"></div>
 	<div class="mk-main-wrapper-holder">
 		<div class="theme-page-wrapper mk-main-wrapper <?php echo $layout; ?>-layout mk-grid vc_row-fluid">
 			<div class="theme-content" itemprop="mainContentOfPage">

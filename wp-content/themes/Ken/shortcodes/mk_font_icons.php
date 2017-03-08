@@ -1,6 +1,6 @@
 <?php
 extract( shortcode_atts( array(
-			'size' => 'medium',
+			'size' => 'small',
 			'style' => 'default',
 			'icon' => '',
 			'color' => '',
@@ -11,23 +11,23 @@ extract( shortcode_atts( array(
 			'border_hover_color' => '',
 			'padding_horizental' => 4,
 			'padding_vertical' => 4,
-			'align' => '',
+			'align' => 'none',
 			'animation' => '',
 			'infinite_animation' => '',
 			'link' => '',
-			'remove_frame' => '',
-			'border_width' => '',
+			'remove_frame' => 'false',
+			'border_width' => 2,
 			'el_class' => '',
 		), $atts ) );
 
 global $mk_accent_color;
 
-$icon_css = $style_css = '';
+$icon_css = '';
 
 
 $infinite_animation = !empty($infinite_animation) ? (' mk-'.$infinite_animation) : '';
 $animation_css = ($animation != '') ? ' mk-animate-element ' . $animation . ' ' : '';
-$style_id = uniqid();
+$style_id = Mk_Static_Files::shortcode_id();
 
 if(!empty( $icon )) {
     $icon = (strpos($icon, 'mk-') !== FALSE) ? ( $icon ) : ( 'mk-'.$icon );
@@ -35,23 +35,27 @@ if(!empty( $icon )) {
     $icon = '';
 }
 
-$style_css .= '<style type="text/css">';
 
 if ( $style == 'default' ) {
-    $style_css .= '
+
+    Mk_Static_Files::addCSS('
         #icon-font-'.$style_id.' i{
             color:'.$mk_accent_color.';
         }
-        ';
+    ', $style_id);
+
 }else if($style == 'filled'){
-	$style_css .= '
+
+	Mk_Static_Files::addCSS('
         #icon-font-'.$style_id.' i{
             background-color:'.$mk_accent_color.';
             color:'.$color.';
         }
-        ';
+    ', $style_id);
+
 }else if($style == 'custom'){
-	$style_css .= '
+
+	Mk_Static_Files::addCSS('
         #icon-font-'.$style_id.' i {
             background-color:'.$bg_color.';
             color:'.$color.';
@@ -62,9 +66,9 @@ if ( $style == 'default' ) {
             color:'.$hover_color.';
             border-color:'.$border_hover_color.';
         }
-        ';
+    ', $style_id);
+    
 }
-$style_css .= '</style>';
 
 	$remove_frame_css = ($remove_frame == 'true') ? ' remove-frame' : '';
 
@@ -79,6 +83,6 @@ if ( $link ) {
 	$output .= '</a>';
 }
 $output .= '</span>';
-$output .= $style_css;
 
 echo $output;
+

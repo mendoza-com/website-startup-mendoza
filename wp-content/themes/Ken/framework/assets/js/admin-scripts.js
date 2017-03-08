@@ -403,10 +403,32 @@ jQuery(document).ready(function() {
 
     mk_post_types();
 
-    /* 
-**
-General Background Selector
--------------------------------------------------------------*/
+    /*** Breadcrumb skin selector
+    -------------------------------------------------------------*/
+    function custom_breadcrumb(){
+        var $breadcrumbID = jQuery('#_breadcrumb_skin');
+        if ($breadcrumbID.val() != 'custom') {
+            jQuery('#_breadcrumb_custom_color_wrapper').hide();
+            jQuery('#_breadcrumb_custom_hover_color_wrapper').hide(); 
+        } else {
+            jQuery('#_breadcrumb_custom_color_wrapper').show();
+            jQuery('#_breadcrumb_custom_hover_color_wrapper').show();
+        }
+        $breadcrumbID.change(function() {
+            if ($breadcrumbID.val() != 'custom') {
+                jQuery('#_breadcrumb_custom_color_wrapper').hide();
+                jQuery('#_breadcrumb_custom_hover_color_wrapper').hide(); 
+            } else {
+                jQuery('#_breadcrumb_custom_color_wrapper').show();
+                jQuery('#_breadcrumb_custom_hover_color_wrapper').show();
+            }
+        });
+    }
+
+    custom_breadcrumb();
+
+    /***General Background Selector
+    -------------------------------------------------------------*/
 
     mk_background_orientation = jQuery('#background_selector_orientation').val();
 

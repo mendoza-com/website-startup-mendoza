@@ -46,6 +46,14 @@ $options = array(
         "type" => "toggle"
     ),
     array(
+        "name" => __("Header Toolbar?", "mk_framework"),
+        "subtitle" => __("", "mk_framework"),
+        "desc" => __("", "mk_framework"),
+        "id" => "_header_toolbar",
+        "default" => 'true',
+        "type" => "toggle"
+    ),
+    array(
         "name" => __("Breadcrumb", "mk_framework"),
         "subtitle" => __("If you dont want to show breadcrumb disable this option.", "mk_framework"),
         "desc" => __("Breadcrumb is useful for SEO purposes and helps your site visitors to know where exactly they are relative to your sitemap from homepage. So its also good for UX.", "mk_framework"),

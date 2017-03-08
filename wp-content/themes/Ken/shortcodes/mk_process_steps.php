@@ -1,8 +1,8 @@
 <?php
-$title = $el_class = $output = $list_items = $style_css = '';
+$title = $el_class = $output = $list_items = '';
 
 extract(shortcode_atts(array(
-	'orientation' => '',
+	'orientation' => 'vertical',
 	'skin' => 'dark',
 	'background_color' => '#fff',
 	'border_color' => '',
@@ -13,15 +13,16 @@ extract(shortcode_atts(array(
 	'el_class' => '',
 ), $atts));
 
-$id = uniqid();
+$id = Mk_Static_Files::shortcode_id();
 
 
 /* style init */
 /* -------------------------------------------------------------------- */
-$style_css .= '<style type="text/css">';
+
 
 if ( $skin == 'custom' ) {
-    $style_css .= '
+
+    Mk_Static_Files::addCSS('
     	#mk-process-steps-'.$id.'.custom-skin .step-items:before{
     		border-color: '.$border_color.';
 		}
@@ -33,26 +34,29 @@ if ( $skin == 'custom' ) {
         #mk-process-steps-'.$id.'.custom-skin .step-icon:hover {
             background-color:'.$icon_color.' !important;
             color:'.$icon_hover_color.' !important;
-        }';
+        }', $id);
+
 	if ($orientation == 'vertical'){
-		$style_css .= '
+
+		Mk_Static_Files::addCSS('
 			#mk-process-steps-'.$id.'.custom-skin .step-holder, #mk-process-steps-'.$id.'.custom-skin .step-holder:before {
 	            border-color: '.$border_color.' !important;
 	            background-color:'.$background_color.' !important; 
 	        }
-	    ';
+	    ', $id);
+
 	}
-	$style_css .= '
+
+	Mk_Static_Files::addCSS('
         #mk-process-steps-'.$id.'.custom-skin .step-holder .step-title{
             color:'.$title_color.' !important;
         }
         #mk-process-steps-'.$id.'.custom-skin .step-holder .step-desc{
             color:'.$description_color.' !important;
         }
-    ';
-}
+    ', $id);
 
-$style_css .= '</style>';
+}
 
 /* html output */
 /* -------------------------------------------------------------------- */
@@ -79,7 +83,10 @@ if ($orientation == 'vertical') {
 				$icon = '';
 			}
 
-			$list_items .= '<li><span data-id="' . $matches[3][$i]['tab_id'] . '"><i class="step-icon ' . $icon . '"></i></span></li>';
+			$title = isset($matches[3][$i]['title']) ? $matches[3][$i]['title'] : '';
+			$tab_id = hash('adler32', $title . $icon);
+
+			$list_items .= '<li><span data-id="' . $tab_id . '"><i class="step-icon ' . $icon . '"></i></span></li>';
 		}
 	}
 
@@ -87,9 +94,12 @@ if ($orientation == 'vertical') {
 
 	$output .= '<ul class="step-items">' . $list_items . '</ul>';
 
+	$output .= '<div class="step-panes-responsive">' . wpb_js_remove_wpautop($content, true) . '</div>';
+
 }
 
 $output .= '</div>';
-$output .= $style_css;
 
 echo $output;
+
+

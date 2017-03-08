@@ -16,6 +16,9 @@ if ( !mk_woocommerce_enabled() ) { return false; }
 
 
 
+
+require_once (THEME_INCLUDES . "/woocommerce-quantity-increment/woocommerce-quantity-increment.php");
+
 /*
 * Declares support to woocommerce
 */
@@ -104,7 +107,6 @@ add_action('page_add_before_content', 'mk_woocommerce_cart_process_steps');
 remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
-remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 remove_action( 'woocommerce_pagination', 'woocommerce_catalog_ordering', 20 );
 remove_action( 'woocommerce_pagination', 'woocommerce_pagination', 10 );
@@ -156,7 +158,10 @@ function mk_woocommerce_output_content_wrapper() {
 
 
 ?>
-<div id="theme-page">
+<div id="theme-page" class="page-master-holder" <?php echo get_schema_markup('main'); ?>>
+
+  	<div class="background-img background-img--page"></div>
+  	
 	<div class="mk-main-wrapper-holder">
 		<div class="theme-page-wrapper mk-main-wrapper <?php echo $layout; ?>-layout mk-grid vc_row-fluid">
 			<div class="theme-content">
@@ -296,7 +301,7 @@ function mk_header_checkout($location) {
 
 	global $woocommerce, $mk_settings;
 
-	if ( !$woocommerce || is_cart() || is_checkout() ) { return false; }
+	if ( !$woocommerce) { return false; }
 
 		if($mk_settings['checkout-box']) :
 
@@ -322,6 +327,24 @@ function mk_header_checkout($location) {
 
 
 </li>
+<li class="mk-responsive-shopping-cart">
+
+	
+	<a href="<?php echo esc_url( WC()->cart->get_checkout_url() ); ?>" class="mk-responsive-cart-link">
+		<i class="mk-theme-icon-cart2"></i><span><?php echo WC()->cart->cart_contents_count; ?></span> 
+	</a>
+
+	
+	<?php /* Shopping Box, the content will be updated via ajax, you can edit @mk_header_add_to_cart_fragment() */ ?>
+	<div class="mk-shopping-box">
+		<div class="shopping-box-header"><span><span class="mk-skin-color"><i class="mk-theme-icon-cart2"></i><?php echo WC()->cart->cart_contents_count; ?> <?php _e('Items', 'mk_framework'); ?></span> <?php _e('In your Shopping Bag', 'mk_framework'); ?></span></div>
+			<?php if (WC()->cart->cart_contents_count == 0) {
+				echo '<p class="empty">'.__('No products in the cart.','mk_framework').'</p>';
+			?>
+			<?php } ?>
+	</div>
+	<?php /***********/ ?>
+</li>
 		<?php 
 		endif;	
 	}
@@ -334,5 +357,57 @@ add_action( 'header_checkout', 'mk_header_checkout' );
 
 
 
+remove_action( 'woocommerce_proceed_to_checkout', 'woocommerce_button_proceed_to_checkout', 20 );
+
+add_action( 'woocommerce_proceed_to_checkout', 'mk_woocommerce_button_proceed_to_checkout', 20 );
+
+if ( ! function_exists( 'mk_woocommerce_button_proceed_to_checkout' ) ) {
+
+	/**
+	 * Output the proceed to checkout button.
+	 *
+	 * @subpackage	Cart
+	 */
+	function mk_woocommerce_button_proceed_to_checkout() {
+		$checkout_url = WC()->cart->get_checkout_url();
+
+		?>
+		<div class="button-icon-holder alt checkout-button-holder"><a href="<?php echo $checkout_url; ?>" class="checkout-button"><i class="mk-theme-icon-cart"></i><?php _e( 'Proceed to Checkout', 'mk_framework' ); ?></a></div>
+		<?php
+	}
+}
 
 
+
+function mk_woocommerce_pagination($pages = '', $range = 2)
+{  
+	 ob_start();
+     $showitems = ($range * 2)+1;  
+     global $paged;
+     if(empty($paged)) $paged = 1;
+     if($pages == '')
+     {
+         global $wp_query;
+         $pages = $wp_query->max_num_pages;
+         if(!$pages)
+         {
+             $pages = 1;
+         }
+     }   
+     if(1 != $pages)
+     {
+         echo "<ul>";
+         if($paged > 1 && $showitems < $pages) echo "<li><a class='page-numbers prev' href='".get_pagenum_link($paged - 1)."'><i class='mk-theme-icon-prev-big'></i></a></li>";
+         for ($i=1; $i <= $pages; $i++)
+         {
+             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
+             {
+                 echo ($paged == $i)? "<li><span class='page-numbers current'>".$i."</span></li>":"<li><a class='page-numbers' href='".get_pagenum_link($i)."' >".$i."</a></li>";
+             }
+         }
+         if ($paged < $pages && $showitems < $pages) echo "<li><a class='page-numbers next' href='".get_pagenum_link($paged + 1)."'><i class='mk-theme-icon-next-big'></i></a></li>"; 
+         echo "</ul>\n";
+     }
+	 
+	 return ob_get_clean();
+}

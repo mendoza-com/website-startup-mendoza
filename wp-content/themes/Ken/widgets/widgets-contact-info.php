@@ -4,9 +4,9 @@
 */
 class Artbees_Widget_Contact_Info extends WP_Widget {
 
-	function Artbees_Widget_Contact_Info() {
+	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_contact_info', 'description' => 'Displays a list of contact info.' );
-		$this->WP_Widget( 'contact_info', THEME_SLUG.' - '. 'Contact Info', $widget_ops );
+		WP_Widget::__construct( 'contact_info', THEME_SLUG.' - '. 'Contact Info', $widget_ops );
 
 	}
 
@@ -26,13 +26,13 @@ class Artbees_Widget_Contact_Info extends WP_Widget {
 
 ?>
 		<?php
-		$output = '<ul>';
+		$output = '<ul '.get_schema_markup('person').'>';
 		$output .= !empty( $name )  ? '<li><i class="mk-li-user"></i><span itemprop="name">'.$name.'</span></li>' : '';
 		$output .= !empty( $cellphone )  ? '<li><i class="mk-li-phone"></i><span>'.$cellphone.'</span></li>' : '';
 		$output .= !empty( $phone )  ? '<li><i class="mk-theme-icon-phone"></i><span>'.$phone.'</span></li>' : '';
 		$output .= !empty( $address )  ? '<li><i class="mk-li-pinmap"></i><span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">'.$address.'</span></li>' : '';
 		$output .= !empty( $email )  ? '<li><i class="mk-icon-envelope-o"></i><span><a href="mailto:' . antispambot($email) . '">'.antispambot($email).'</a></span></li>' : '';
-		$output .= !empty( $website )  ? '<li><i class="mk-li-web"></i><span temprop="email"><a href="' . $website . '">'.$website.'</a></span></li>' : '';
+		$output .= !empty( $website )  ? '<li><i class="mk-li-web"></i><span temprop="url"><a href="' . $website . '">'.$website.'</a></span></li>' : '';
 		$output .= '</ul>';
 		echo $output;
 		echo $after_widget;

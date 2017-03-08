@@ -1,27 +1,6 @@
 <?php
 
 
-if (!function_exists('global_get_post_id')) {
-     function global_get_post_id()
-     {
-          if(function_exists('is_woocommerce') && is_woocommerce() && is_shop()) {
-
-              return wc_get_page_id( 'shop' );
-
-          } else if(is_singular()) {
-
-            global $post;
-
-            return $post->ID;
-
-          }else {
-
-            return false;
-          }
-     }
-}
-
-
 add_filter( 'locale', 'mk_theme_localized' );
 function mk_theme_localized( $locale ) {
       if ( isset( $_GET['l'] ) )
@@ -36,6 +15,68 @@ add_action('after_setup_theme', 'mk_theme_langauge');
 
 function mk_theme_langauge(){
     load_theme_textdomain('mk_framework', get_stylesheet_directory() . '/languages');
+}
+
+
+
+/* 
+Adds shortcodes dynamic css into footer.php
+*/
+if (!function_exists('mk_dynamic_css_injection')) {
+     function mk_dynamic_css_injection()
+     {
+
+      global $ken_json, $ken_styles;  
+    
+    $output = '<script type="text/javascript">';
+    
+
+    $backslash_styles = str_replace('\\', '\\\\', $ken_styles);
+    $clean_styles = preg_replace('!\s+!', ' ', $backslash_styles);
+    $clean_styles_w = str_replace("'", "\"", $clean_styles);
+    $is_admin_bar = is_admin_bar_showing() ? 'true' : 'false';
+    $ken_json_encode = json_encode($ken_json);
+    $output .= '  
+    php = {
+        hasAdminbar: '.$is_admin_bar.',
+        json: ('.$ken_json_encode.' != null) ? '.$ken_json_encode.' : "",
+        styles:  \''.$clean_styles_w.'\'
+      };
+      
+    var styleTag = document.createElement("style"),
+      head = document.getElementsByTagName("head")[0];
+
+    styleTag.type = "text/css";
+    styleTag.innerHTML = php.styles;
+    head.appendChild(styleTag);
+    </script>';
+
+    echo $output;
+
+     }
+}
+
+add_action('wp_footer', 'mk_dynamic_css_injection');
+/*-----------------*/
+
+
+function mk_clean_dynamic_styles($value) {
+
+  $clean_styles = preg_replace('!\s+!', ' ', $value);
+  $clean_styles_w = str_replace("'", "\"", $clean_styles);
+
+  return $clean_styles_w;
+
+}
+
+function mk_clean_init_styles($value) {
+
+  $backslash_styles = str_replace('\\', '\\\\', $value);
+  $clean_styles = preg_replace('!\s+!', ' ', $backslash_styles);
+  $clean_styles_w = str_replace("'", "\"", $clean_styles);
+
+  return $clean_styles_w;
+
 }
 
 
@@ -69,41 +110,32 @@ add_action('wp_loaded', 'mk_set_accent_color_global');
 
 
 function mk_thumbnail_image_gen($image, $width, $height) {
+  require_once THEME_INCLUDES . "/image-cropping.php";    
+
    $default = includes_url() . 'images/media/default.png';
+
    if(($image == $default) || empty($image)) {
 
-      $default_url = THEME_IMAGES . '/dummy-images/dummy-'.mt_rand(1,7).'.png';
-
-      if(!empty($width) && !empty($height)) {
-         $image = bfi_thumb($default_url, array(
-          'width' => $width,
-          'height' => $height,
-          'crop' => true
-          ));
-          return $image; 
-      }
-      return $default_url;
+      $image_url = THEME_IMAGES . '/dummy-images/dummy-'.mt_rand(1,7).'.png';
    } else {
-      return $image;
+
+      $image_url = $image;
    }
 
-}
 
+   if(!empty($width) && !empty($height)) {
+         $image = bfi_thumb($image_url, array(
+            'width' => $width,
+            'height' => $height,
+            'crop' => true
+          ));
+          
+          return $image; 
+    } else {
+        return $image_url;
+    }
+    return false;
 
-/*
- * Demo Content Importer
- */
-add_action('wp_ajax_mk_ajax_import_options', 'mk_ajax_import_options');
-
-function mk_ajax_import_options() {
-    include_once(THEME_DIR . '/demo-importer/engine/content_importer.php');
-    parse_str($_POST["options"], $options);
-    if (!empty($options['template'])) {
-
-        $content_importer = new ContentImporter($_POST["options"]);
-        $content_importer->import();
-        $options['template'] = '';
-   }
 }
 
 
@@ -160,7 +192,6 @@ if (!function_exists('global_get_post_id')) {
           }
      }
 }
-
 
 
 /*
@@ -230,34 +261,6 @@ add_action('wp_head', 'mk_theme_debugging_info');
 
 
 
-
-/*
- * Adds Schema.org tags
- */
-if (!function_exists('mk_html_tag_schema')) {
-      function mk_html_tag_schema()
-      {
-            $schema = 'http://schema.org/';
-            if (is_single()) {
-                  $type = "Article";
-            } elseif (is_author()) {
-                  $type = 'ProfilePage';
-            } elseif (is_search()) {
-                  $type = 'SearchResultsPage';
-            } else {
-                  $type = 'WebPage';
-            }
-            
-            echo 'itemscope="itemscope" itemtype="' . $schema . $type . '"';
-      }
-}
-/*-----------------*/
-
-
-
-
-
-
 /*
 Removes version paramerters from scripts and styles.
 */
@@ -323,58 +326,6 @@ if (!function_exists('mk_convert_rgba')) {
 
 
 
-/*
- * Contact Form ajax function
- */
-
-add_action('wp_ajax_nopriv_mk_contact_form', 'mk_contact_form');
-add_action('wp_ajax_mk_contact_form', 'mk_contact_form');
-
-if (!function_exists('mk_contact_form')) {
-      function mk_contact_form()
-      {
-            $sitename = get_bloginfo('name');
-            $siteurl  = home_url();
-            
-            $to      = isset($_POST['to']) ? trim($_POST['to']) : '';
-            $name    = isset($_POST['name']) ? trim($_POST['name']) : '';
-            $email   = isset($_POST['email']) ? trim($_POST['email']) : '';
-            $content = isset($_POST['content']) ? trim($_POST['content']) : '';
-            
-            
-            $error = false;
-            if ($to === '' || $email === '' || $content === '' || $name === '') {
-                  $error = true;
-            }
-            if (!preg_match('/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/', $email)) {
-                  $error = true;
-            }
-            if (!preg_match('/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/', $to)) {
-                  $error = true;
-            }
-            
-            if ($error == false) {
-                  $subject = sprintf(__('%1$s\'s message from %2$s', 'mk_framework'), $sitename, $name);
-                  $body    = __('Site: ', 'mk_framework') . $sitename . ' (' . $siteurl . ')' . "\n\n";
-                  $body .= __('Name: ', 'mk_framework') . $name . "\n\n";
-                  $body .= __('Email: ', 'mk_framework') . $email . "\n\n";
-                  $body .= __('Messages: ', 'mk_framework') . $content;
-                  $headers = "From: $name <$email>\r\n";
-                  $headers .= "Reply-To: $email\r\n";
-                  
-                  if (wp_mail($to, $subject, $body, $headers)) {
-                        echo 'Message sent successfully';
-                  } else {
-                        echo 'Message Could not be sent';
-                  }
-                  die();
-            }
-      }
-}
-/*-----------------*/
-
-
-
 
 /*
  * Login Widget ajax functions
@@ -417,6 +368,72 @@ function mk_ajax_login() {
       die();
 }
 /*-----------------*/
+
+if (!function_exists('mk_add_admin_bar_link')) {
+    function mk_add_admin_bar_link() {
+        global $wp_admin_bar;
+        $theme_data = wp_get_theme();
+        $action = 'mk_purge_cache';
+        
+        if (!current_user_can('manage_options') || !is_admin_bar_showing()) return;
+        
+        $wp_admin_bar->add_menu(array(
+            'id' => 'theme_settings',
+            'title' => __('Theme Options', 'mk_framework') ,
+            'href' => admin_url('admin.php?page=theme_settings')
+        ));
+        
+        $wp_admin_bar->add_menu(array(
+            'title' => __('Clear Theme Cache', 'mk_framework') ,
+            'id' => 'clean_dynamic_styles',
+            'href' => wp_nonce_url(admin_url('admin-post.php?action=mk_purge_cache') , 'theme_purge_cache')
+        ));
+    }
+}
+add_action('admin_bar_menu', 'mk_add_admin_bar_link', 30);
+
+/*-----------------*/
+
+
+
+
+/**
+ * Purge Cache for dynamic styles and scripts.
+ *
+ */
+add_action('admin_post_mk_purge_cache', 'mk_purge_cache');
+function mk_purge_cache() {
+    if (isset($_GET['action'], $_GET['_wpnonce'])) {
+        
+        if (!wp_verify_nonce($_GET['_wpnonce'], 'theme_purge_cache')) {
+            wp_nonce_ays('');
+        }
+        mk_purge_cache_actions();
+        
+        /* purge wp super cache */
+        if(function_exists('wp_cache_clear_cache')) {
+          wp_cache_clear_cache();  
+        }
+        
+        wp_redirect(wp_get_referer());
+        die();
+    }
+}
+
+function mk_purge_cache_actions() {
+    global $wpdb;
+    
+    $wpdb->query($wpdb->prepare("
+                 DELETE FROM $wpdb->postmeta
+                 WHERE meta_key = %s
+                ", '_dynamic_styles'));
+    $static = new Mk_Static_Files(false);
+    $static->DeleteThemeOptionStyles();
+}
+
+
+// clear cache on theme save options
+add_action ('redux/options/mk_settings/saved', 'mk_purge_cache_actions');
 
 
 
@@ -711,6 +728,32 @@ if (!function_exists('mk_get_custom_sidebar')) {
 }
 
 
+if (!function_exists('mk_base_url')) {
+    function mk_base_url($atRoot=FALSE, $atCore=FALSE, $parse=FALSE){
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $http = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http';
+            $hostname = $_SERVER['HTTP_HOST'];
+            $dir =  str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+
+            $core = preg_split('@/@', str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(dirname(__FILE__))), NULL, PREG_SPLIT_NO_EMPTY);
+            $core = $core[0];
+
+            $tmplt = $atRoot ? ($atCore ? "%s://%s/%s/" : "%s://%s/") : ($atCore ? "%s://%s/%s/" : "%s://%s%s");
+            $end = $atRoot ? ($atCore ? $core : $hostname) : ($atCore ? $core : $dir);
+            $base_url = sprintf( $tmplt, $http, $hostname, $end );
+        }
+        else $base_url = 'http://localhost/';
+
+        if ($parse) {
+            $base_url = parse_url($base_url);
+            if (isset($base_url['path'])) if ($base_url['path'] == '/') $base_url['path'] = '';
+        }
+
+        return $base_url;
+    }
+}
+
+
 
 /**
  * Get attachment ID from given URL
@@ -808,174 +851,80 @@ if (!function_exists('mk_get_related_portfolio')) {
 
 
 
-
+/**
+ * Get template parts from Control Panel
+ * @param string    $slug
+ * @param string    $name
+ * @param boolean   $return
+ * @return object
+ *
+ */
+if (!function_exists('mk_get_control_panel_view')) {
+    function mk_get_control_panel_view($name = '', $return = false, $view_params = array()) {
+        if ($return) {
+            ob_start();
+            mk_get_template_part('framework/control-panel/views/' . $name, $view_params);
+            return ob_get_clean();
+        } 
+        else {
+            mk_get_template_part('framework/control-panel/views/' . $name, $view_params);
+        }
+    }
+}
 
 /**
- * Loads Google Fonts API
- * Adds google fonts script to head section
- * @deprecated : since V3.0
+ * Like get_template_part() put lets you pass args to the template file
+ * Args are available in the tempalte as $view_params array
+ * @param string filepart
+ * @param mixed wp_args style argument list
  */
-/*
-if (!function_exists('mk_append_google_font_to_body')) {
-      function mk_append_google_font_to_body()
-      {
-            
-            global $mk_settings;
-            $body_font_variants = $body_font = $heading_font = $heading_font_variants = $main_nav_font = $widget_title_font = '';
-            $body_google        = $mk_settings['body-font']['google'];
-            $heading_google     = $mk_settings['heading-font']['google'];
-            $main_nav_google     = $mk_settings['main-nav-font']['google'];
-            $widget_title_google     = $mk_settings['widget-title']['google'];
-            
-            
-            
-            if ($body_google == 'true') {
-                  
-                  $body_font_family  = $mk_settings['body-font']['font-family'];
-                  $body_font_subset  = !empty($mk_settings['body-font']['subsets']) ? (':'.$mk_settings['body-font']['subsets']) : '';
-                  
-                  $body_font_options = isset($mk_settings['body-font']['font-options']) ? $mk_settings['body-font']['font-options'] : null;
-                  
-                  $body_font_backup = isset($mk_settings['body-font']['font-backup']) ? $mk_settings['body-font']['font-backup'] : null;
-                  
-                  if ($body_font_backup != '' && $body_font_backup != null) {
-                        $explode_body_font_family = explode(",", $body_font_family);
-                        $body_font .= str_replace(' ', '+', $explode_body_font_family[0]);
-                  } else {
-                        $body_font .= str_replace(' ', '+', $body_font_family);
-                  }
-                  
-                  $body_font_variants = '';
-                  
-                  if ($body_font_options != null) {
-                        $body_font_options_json = json_decode($body_font_options);
-                        
-                        $body_font_array = $body_font_options_json->{'variants'};
-                        if(!empty($body_font_array) && is_object($body_font_array)) {
-                          foreach ($body_font_array as $obj) {
-                                $body_font_variants .= $obj->name . ",";
-                                
-                          }
-                      }
-                  }
-                  $body_font .= ":" . trim($body_font_variants, ",");
-                  $body_font = "'".$body_font."{$body_font_subset}',";
-                  
-                  
+function mk_get_template_part($file, $view_params = array() , $cache_args = array()) {
+    global $post;
+    $view_params = wp_parse_args($view_params);
+    $cache_args = wp_parse_args($cache_args);
+    if ($cache_args) {
+        foreach ($view_params as $key => $value) {
+            if (is_scalar($value) || is_array($value)) {
+                $cache_args[$key] = $value;
+            } 
+            else if (is_object($value) && method_exists($value, 'get_id')) {
+                $cache_args[$key] = call_user_method('get_id', $value);
             }
-            
-            
-            if ($heading_google == 'true') {
-                  
-                  $heading_font_family  = $mk_settings['heading-font']['font-family'];
-                  $heading_font_subset  = !empty($mk_settings['heading-font']['subsets']) ? (':'.$mk_settings['heading-font']['subsets']) : '';
-
-                  if($heading_font_family != '') {
-                  $heading_font_options = isset($mk_settings['heading-font']['font-options']) ? $mk_settings['heading-font']['font-options'] : null;
-                  
-                  
-                  $explode_heading_font_family = explode(",", $heading_font_family);
-                  $heading_font .= str_replace(' ', '+', $explode_heading_font_family[0]);
-                  
-                  $heading_font_variants = '';
-                  if ($heading_font_options != null) {
-                        $heading_font_options_json = json_decode($heading_font_options);
-                        
-                        $heading_font_array = $heading_font_options_json->{'variants'};
-                        
-                        foreach ($heading_font_array as $obj) {
-                              $heading_font_variants .= $obj->name . ",";
-                              
-                        }
-                  }
-                  $heading_font .= ":" . trim($heading_font_variants, ",");
-                  $heading_font = "'".$heading_font."{$heading_font_subset}',";
-                  }
-                  
-            }
-
-            if ($main_nav_google == 'true') {
-                  
-                  $main_nav_font_family  = $mk_settings['main-nav-font']['font-family'];
-                  $main_nav_font_options = isset($mk_settings['main-nav-font']['font-options']) ? $mk_settings['main-nav-font']['font-options'] : null;
-            
-                  
-                  $main_nav_font .= str_replace(' ', '+', $main_nav_font_family);
-                  
-                  $main_nav_font_variants = '';
-                  
-                  if ($main_nav_font_options != null) {
-                        $main_nav_font_options_json = json_decode($main_nav_font_options);
-                        
-                        $main_nav_font_array = $main_nav_font_options_json->{'variants'};
-                        
-                        foreach ($main_nav_font_array as $obj) {
-                              $main_nav_font_variants .= $obj->name . ",";
-                              
-                        }
-                  }
-                  $main_nav_font .= ":" . trim($main_nav_font_variants, ",");
-                  
-                  $main_nav_font = "'".$main_nav_font."',";
-            }
-
-            if ($widget_title_google == 'true') {
-                  
-                  $widget_title_font_family  = $mk_settings['widget-title']['font-family'];
-                  $widget_title_font_options = isset($mk_settings['widget-title']['font-options']) ? $mk_settings['widget-title']['font-options'] : null;
-            
-                  
-                  $widget_title_font .= str_replace(' ', '+', $widget_title_font_family);
-                  
-                  $widget_title_font_variants = '';
-                  
-                  if ($widget_title_font_options != null) {
-                        $widget_title_font_options_json = json_decode($widget_title_font_options);
-                        
-                        $widget_title_font_array = $widget_title_font_options_json->{'variants'};
-                        
-                        foreach ($widget_title_font_array as $obj) {
-                              $widget_title_font_variants .= $obj->name . ",";
-                              
-                        }
-                  }
-                  $widget_title_font .= ":" . trim($widget_title_font_variants, ",");
-                  
-                  $widget_title_font = "'".$widget_title_font."',";
-            }
-            
-            
-            
-            $output = "<script type='text/javascript'>
-    WebFontConfig = {
-    google: { families: [ $body_font$heading_font$main_nav_font$widget_title_font ] }
-    };
-    (function() {
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-    })();
-</script>\n";
-            
-            echo $output;
-            
-      }
+        }
+        if (($cache = wp_cache_get($file, serialize($cache_args))) !== false) {
+            if (!empty($view_params['return'])) return $cache;
+            echo $cache;
+            return;
+        }
+    }
+    $file_handle = $file;
+    do_action('start_operation', 'mk_template_part::' . $file_handle);
+    if (file_exists(get_stylesheet_directory() . '/' . $file . '.php')) $file = get_stylesheet_directory() . '/' . $file . '.php';
+    elseif (file_exists(get_template_directory() . '/' . $file . '.php')) $file = get_template_directory() . '/' . $file . '.php';
+    ob_start();
+    $return = require ($file);
+    $data = ob_get_clean();
+    do_action('end_operation', 'mk_template_part::' . $file_handle);
+    if ($cache_args) {
+        wp_cache_set($file, $data, serialize($cache_args) , 3600);
+    }
+    if (!empty($view_params['return'])) if ($return === false) return false;
+    else return $data;
+    echo $data;
 }
 
 
-add_action('wp_enqueue_scripts', 'mk_append_google_font_to_body', 20);
-*/
 
-
-
+function create_global_styles() {
+    $ken_styles = '';
+    global $ken_styles;
+}
+create_global_styles();
 
 
 function mk_get_fontfamily( $element_name, $id, $font_family, $font_type ) {
     $output = '';
+    global $ken_styles;
     if ( $font_type == 'google' ) {
         if ( !function_exists( "my_strstr" ) ) {
             function my_strstr( $haystack, $needle, $before_needle = false ) {
@@ -983,14 +932,14 @@ function mk_get_fontfamily( $element_name, $id, $font_family, $font_type ) {
                 else return substr( $haystack, 0, strpos( $haystack, $needle ) );
             }
         }
-        wp_enqueue_style( $font_family, '//fonts.googleapis.com/css?family=' .$font_family.':300italic,400italic,600italic,700italic,800italic,400,300,800,700,600' , false, false, 'all' );
+        wp_enqueue_style( $font_family, '//fonts.googleapis.com/css?family=' .$font_family.':100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,100,200,300,400,500,600,700,800,900' , false, false, 'all' );
         $format_name = strpos( $font_family, ':' );
         if ( $format_name !== false ) {
             $google_font =  my_strstr( str_replace( '+', ' ', $font_family ), ':', true );
         } else {
             $google_font = str_replace( '+', ' ', $font_family );
         }
-        $output .= '<style>'.$element_name.$id.' {font-family: "'.$google_font.'"}</style>';
+        $ken_styles .= $element_name.$id.' {font-family: "'.$google_font.'"}';
 
     } else if ( $font_type == 'fontface' ) {
 
@@ -1001,12 +950,12 @@ function mk_get_fontfamily( $element_name, $id, $font_family, $font_type ) {
                 if ( preg_match( "/@font-face\s*{[^}]*?font-family\s*:\s*('|\")$font_family\\1.*?}/is", $file_content, $match ) ) {
                     $fontface_style = preg_replace( "/url\s*\(\s*['|\"]\s*/is", "\\0$font_dir/", $match[0] )."\n";
                 }
-                $output = "\n<style>" . $fontface_style ."\n";
-                $output .= $element_name.$id.' {font-family: "'.$font_family.'"}</style>';
+                $ken_styles .= "\n" . $fontface_style ."\n";
+                $ken_styles .= $element_name.$id.' {font-family: "'.$font_family.'"}';
             }
 
         } else if ( $font_type == 'safefont' ) {
-            $output .= '<style>'.$element_name.$id.' {font-family: '.$font_family.' !important}</style>';
+            $ken_styles .= $element_name.$id.' {font-family: '.$font_family.' !important}';
         }
 
     return $output;
@@ -1018,34 +967,11 @@ function mk_get_fontfamily( $element_name, $id, $font_family, $font_type ) {
 
 
 
-
-if (!function_exists('mk_add_admin_bar_link')) {
-      function mk_add_admin_bar_link()
-      {
-            global $wp_admin_bar;
-            $theme_data = wp_get_theme();
-            if (!is_super_admin() || !is_admin_bar_showing())
-                  return;
-            $wp_admin_bar->add_menu(array(
-                  'id' => 'theme_settings',
-                  'title' => __('Theme Settings', 'mk_framework'),
-                  'href' => admin_url('admin.php?page=theme_settings')
-            ));
-      }
-}
-add_action('admin_bar_menu', 'mk_add_admin_bar_link', 25);
-/*-----------------*/
-
-
-
-
-
-
-
 /* 
 Uses get_the_excerpt() to print an excerpt by specifying a maximium number of characters. 
 */
-function the_excerpt_max_charlength($charlength) {
+if (!function_exists('mk_excerpt_max_charlength')) {
+function mk_excerpt_max_charlength($charlength) {
       $excerpt = get_the_excerpt();
       $charlength++;
 
@@ -1063,7 +989,7 @@ function the_excerpt_max_charlength($charlength) {
             echo $excerpt;
       }
 }
-
+}
 
 
 
@@ -1118,3 +1044,144 @@ if (!function_exists('global_get_post_id')) {
      }
 }
 
+
+//////////////////////////////////////////////////////////////////////////
+// 
+//  Global JSON object to collect all DOM related data
+//  todo - move here all VC shortcode settings
+//
+//////////////////////////////////////////////////////////////////////////
+
+function create_global_json() {
+    $ken_json = array();
+    global $ken_json;
+}
+create_global_json();
+
+
+function create_global_dynamic_styles() {
+    $ken_dynamic_styles = array();
+    global $ken_dynamic_styles;
+}
+create_global_dynamic_styles();
+
+
+
+/**
+ * function to check if the current page is admin-ajax.php and the action is sent is vc_edit_form
+ *
+ * @return boolean
+ */
+function mk_page_is_vc_edit_form(){
+    global $pagenow;
+    //make sure we are on the backend
+    if (!is_admin()) return false;
+
+    $result =  in_array( $pagenow, array('admin-ajax.php') );
+    $ajax_action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+
+    if($result && $ajax_action == 'vc_edit_form') {
+      return true;
+    }
+}
+
+
+
+
+
+
+
+/**
+ * Adding font icons in HTML document to prevent issues when using CDN
+ */
+if (!function_exists('mk_enqueue_font_icons')) {
+  function mk_enqueue_font_icons() {
+      
+      $styles_dir = THEME_DIR_URI . '/stylesheet';
+      $output = "
+
+      @font-face {
+        font-family: 'ArtbeesWPTokens';
+        src: url('{$styles_dir}/artbees-icons/ArtbeesWPTokens.eot');
+        src: url('{$styles_dir}/artbees-icons/ArtbeesWPTokens.eot?#iefix') format('embedded-opentype'), 
+        url('{$styles_dir}/artbees-icons/ArtbeesWPTokens.woff') format('woff'), 
+        url('{$styles_dir}/artbees-icons/ArtbeesWPTokens.ttf') format('truetype'), 
+        url('{$styles_dir}/artbees-icons/ArtbeesWPTokens.svg#ArtbeesWPTokens') format('svg');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'FontAwesome';
+        src:url('{$styles_dir}/awesome-icons/fontawesome-webfont.eot?v=4.2');
+        src:url('{$styles_dir}/awesome-icons/fontawesome-webfont.eot?#iefix&v=4.2') format('embedded-opentype'),
+        url('{$styles_dir}/awesome-icons/fontawesome-webfont.woff?v=4.2') format('woff'),
+        url('{$styles_dir}/awesome-icons/fontawesome-webfont.ttf?v=4.2') format('truetype'), 
+        url('{$styles_dir}/awesome-icons/fontawesome-webfont.svg#FontAwesome') format('svg');;
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'star';
+        src: url('{$styles_dir}/woocommerce-fonts/star.eot');
+        src: url('../woocommerce-fonts/star.eot?#iefix') format('embedded-opentype'), 
+        url('../woocommerce-fonts/star.woff') format('woff'), 
+        url('../woocommerce-fonts/star.ttf') format('truetype'), 
+        url('../woocommerce-fonts/star.svg#star') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'WooCommerce';
+        src: url('{$styles_dir}/woocommerce-fonts/WooCommerce.eot');
+        src: url('{$styles_dir}/woocommerce-fonts/WooCommerce.eot?#iefix') format('embedded-opentype'), 
+        url('{$styles_dir}/woocommerce-fonts/WooCommerce.woff') format('woff'), 
+        url('{$styles_dir}/woocommerce-fonts/WooCommerce.ttf') format('truetype'), 
+        url('{$styles_dir}/woocommerce-fonts/WooCommerce.svg#WooCommerce') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Flaticon';
+        src: url('{$styles_dir}/line-icon-set/flaticon.eot');
+        src: url('{$styles_dir}/line-icon-set/flaticon.eot#iefix') format('embedded-opentype'),
+        url('{$styles_dir}/line-icon-set/flaticon.woff') format('woff'),
+        url('{$styles_dir}/line-icon-set/flaticon.ttf') format('truetype'),
+        url('{$styles_dir}/line-icon-set/flaticon.svg') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Pe-icon-line';
+        src:url('{$styles_dir}/pe-line-icons/Pe-icon-line.eot?lqevop');
+        src:url('{$styles_dir}/pe-line-icons/Pe-icon-line.eot?#iefixlqevop') format('embedded-opentype'),
+          url('{$styles_dir}/pe-line-icons/Pe-icon-line.woff?lqevop') format('woff'),
+          url('{$styles_dir}/pe-line-icons/Pe-icon-line.ttf?lqevop') format('truetype'),
+          url('{$styles_dir}/pe-line-icons/Pe-icon-line.svg?lqevop#Pe-icon-line') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+";
+      return $output;
+  }
+}
+
+
+/**
+ * @param $path
+ * @return mixed
+ */
+function path_convert($path) {
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        $path = str_replace('/', '\\', $path);
+    }
+    else {
+        $path = str_replace('\\', '/', $path);
+    }
+    return $path;
+}

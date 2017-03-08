@@ -1,6 +1,6 @@
 <?php 
 global $mk_settings;
-
+$mk_footer_class = '';
 
 $template = '';
 if(global_get_post_id()) {
@@ -8,10 +8,15 @@ if(global_get_post_id()) {
 
 }
 
+if($mk_settings['footer-type'] == 'fixed') {
+  $mk_footer_class .= ' mk-footer-fixed ';
+}
+
 if($template != 'no-footer' && $template != 'no-header-footer' && $template != 'no-header-title-footer' && $template !='no-sub-footer-title' && $template !='no-title-footer-sub-footer') :
 
 if($mk_settings['footer'] == true && $template != 'no-footer-only' && $template != 'no-footer-title' && $template != 'no-header-title-only-footer' && $template != 'no-title-footer') : ?>
-<section id="mk-footer">
+<div id="mk-footer-fixed-spacer"></div>
+<section id="mk-footer" class="<?php echo $mk_footer_class; ?>" <?php echo get_schema_markup('footer'); ?>>
 <div class="footer-wrapper mk-grid">
 <div class="mk-padding-wrapper">
 <?php
@@ -145,6 +150,7 @@ endif;?>
     	<span class="mk-footer-copyright"><?php echo stripslashes($mk_settings['footer-copyright']); ?></span>
 
     	<?php do_action('subfooter_social'); ?>
+    	<?php do_action('subfooter_logos'); ?>
 
 		</div>
 	</div>
@@ -169,6 +175,8 @@ endif;?>
 	do_action( 'side_dashboard'); 
 	do_action( 'quick_contact'); 
 ?>
+
+
 
 <?php wp_footer(); ?>
 <?php if($mk_settings['custom-js']) : ?>
@@ -202,10 +210,29 @@ $header_padding_type = $mk_settings['sticky-header'] ? 'sticky-header' : 'none-s
 }
 ?>
 
+<script>
+    // Run this very early after DOM is ready 
+    (function ($) {
+        // Prevent browser native behaviour of jumping to anchor
+        // while preserving support for current links (shared across net or internally on page)
+        var loc = window.location,
+            hash = loc.hash;
+
+        // Detect hashlink and change it's name with !loading appendix
+        if(hash.length && hash.substring(1).length) {
+            var $topLevelSections = $('.vc_row, .mk-page-section, #comments');
+            var $section = $topLevelSections.filter( '#' + hash.substring(1) );
+            // We smooth scroll only to page section and rows where we define our anchors.
+            // This should prevent conflict with third party plugins relying on hash
+            if( ! $section.length )  return;
+            // Mutate hash for some good reason - crazy jumps of browser. We want really smooth scroll on load
+            // Discard loading state if it already exists in url (multiple refresh)
+            hash = hash.replace( '!loading', '' );
+            var newUrl = hash + '!loading';
+            loc.hash = newUrl;
+        }
+    }(jQuery));
+</script>
 
 </body>
 </html>
-
-
-
-

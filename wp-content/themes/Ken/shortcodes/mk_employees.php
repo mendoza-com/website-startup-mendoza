@@ -3,7 +3,7 @@
 extract(shortcode_atts(array(
     'count' => 10,
     'column' => 3,
-    'style' => 'column',
+    'style' => 'column_rounded',
     'dimension' => 250,
     'employees' => '',
     'animation' => '',
@@ -13,12 +13,15 @@ extract(shortcode_atts(array(
     'offset' => '',
     'autoplay' => 'true',
     'directionNav' => 'true',
+    'full_width_image' => 'false',
     'orderby' => 'date',
     'order' => 'DESC'
 ), $atts));
 
-$id     = uniqid();
-$output = '';
+require_once THEME_INCLUDES . "/image-cropping.php";    
+
+$id     = Mk_Static_Files::shortcode_id();
+$output = $image_width = '';
 
 $scroll_stuff = array(
     '',
@@ -27,6 +30,12 @@ $scroll_stuff = array(
     '',
     ''
 );
+
+
+if($full_width_image == 'true'){
+    $image_width = 'width:100%;';
+}
+
 
 
 $query = array(
@@ -105,7 +114,7 @@ if ($style == 'column' || $style == 'column_rounded'):
         $output .= '<li class="mk-employee-item"><div class="employee-item-wrapper">';
 
 
-        $output .= '<div class="team-thumbnail ' . $animation_css . '" onClick="return true"><img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src, $image_dimension, $image_dimension) . '" />';
+        $output .= '<div class="team-thumbnail ' . $animation_css . '" onClick="return true"><img alt="' . get_the_title() . '" style="'.$image_width.'" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src, $image_dimension, $image_dimension) . '" />';
         $output .= '<div class="hover-overlay"></div>';
         if ($image_dimension > 200) {
             $output .= '<ul class="mk-employeee-networks">';
@@ -165,9 +174,9 @@ if ($style == 'column' || $style == 'column_rounded'):
 else:
     if ($scroll == 'true') {
         $scroll_stuff = array(
-            'swiper-container mk-swiper-slider ',
+            'mk-swiper-container mk-swiper-slider ',
             ' data-freeModeFluid="true" data-slidesPerView="auto" data-loop="false" data-pagination="false" data-freeMode="false" data-mousewheelControl="false" data-direction="horizontal" data-slideshowSpeed="4000" data-animationSpeed="400" data-directionNav="false" ',
-            'swiper-wrapper',
+            'mk-swiper-wrapper',
             'swiper-slide'
         );
     }
@@ -195,7 +204,7 @@ else:
         ));
 
         $output .= $style == 'grid' ? '<li class="mk-employee-item ' . $scroll_stuff[3] . '" onClick="return true">' : '<li class="mk-employee-item ' . $scroll_stuff[3] . '">';
-        $output .= '<img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src, $dimension, $dimension) . '" />';
+        $output .= '<img alt="' . get_the_title() . '" style="'.$image_width.'" title="' . get_the_title() . '" src="' . mk_thumbnail_image_gen($image_src, $dimension, $dimension) . '" />';
         $output .= '<div class="hover-overlay"></div>';
 
 

@@ -11,6 +11,8 @@ extract( shortcode_atts( array(
 			"el_class" => '',
 		), $atts ) );
 
+require_once THEME_INCLUDES . "/image-cropping.php";	
+
 if ( $images == '' ) return null;
 $animation_css = '';
 if ( $animation != '' ) {

@@ -12,7 +12,8 @@ $layout = 'right';
 
 
 get_header(); ?>
-<div id="theme-page">
+<div id="theme-page" class="page-master-holder">
+	<div class="background-img background-img--page"></div>
 	<div class="mk-main-wrapper-holder">
 	<div class="theme-page-wrapper mk-main-wrapper <?php echo $layout; ?>-layout mk-grid vc_row-fluid">
 		<div class="theme-content" itemprop="mainContentOfPage">
@@ -43,9 +44,11 @@ get_header(); ?>
 
 								<div class="listtype-meta">
 									
+									<?php if($post_type != 'page') : ?>
 									<time datetime="<?php the_time( 'F, j' ); ?>" itemprop="datePublished" pubdate>
 										<a href="<?php echo get_month_link( get_the_time( "Y" ), get_the_time( "m" ) ); ?>"><?php the_date(); ?></a>
 									</time>
+									<?php endif; ?>
 
 
 									<?php if($post_type == 'post') { ?>

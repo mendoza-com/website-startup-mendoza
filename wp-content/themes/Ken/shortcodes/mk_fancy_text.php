@@ -2,20 +2,20 @@
 
 extract( shortcode_atts( array(
 			'el_class' => '',
-			'color' => '',
+			'color' => '#393836',
 			'highlight_color' => '#000',
 			'highlight_opacity' => 0.3,
-			"size" => '18',
-			'font_weight' => 'normal',
+			"size" => 18,
+			'font_weight' => 'inherit',
 			'margin_bottom' => '20',
-			'margin_top' => '0',
-			'line_height' => '34',
+			'margin_top' => 0,
+			'line_height' => 34,
 			"align" => 'left',
 			'animation' => '',
 			"font_family" => '',
 			"font_type" => '',
 		), $atts ) );
-$id = uniqid();
+$id = Mk_Static_Files::shortcode_id();
 $output = '';
 $animation_css ='';
 $output .= mk_get_fontfamily( "#fancy-title-", $id, $font_family, $font_type );

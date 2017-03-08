@@ -9,7 +9,7 @@
 
 .widget {
 	overflow: hidden;
-	margin-bottom: 40px;
+	margin-bottom: 35px;
 }
 .widgettitle {
 	position: relative;
@@ -33,6 +33,9 @@
 	}
 	.widget {
 		margin-bottom: 20px;
+	}
+	.widget-social-container {
+		padding: 0 !important;
 	}
 }
 #mk-sidebar ul, #mk-footer ul, .mk-side-dashboard ul {
@@ -161,7 +164,8 @@
 
 /* Widget:Sub Navigation
 -------------------------------------------------------------------- */
-.widget-sub-navigation {
+.widget-sub-navigation,
+.woocommerce-MyAccount-navigation {
 	ul {
 		display: block;
 		margin: 0;
@@ -320,6 +324,8 @@
 /* Widgets:INSTAGRAM FEEDS
 -------------------------------------------------------------------- */
 .mk-instagram-feeds {
+	width: 100%;
+	overflow: hidden;
 	.item-holder {
 		position: relative;
 	}
@@ -331,6 +337,10 @@
 		float: left;
 		display: inline-block;
 		margin: 0 1px 1px 0;
+		img {
+			width: 100%;
+
+		}
 	}
 	.one-columns {
 		width: 100%;
@@ -342,14 +352,17 @@
 		width: 33.2%;
 	}
 	.four-columns {
-		width: 24.9%;
+		width: 24.7%;
 	}
 	.five-columns {
-		width: 19.9%;
+		width: 19.6%;
 	}
 	@media handheld, only screen and (max-width:600px) {
 		.five-columns, .four-columns, .three-columns {
-			width: 50% !important;
+			width: 49% !important;
+		}
+		a img{
+			width: 100%;
 		}
 	}
 }
@@ -490,15 +503,26 @@
 /* Widgets:SOCIAL NETWORKS
 -------------------------------------------------------------------- */
 .widget_social_networks {
+	.social-title{
+		&.left{}
+		&.center{
+			text-align: center;
+			&:after {
+				margin-left: auto !important;
+				margin-right: auto !important;
+			}
+		}
+		&.right{
+			text-align: right;
+		}
+	}
 	a {
 		position: relative;
 		display: inline-block;
 		float: left;
 		margin: 4px;
 		font-size: 16px;
-		height: 30px;
-		width: 30px;
-		line-height: 30px; 
+		
 		text-align: center;
 		.border-radius(3px);
 		&.dark {
@@ -532,6 +556,9 @@
 	}
 	.circle-style {
 		a{
+			height: 30px;
+			width: 30px;
+			line-height: 30px; 
 			.border-radius(50%);
 			&.dark {
 				border: 3px solid #737373;
@@ -556,7 +583,11 @@
 		}
 	}
 	.simple-style {
+		padding: 0;
+
 		a {
+			font-size: 24px;
+			margin: 8px 16px 8px 0; 
 			i {
 				transition: color .3s ease;
 			}
@@ -1083,3 +1114,56 @@
 		}
 	}
 }
+
+/* Widgets: Subscription form
+-------------------------------------------------------------------- */
+.mk-subscription-form-wrapper{
+	width: 100%;
+	.clearfix;
+	.text-input{
+		float: left;
+		width: 70%;
+		height: 40px;
+		vertical-align: top;
+	}
+	.mk-subscription-button{
+		width: 27%;
+		float: right;
+		font-size: 10px;
+		height: 40px;
+		.transition(all .2s ease-in-out);
+	}
+	&.light-skin{
+		.text-input{
+			border:2px solid #eee;
+			background-color: #fff;
+			color: #666;
+		}
+		.mk-subscription-button{
+			background-color: #eee;
+			color: #000;
+			border:none;
+			&:hover{
+				background-color: #666;
+				color: #eee;
+			}
+		}
+	}
+	&.dark-skin{
+		.text-input{
+			border:2px solid #000;
+			background-color: #fff;
+			color: #666;
+		}
+		.mk-subscription-button{
+			background-color: #000;
+			color: #fff;
+			border:none;
+			&:hover{
+				background-color: #d7d7d7;
+				color: #000;
+			}
+		}
+	}
+}
+

@@ -5,9 +5,9 @@
 */
 class Artbees_Widget_Flickr_feeds extends WP_Widget {
 
-	function Artbees_Widget_Flickr_feeds() {
+	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_flickr', 'description' => 'Displays photos from a Flickr ID' );
-		$this->WP_Widget( 'flickr', THEME_SLUG.' - '.'Flickr', $widget_ops );
+		WP_Widget::__construct( 'flickr', THEME_SLUG.' - '.'Flickr', $widget_ops );
 
 	}
 

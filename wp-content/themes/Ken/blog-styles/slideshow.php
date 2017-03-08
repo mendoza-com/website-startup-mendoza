@@ -42,7 +42,7 @@ function blog_slideshow_style($atts)
     if ($disable_meta != 'false') {
         $output .= '<div class="blog-meta">';
         $output .= '<span class="post-type-icon"><i class="mk-post-type-icon-' . $post_type . '"></i></span>';
-        $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+        $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
         
         
 

@@ -1,15 +1,20 @@
 <?php
 /**
- * The template for displaying product content within loops.
+ * The template for displaying product content within loops
  *
- * Override this template by copying it to yourtheme/woocommerce/content-product.php
+ * This template can be overridden by copying it to yourtheme/woocommerce/content-product.php.
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     1.6.4
+ * HOWEVER, on occasion WooCommerce will need to update template files and you (the theme developer).
+ * will need to copy the new files to your theme to maintain compatibility. We try to do this.
+ * as little as possible, but it does happen. When this occurs the version of the template file will.
+ * be bumped and the readme will list any important changes.
  *
- * @package This template is overrided by theme
+ * @see     http://docs.woothemes.com/document/template-structure/
+ * @author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 2.6.1
  */
+
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -17,16 +22,19 @@ global $product, $woocommerce_loop, $mk_settings, $post;
 
 
 // Store loop count we're currently on
-if ( empty( $woocommerce_loop['loop'] ) )
+if ( empty( $woocommerce_loop['loop'] ) ){
 	$woocommerce_loop['loop'] = 0;
+}
 
 // Store column count for displaying the grid
-if ( empty( $woocommerce_loop['columns'] ) )
+if ( empty( $woocommerce_loop['columns'] ) ){
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
+}
 
 // Ensure visibility
-if ( ! $product || ! $product->is_visible() )
+if ( ! $product || ! $product->is_visible() ){
 	return;
+}
 
 // Increase loop count
 $woocommerce_loop['loop']++;
@@ -89,51 +97,9 @@ if(is_archive()) {
 */
 $out_of_stock_badge = '';
 if ( ! $product->is_in_stock() ) {
-
-	$mk_add_to_cart = '<a href="'. apply_filters( 'out_of_stock_add_to_cart_url', get_permalink( $product->id ) ).'" alt="'. apply_filters( 'out_of_stock_add_to_cart_text', __( 'READ MORE', 'mk_framework' ) ).'" class="add_to_cart_button"><i class="mk-theme-icon-magnifier"></i></a>';
-
 	$out_of_stock_badge = '<span class="out-of-stock">'.__( 'OUT OF STOCK', 'mk_framework' ).'</span>';
-}
-else { ?>
+} ?>
 
-	<?php
-
-	switch ( $product->product_type ) {
-	case "variable" :
-		$link  = apply_filters( 'variable_add_to_cart_url', get_permalink( $product->id ) );
-		$label  = apply_filters( 'variable_add_to_cart_text', __( 'Select options', 'mk_framework' ) );
-		$icon_class = 'mk-theme-icon-plus';
-		break;
-	case "grouped" :
-		$link  = apply_filters( 'grouped_add_to_cart_url', get_permalink( $product->id ) );
-		$label  = apply_filters( 'grouped_add_to_cart_text', __( 'View options', 'mk_framework' ) );
-		$icon_class = 'mk-theme-icon-plus';
-		break;
-	case "external" :
-		$link  = apply_filters( 'external_add_to_cart_url', get_permalink( $product->id ) );
-		$label  = apply_filters( 'external_add_to_cart_text', __( 'Read More', 'mk_framework' ) );
-		$icon_class = 'mk-theme-icon-magnifier';
-		break;
-	default :
-		$link  = apply_filters( 'add_to_cart_url', esc_url( $product->add_to_cart_url() ) );
-		$label  = apply_filters( 'add_to_cart_text', __( 'ADD TO CART', 'mk_framework' ) );
-		$icon_class = 'mk-theme-icon-cart2';
-		break;
-	}
-
-	if ( $product->product_type != 'external' ) {
-		$mk_add_to_cart = '<a href="'. $link .'" rel="nofollow" data-product_id="'.$product->id.'" title="'.$label.'" class="add_to_cart_button product_type_'.$product->product_type.'"><i class="'.$icon_class.'"></i></a>';
-	}
-	else {
-		$mk_add_to_cart = '';
-	}
-}
-
-
-
-
-
-?>
 <li <?php post_class( $classes ); ?> style="max-width:<?php echo $column_width; ?>px">
 	<div class="item-holder">
 
@@ -259,12 +225,15 @@ else { ?>
 
 			<?php do_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 ); ?>
 
-			<?php echo $mk_add_to_cart; ?>
+			<?php
+				/**
+				 * woocommerce_after_shop_loop_item hook
+				 *
+				 * @hooked woocommerce_template_loop_add_to_cart - 10
+				 */
+				do_action( 'woocommerce_after_shop_loop_item' );
+			?>
 		</div>
-
-
-
-	<?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
 </div>
 </li>
 

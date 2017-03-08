@@ -14,7 +14,8 @@ add_action( 'page_title', 'mk_page_title' );
 // add_action( 'breadcrumbs', 'mk_breadcrumbs' );
 add_action( 'subfooter_social', 'mk_subfooter_social' );
 add_action( 'theme_breadcrumbs', 'mk_theme_breadcrumbs' );
-add_action( 'quick_contact', 'mk_quick_contact' ); 
+add_action( 'quick_contact', 'mk_quick_contact' );
+add_action( 'subfooter_logos', 'mk_subfooter_logos' );
 
 
 
@@ -82,7 +83,7 @@ if ( !function_exists( 'mk_page_title' ) ) {
 				else {
 					$curauth = get_userdata( get_query_var( 'author' ) );
 				}
-				$title = sprintf( __( 'Author Archive for: "%s"' ), $curauth->nickname );
+				$title = sprintf( __( 'Author Archive for: "%s"', 'mk_framework' ), $curauth->nickname );
 			}
 			elseif ( is_tax() ) {
 				$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
@@ -109,9 +110,6 @@ if ( !function_exists( 'mk_page_title' ) ) {
 
 				$forum_id = get_queried_object_id();
 				$forum_parent_id = bbp_get_forum_parent_id( $forum_id );
-
-				if ( 0 !== $forum_parent_id )
-					$title = array_merge( $item, breadcrumbs_plus_get_parents( $forum_parent_id ) );
 
 				$title = bbp_get_forum_title( $forum_id );
 			}
@@ -213,7 +211,7 @@ function mk_theme_breadcrumbs() {
         }
 
         if (is_category() && !is_singular('portfolio')) {
-            
+
             $category = get_the_category();
             $ID = $category[0]->cat_ID;
             echo is_wp_error( $cat_parents = get_category_parents($ID, TRUE, '', FALSE ) ) ? '' : '<span>'.$cat_parents.'</span>';
@@ -222,7 +220,7 @@ function mk_theme_breadcrumbs() {
             echo '<span>'.get_the_title().'</span>';
 
         } else if ( is_single() && ! is_attachment()) {
-		      	
+
 		       if ( get_post_type() == 'product' ) {
 
 					if ( $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) ) ) {
@@ -264,7 +262,7 @@ function mk_theme_breadcrumbs() {
 				} else {
 						$cat = current( get_the_category() );
 						echo get_category_parents( $cat, true, $delimiter );
-						echo get_the_title();	
+						echo get_the_title();
 				}
 		}  elseif ( is_page() && !$post->post_parent ) {
 
@@ -293,7 +291,12 @@ function mk_theme_breadcrumbs() {
 			$parent = get_post( $post->post_parent );
 			$cat = get_the_category( $parent->ID );
 			$cat = $cat[0];
-			echo get_category_parents( $cat, true, '' . $delimiter );
+			/* admin@innodron.com patch:
+	        Fix for Catchable fatal error: Object of class WP_Error could not be converted to string
+	        ref: https://wordpress.org/support/topic/catchable-fatal-error-object-of-class-wp_error-could-not-be-converted-to-string-11
+		    */
+		    echo is_wp_error( $cat_parents = get_category_parents($cat, TRUE, '' . $delimiter . '') ) ? '' : $cat_parents;
+		   /* end admin@innodron.com patch */
 			echo '<a href="' . get_permalink( $parent ) . '">' . $parent->post_title . '</a>' . $delimiter;
 			echo  get_the_title();
 
@@ -325,17 +328,17 @@ function mk_theme_breadcrumbs() {
 
 			echo  get_the_time( 'Y' );
 
-		} 
+		}
 
 		if ( get_query_var( 'paged' ) )
 			echo ' (' . __( 'Page', 'mk_framework' ) . ' ' . get_query_var( 'paged' ) . ')';
-		
+
 
         if (is_tax()) {
             $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
             echo $delimiter . '<span>'.$term->name.'</span>';
         }
-        
+
         if ( function_exists( 'is_bbpress' ) && is_bbpress() ) {
         	$item = array();
 
@@ -388,7 +391,7 @@ function mk_theme_breadcrumbs() {
 						$item[] = bbp_get_reply_title( $reply_id );
 
 					} else {
-						$item[] = '<a href="' . bbp_get_reply_url( $reply_id ) . '">' . bbp_get_reply_title( $reply_id ) . '</a>' ; 
+						$item[] = '<a href="' . bbp_get_reply_url( $reply_id ) . '">' . bbp_get_reply_title( $reply_id ) . '</a>' ;
 						$item[] = __( 'Edit', 'mk_framework' );
 					}
 
@@ -419,7 +422,7 @@ function mk_theme_breadcrumbs() {
 
 
         }
-	
+
         echo "</div></div>";
 }
 endif;
@@ -466,6 +469,34 @@ add_action( 'wp_head', 'mk_typekit_script');
 
 
 
+
+
+
+
+if ( !function_exists( 'mk_subfooter_logos' ) ) {
+	function mk_subfooter_logos() {
+		global $mk_settings;
+
+		$src = isset($mk_settings['subfooter-logos-src']['url']) ? $mk_settings['subfooter-logos-src']['url'] : '';
+
+		if(empty($src)) { return false; }
+
+		$link = $mk_settings['subfooter-logos-link'];
+
+		$output = '';
+		$output .= '<div class="mk-subfooter-logos">';
+		$output .= !empty($link) ? '<a href="'.$link.'">' : '';
+		$output .= '<img alt="'.get_bloginfo('name').'" title="'.get_bloginfo('name').'" src="'.$src.'" />';
+		$output .= !empty($link) ? '</a>' : '';
+		$output .= '</div>';
+
+
+		echo $output;
+	}
+}
+
+
+
 if ( !function_exists( 'mk_subfooter_social' ) ) {
 	function mk_subfooter_social() {
 		global $mk_settings;
@@ -504,6 +535,13 @@ if ( !function_exists( 'mk_subfooter_social' ) ) {
 		}
 		if(!empty($mk_settings['social-youtube'])) {
 			$output .= '<li><a target="_blank" href="'.$mk_settings['social-youtube'].'"><i class="mk-icon-youtube"></i></a></li>';
+		}
+
+		if(!empty($mk_settings['social-vimeo'])) {
+			$output .= '<li><a target="_blank" href="'.$mk_settings['header-social-vimeo'].'"><i class="mk-theme-icon-social-vimeo"></i></a></li>';
+		}
+		if(!empty($mk_settings['social-spotify'])) {
+			$output .= '<li><a target="_blank" href="'.$mk_settings['header-social-spotify'].'"><i class="mk-theme-icon-social-spotify"></i></a></li>';
 		}
 
 		if(!empty($mk_settings['social-weibo'])) {
@@ -554,6 +592,8 @@ function mk_post_nav($same_category = true, $taxonomy = 'category')
   if(is_singular('post') && $mk_settings['blog_next_prev'] != '1') return false;
 
   if(is_singular('portfolio') && $mk_settings['portfolio_next_prev'] != '1') return false;
+
+  if(is_page()) return false;
 
       $options = array();
       $options['same_category'] = $same_category;
@@ -667,6 +707,7 @@ if ( !function_exists( 'mk_quick_contact' ) ) {
 		$output = $skin = '';
 		$disable_quick_contact = isset($mk_settings['disable-quick-contact']) && $mk_settings['disable-quick-contact'] != '1' ? '0' : '1';
 		$skin_quick_contact = isset($mk_settings['skin-quick-contact']) && $mk_settings['skin-quick-contact'] != '1' ? '0' : '1';
+		$email = (isset($mk_settings['email-quick-contact']) && !empty($mk_settings['email-quick-contact'])) ? $mk_settings['email-quick-contact'] : get_bloginfo( 'admin_email' );
 
 		$page_quick_contact = get_post_meta( $post_id, '_quick_contact', true );
     	$page_quick_contact_skin = get_post_meta( $post_id, '_quick_contact_skin', true );
@@ -678,7 +719,7 @@ if ( !function_exists( 'mk_quick_contact' ) ) {
 		}
 
 		if( $page_quick_contact == 'disabled'){
-			return false;			
+			return false;
 		}else if ( $page_quick_contact == 'enabled' ){
 			$skin = $page_quick_contact_skin;
 		}
@@ -693,14 +734,14 @@ if ( !function_exists( 'mk_quick_contact' ) ) {
 		$output .= '	<div class="mk-quick-contact-wrapper">';
 		$output .= '		<div class="mk-quick-contact-inset">';
 		if($skin == 'light'){
-			$output .= 			do_shortcode( '[mk_contact_form style="modern" skin_color="#303030" btn_text_color="#303030" btn_hover_text_color="#eaeaea" phone="false"]' );
+			$output .= 			do_shortcode( '[mk_contact_form email="'.$email.'" style="modern" skin_color="#303030" btn_text_color="#303030" btn_hover_text_color="#eaeaea" phone="false"]' );
 		}else{
-			$output .= 			do_shortcode( '[mk_contact_form style="modern" skin_color="#fff" btn_text_color="#fff" btn_hover_text_color="#333" phone="false"]' );
+			$output .= 			do_shortcode( '[mk_contact_form email="'.$email.'" style="modern" skin_color="#fff" btn_text_color="#fff" btn_hover_text_color="#333" phone="false"]' );
 		}
 		$output .= '		</div>';
-		$output .= '	</div>'; 
+		$output .= '	</div>';
 		$output .= '</div>';
-		
+
 		echo $output;
 	}
 }

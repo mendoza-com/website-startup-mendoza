@@ -5,7 +5,7 @@ class mkSidebarGenerator {
 	var $footer_sidebar_count = 0;
 	var $footer_sidebar_names = array();
 
-	function mkSidebarGenerator() {
+	function __construct() {
 
 		$this->sidebar_names = array(
 			'page'=>__( 'Pages', 'mk_framework' ),
@@ -33,30 +33,38 @@ class mkSidebarGenerator {
 
 	function register_sidebar() {
 
+		$i = 1;
 
 		foreach ( $this->sidebar_names as $name ) {
 			register_sidebar( array(
 					'name' => $name,
+					'id' => 'sidebar-'.$i,
 					'description' => $name,
 					'before_widget' => '<section id="%1$s" class="widget %2$s">',
 					'after_widget' => '</section>',
 					'before_title' => '<div class="widgettitle">',
 					'after_title' => '</div>',
 				) );
+
+			$i++;
 		}
 		foreach ( $this->footer_sidebar_names as $name ) {
 			register_sidebar( array(
 					'name' =>  $name,
+					'id' => 'sidebar-'.$i,
 					'description' => $name,
 					'before_widget' => '<section id="%1$s" class="widget %2$s">',
 					'after_widget' => '</section>',
 					'before_title' => '<div class="widgettitle">',
 					'after_title' => '</div>',
 				) );
+			$i++;
 		}
+
 
 		register_sidebar( array(
 			'name' =>  'Side Dashboard',
+			'id' => 'sidebar-'.$i,
 			'description' => 'Side Dashboard',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget' => '</section>',
@@ -64,6 +72,7 @@ class mkSidebarGenerator {
 			'after_title' => '</div>',
 		) );
 
+		$i++;
 
 		$custom_sidebars = get_option( 'mk_settings' );
 		$custom_sidebars_array = isset($custom_sidebars['custom-sidebar']) ? $custom_sidebars['custom-sidebar'] : null;
@@ -71,12 +80,14 @@ class mkSidebarGenerator {
 			foreach ( $custom_sidebars_array as $key => $value ) {
 				register_sidebar( array(
 						'name' =>  $value,
+						'id' => 'sidebar-'.$i,
 						'description' => $value,
 						'before_widget' => '<section id="%1$s" class="widget %2$s">',
 						'after_widget' => '</section>',
 						'before_title' => '<div class="widgettitle">',
 						'after_title' => '</div>',
 					) );
+				$i++;
 			}
 		}
 	}

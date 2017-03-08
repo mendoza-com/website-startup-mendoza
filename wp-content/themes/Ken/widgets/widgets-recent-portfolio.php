@@ -6,9 +6,9 @@
 
 class Artbees_Widget_Recent_Portfolio extends WP_Widget {
 
-	function Artbees_Widget_Recent_Portfolio() {
+	function __construct() {
 		$widget_ops = array( "classname" => "widget_recent_portfolio", "description" => "Displays the Recent Portfolio items" );
-		$this-> WP_Widget( "recent_portfolio", THEME_SLUG . " - Recent Portfolios", $widget_ops );
+		WP_Widget::__construct( "recent_portfolio", THEME_SLUG . " - Recent Portfolios", $widget_ops );
 		$this-> alt_option_name = "widget_recent_portfolio";
 
 		add_action( "save_post", array( &$this, "flush_widget_cache" ) );

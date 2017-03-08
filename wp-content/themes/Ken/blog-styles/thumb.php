@@ -37,12 +37,12 @@ function blog_thumb_style($atts)
     $output .= '<time datetime="' . get_the_date() . '" itemprop="datePublished" pubdate>';
     $output .= '<a href="' . get_month_link(get_the_time("Y"), get_the_time("m")) . '">' . get_the_date() . '</a>';
     $output .= '</time>';
-    $output .= '<h2 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+    $output .= '<h3 class="blog-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
     
     
     if($excerpt_length != 0) {
         ob_start();
-        the_excerpt_max_charlength($excerpt_length);
+        mk_excerpt_max_charlength($excerpt_length);
         $output .= '<div class="blog-excerpt">' . ob_get_clean() . '</div>';
     }
     $output .= '<div class="clearboth"></div></div>';

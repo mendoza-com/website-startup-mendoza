@@ -118,8 +118,35 @@ function mk_portfolio_masonry_loop( &$r, $atts, $current ) {
 
 
 
-	$image_src_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true );
-	$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $width*$image_quality, 'height' => $height*$image_quality, 'crop'=>true));
+	switch ($image_size) {
+        case 'full':
+            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+            $image_src = $image_src_array[0];
+            break;
+        case 'crop':
+            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+            $image_src = bfi_thumb($image_src_array[0], array(
+                'width' => $width * $image_quality,
+                'height' => $height * $image_quality
+            ));
+            break;            
+        case 'large':
+            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true);
+            $image_src = $image_src_array[0];
+            break;
+        case 'medium':
+            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium', true);
+            $image_src = $image_src_array[0];
+            break;        
+        default:
+            $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+            $image_src = bfi_thumb($image_src_array[0], array(
+                'width' => $width * $image_quality,
+                'height' => $height * $image_quality
+            ));
+         break;
+    }
+
 
 	if($hover_style == 'parallax') {
 		$parallax_class = 'layer';
@@ -129,7 +156,7 @@ function mk_portfolio_masonry_loop( &$r, $atts, $current ) {
 	$output .='<article id="portfolio-'.get_the_ID().'" class="masonry-portfolio-item masonry-'.$item_id.' mk-portfolio-item '.$hover_style.'-hover portfolio-ajax-item mk-isotop-item size_'.$column.' ' . implode( ' ', mk_get_portfolio_tax($post->ID, false, true)  ) . '"><div class="item-holder">';
 
 	$output .='<div class="featured-image '.$parallax_class.'" '.$parallax_data.'>';
-	if($hover_style == 'parallax') { $output .= '<a href="'.$image_src_array[ 0 ].'" title="'.get_the_title().'" rel="portfolio-loop" class="mk-lightbox">'; }
+	if($hover_style == 'parallax') { $output .= '<a href="'.$image_src_array[ 0 ].'" title="'.get_the_title().'" data-fancybox-group="portfolio-loop" class="mk-lightbox" style="display: block;">'; }
 	$output .='<img alt="'.get_the_title().'" width="'.$width.'" class="item-featured-image" height="'.$height.'" title="'.get_the_title().'" src="'.mk_thumbnail_image_gen($image_src, $width*$image_quality, $height*$image_quality).'" itemprop="image" />';
 	if($hover_style == 'parallax') { $output .= '</a>'; }
 
@@ -149,7 +176,7 @@ function mk_portfolio_masonry_loop( &$r, $atts, $current ) {
 
 		$output .='<div class="portfolio-meta">';
 		if($plus_icon == 'true') {
-			$output .='<a href="'.$image_src_array[ 0 ].'" title="'.get_the_title().'" rel="portfolio-loop" class="mk-lightbox portfolio-plus-icon"><i class="mk-theme-icon-plus"></i></a>';
+			$output .='<a href="'.$image_src_array[ 0 ].'" title="'.get_the_title().'"  data-fancybox-group="portfolio-loop"  class="mk-lightbox portfolio-plus-icon"><i class="mk-theme-icon-plus"></i></a>';
 		}
 		if($ajax == 'true') {
 			$output .='<div class="the-title"><span>'.get_the_title().'</span></div><div class="clearboth"></div>';

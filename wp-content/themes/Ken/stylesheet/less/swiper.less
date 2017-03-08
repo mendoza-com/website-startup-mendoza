@@ -16,7 +16,7 @@ Vladimir Kharlampidi
 /* ===============================================================
 Basic Swiper Styles
 ================================================================ */
-.swiper-container {
+.mk-swiper-container {
 	margin: 0 auto;
 	position: relative;
 	overflow: hidden;
@@ -26,10 +26,14 @@ Basic Swiper Styles
 	-o-backface-visibility: hidden;
 	backface-visibility: hidden; /* Fix of Webkit flickering */
 	z-index: 1;
-	direction:ltr;
+	direction:ltr; 
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		overflow: auto;
+		-ms-overflow-style: none; 
+	}
 }
-.swiper-wrapper {
-	position: relative;
+.mk-swiper-wrapper {
+	position: relative; 
 	width: 100%;
 	-webkit-transition-property: -webkit-transform, left, top;
 	-webkit-transition-duration: 0s;
@@ -54,7 +58,7 @@ Basic Swiper Styles
 	transition-timing-function: ease;
 
 }
-.swiper-free-mode > .swiper-wrapper {
+.swiper-free-mode > .mk-swiper-wrapper {
 	-webkit-transition-timing-function: ease-out;
 	-moz-transition-timing-function: ease-out;
 	-ms-transition-timing-function: ease-out;
@@ -81,7 +85,7 @@ sizes,
 pagination,
 etc.
 ================================================================ */
-.swiper-container {
+.mk-swiper-container {
 	/* Specify Swiper's Size:  */
 	
 	/* width:200px;
